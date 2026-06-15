@@ -13,6 +13,7 @@ dist-ssr
 *.tsbuildinfo
 *.local
 _archive/node_modules
+public/images
 
 # Editor directories and files
 .vscode/*
