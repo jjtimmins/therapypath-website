@@ -1,5 +1,20 @@
 {
+  "routes": [
+    {
+      "route": "/book-online",
+      "rewrite": "/book-online.html"
+    },
+    {
+      "route": "/contact-us",
+      "rewrite": "/contact-us.html"
+    },
+    {
+      "route": "/services",
+      "rewrite": "/services.html"
+    }
+  ],
   "navigationFallback": {
-    "rewrite": "/index.html"
+    "rewrite": "/index.html",
+    "exclude": ["/images/*", "/*.{css,js,png,jpg,jpeg,svg,pdf,xml,ico}"]
   }
 }

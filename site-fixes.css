@@ -1,0 +1,242 @@
+/* Therapy Path static mirror adjustments */
+#comp-m4vmexby,
+#comp-m4vmf0th,
+#comp-m4vmexby *,
+#comp-m4vmf0th * {
+  display: none !important;
+}
+
+/* Home hero: use local AdobeStock image (Wix runtime rewrites img src to a broken CDN URL) */
+#bgLayers_comp-m4n0yl36 [data-testid='colorUnderlay'] {
+  display: none !important;
+}
+
+#img_comp-m4n0yl36 {
+  background-image: url('/images/AdobeStock_495222202.jpeg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m4n0yl36 img {
+  opacity: 0 !important;
+}
+
+a[href*='theramatic.ca/request-appointment'] .wixui-button__label,
+a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
+  white-space: nowrap;
+}
+
+/* Wix contact captcha does not work on static mirror */
+.comp-m4d2ct0y,
+.wixui-captcha {
+  display: none !important;
+}
+
+.tp-contact-sent {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 4px;
+  background: #eef5ff;
+  border: 1px solid #b8d4f5;
+  color: #192a88;
+  font-family: helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, sans-serif;
+}
+
+/* Nav dropdowns: Wix JS sets data-hovered; enable CSS-only hover fallback */
+#comp-m4ufk180 {
+  position: relative;
+  z-index: 60;
+}
+
+#comp-m4ufk180 .itemDepth02233374943__itemWrapper {
+  position: relative;
+}
+
+#comp-m4ufk180 .itemDepth02233374943__itemWrapper:hover > .itemDepth02233374943__positionBox,
+#comp-m4ufk180 .itemDepth02233374943__itemWrapper:focus-within > .itemDepth02233374943__positionBox {
+  display: block !important;
+}
+
+#comp-m4ufk180 .itemDepth02233374943__itemWrapper:hover .itemDepth02233374943__animationBox,
+#comp-m4ufk180 .itemDepth02233374943__itemWrapper:focus-within .itemDepth02233374943__animationBox {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+#comp-m4ufk180 .itemDepth02233374943__positionBox[aria-label='Products'] {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  min-width: 300px;
+  background: #fff;
+  border: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+}
+
+#comp-m4ufk180 [aria-label='Products'] .submenu815198092__root {
+  padding: 20px 10px !important;
+}
+
+#comp-m4ufk180 [aria-label='Products'] .itemShared2352141355__accessibilityIconWrapper {
+  display: none !important;
+}
+
+/* Products menu: stack Click Reader below Clinical Management Software */
+#comp-m4ufk180 [aria-label='Products'] .itemDepth12472627565__itemWrapper {
+  display: block !important;
+}
+
+#comp-m4ufk180 [aria-label='Products'] .itemDepth12472627565__positionBox {
+  display: block !important;
+  position: static !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 0 0 0 10px !important;
+}
+
+#comp-m4ufk180 [aria-label='Products'] .itemDepth12472627565__animationBox {
+  opacity: 1 !important;
+}
+
+#comp-m4ufk180 [aria-label='Products'] .itemDepth12472627565__list,
+#comp-m4ufk180 [aria-label='Products'] .itemDepth02233374943__list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Match Services mega-menu typography */
+#comp-m4ufk180 [aria-label='Products'] .submenu815198092__menuItem {
+  padding: 10px !important;
+  margin-bottom: 8px !important;
+}
+
+#comp-m4ufk180
+  [aria-label='Products']
+  .itemDepth02233374943__list
+  > .itemDepth12472627565__itemWrapper
+  > .itemShared2352141355__rootContainer
+  > a
+  .itemDepth12472627565__label {
+  font-family: helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  color: #1d67cd !important;
+  text-decoration: underline !important;
+  text-transform: none !important;
+}
+
+#comp-m4ufk180 [aria-label='Products'] .itemDepth12472627565__positionBox .itemDepth12472627565__label {
+  font-family: helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  color: #000 !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+}
+
+#comp-m4ufk180 [aria-label='Products'] .itemDepth12472627565__positionBox a:hover .itemDepth12472627565__label {
+  color: #1d67cd !important;
+  text-decoration: underline !important;
+}
+
+/* Language switcher (replaces Wix LanguageSelector widget) */
+#comp-m6k5baee {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 137px;
+  height: 42px;
+}
+
+.tp-lang-switch {
+  position: relative;
+  font-family: poppins-extralight, poppins, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
+}
+
+.tp-lang-current {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 137px;
+  height: 42px;
+  padding: 0 12px;
+  border: 0;
+  background: rgba(243, 243, 243, 0.7);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.tp-lang-current:hover,
+.tp-lang-switch.is-open .tp-lang-current {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.tp-lang-flag {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.tp-lang-code {
+  flex: 1;
+  text-align: left;
+}
+
+.tp-lang-chevron {
+  font-size: 10px;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.tp-lang-switch.is-open .tp-lang-chevron {
+  transform: rotate(180deg);
+}
+
+.tp-lang-menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tp-lang-menu[hidden] {
+  display: none !important;
+}
+
+.tp-lang-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  color: #000;
+  text-decoration: none;
+  font: inherit;
+}
+
+.tp-lang-option:hover {
+  background: #f3f3f3;
+  color: #323232;
+}
+
+.tp-page-anchor {
+  position: relative;
+  top: -120px;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}

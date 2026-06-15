@@ -1,0 +1,109 @@
+:root {
+  /* Brand colors extracted from Wix site theme */
+  --ttp-color-navy: #192a88;
+  --ttp-color-blue: #285da1;
+  --ttp-color-blue-light: #3d86e4;
+  --ttp-color-blue-bright: #3d9be9;
+  --ttp-color-cream: #f5f6f0;
+  --ttp-color-gray-light: #d7d8d3;
+  --ttp-color-text: #000000;
+  --ttp-color-text-muted: #757575;
+  --ttp-color-white: #ffffff;
+
+  --ttp-font-heading: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --ttp-font-body: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+
+  --ttp-max-width: 980px;
+  --ttp-header-height: 112px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--ttp-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ttp-color-text);
+  background-color: var(--ttp-color-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ttp-font-heading);
+  color: var(--ttp-color-blue);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--ttp-color-blue);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--ttp-color-navy);
+}
+
+.ttp-container {
+  width: min(100% - 2rem, var(--ttp-max-width));
+  margin-inline: auto;
+}
+
+.ttp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 5px;
+  background: var(--ttp-color-blue-light);
+  color: var(--ttp-color-white);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ttp-button:hover,
+.ttp-button:focus-visible {
+  background: var(--ttp-color-blue);
+  color: var(--ttp-color-white);
+}
+
+.ttp-button--secondary {
+  background: var(--ttp-color-blue);
+}
+
+.ttp-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ttp-color-blue);
+}
+
+.ttp-heading-hero {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--ttp-color-navy);
+}
+
+.ttp-lead {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--ttp-color-text);
+}

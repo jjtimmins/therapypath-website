@@ -1,0 +1,24 @@
+.placeholder {
+  padding: 4rem 0 5rem;
+  text-align: center;
+}
+
+.placeholder__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ttp-color-blue);
+}
+
+.placeholder h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.placeholder__body {
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+  color: var(--ttp-color-text-muted);
+}
