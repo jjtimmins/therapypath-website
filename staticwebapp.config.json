@@ -1,5 +1,26 @@
 {
+  "globalHeaders": {
+    "Cache-Control": "no-cache"
+  },
   "routes": [
+    {
+      "route": "/images/*",
+      "headers": {
+        "Cache-Control": "public, max-age=2592000"
+      }
+    },
+    {
+      "route": "/*.css",
+      "headers": {
+        "Cache-Control": "public, max-age=86400"
+      }
+    },
+    {
+      "route": "/*.js",
+      "headers": {
+        "Cache-Control": "public, max-age=86400"
+      }
+    },
     {
       "route": "/book-online",
       "rewrite": "/book-online.html"

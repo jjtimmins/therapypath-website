@@ -193,10 +193,32 @@
   }
 
   function initHashScroll() {
-    var feesHashes = { "comp-m4uec27w1": true, "anchors-m4uec27r6": true };
+    var hashScrollTargets = {
+      "comp-m4uec27w1": "comp-m4uec27w1",
+      "anchors-m4uec27r6": "comp-m4uec27w1",
+      "anchors-lvfbdtjs": "comp-m4d289nf",
+      "comp-m4d289nf": "comp-m4d289nf",
+      "anchors-m4u9ygef6": "comp-m4u9ygeh8",
+      "comp-m4u9ygeh8": "comp-m4u9ygeh8",
+      "anchors-m4u9yger9": "comp-m4u9ygew",
+      "comp-m4u9ygew": "comp-m4u9ygew",
+      "anchors-m4u9ygfe4": "comp-m4u9ygfg2",
+      "comp-m4u9ygfg2": "comp-m4u9ygfg2",
+      "anchors-m4uaf2y410": "comp-m4uaf2y81",
+      "join-our-team": "comp-m4uaf2y81",
+      "comp-m4uaf2y81": "comp-m4uaf2y81",
+      "anchors-m4u9qh0c": "comp-m4u9qh0e6",
+      "comp-m4u9qh0e6": "comp-m4u9qh0e6",
+      "anchors-m4u9qh0m1": "comp-m4u9qh0q1",
+      "comp-m4u9qh0q1": "comp-m4u9qh0q1",
+      "anchors-m4u9qh0u6": "comp-m4u9u733",
+      "comp-m4u9u733": "comp-m4u9u733",
+    };
 
-    function scrollToFees() {
-      var target = document.getElementById("comp-m4uec27w1");
+    function scrollToHashTarget(hash) {
+      var targetId = hashScrollTargets[hash];
+      if (!targetId) return false;
+      var target = document.getElementById(targetId);
       if (!target) return false;
       var top =
         target.getBoundingClientRect().top + window.pageYOffset - 130;
@@ -204,16 +226,20 @@
       return true;
     }
 
-    function handleFeesHash() {
+    function handlePageHash() {
       var hash = location.hash.replace(/^#/, "");
-      if (!feesHashes[hash]) return;
-      scrollToFees();
-      window.setTimeout(scrollToFees, 150);
-      window.setTimeout(scrollToFees, 500);
+      if (!hashScrollTargets[hash]) return;
+      scrollToHashTarget(hash);
+      window.setTimeout(function () {
+        scrollToHashTarget(hash);
+      }, 150);
+      window.setTimeout(function () {
+        scrollToHashTarget(hash);
+      }, 500);
     }
 
-    handleFeesHash();
-    window.addEventListener("hashchange", handleFeesHash);
+    handlePageHash();
+    window.addEventListener("hashchange", handlePageHash);
 
     document.addEventListener("click", function (event) {
       var link = event.target.closest("a[href]");
@@ -225,17 +251,187 @@
         return;
       }
       var hash = url.hash.replace(/^#/, "");
-      if (!feesHashes[hash]) return;
-      if (url.pathname !== location.pathname) return;
-      if (!document.getElementById("comp-m4uec27w1")) return;
+      if (!hashScrollTargets[hash]) return;
+
+      var samePage =
+        url.pathname === location.pathname ||
+        (url.pathname.endsWith("/therapy.html") &&
+          location.pathname.endsWith("/therapy.html")) ||
+        (url.pathname.endsWith("/our-team.html") &&
+          location.pathname.endsWith("/our-team.html")) ||
+        (url.pathname.endsWith("/our-specializations.html") &&
+          location.pathname.endsWith("/our-specializations.html")) ||
+        (url.pathname.endsWith("/contact-us.html") &&
+          location.pathname.endsWith("/contact-us.html"));
+
+      if (!samePage) return;
+
+      var targetId = hashScrollTargets[hash];
+      if (!document.getElementById(targetId)) return;
+
       event.preventDefault();
-      history.pushState(null, "", url.pathname + url.search + "#comp-m4uec27w1");
-      scrollToFees();
+      history.pushState(null, "", url.pathname + url.search + "#" + hash);
+      scrollToHashTarget(hash);
+    });
+  }
+
+  function initTherapyMenuLinks() {
+    var isFrench = location.pathname === "/fr.html" || location.pathname.indexOf("/fr/") === 0;
+    var therapyPath = isFrench ? "/fr/services/therapy.html" : "/services/therapy.html";
+    var teamPath = isFrench ? "/fr/about-us/our-team.html" : "/about-us/our-team.html";
+    var specializationsPath = isFrench
+      ? "/fr/about-us/our-specializations.html"
+      : "/about-us/our-specializations.html";
+    var contactPath = isFrench ? "/fr/contact-us.html" : "/contact-us.html";
+    var targetsByText = {
+      "Speech": therapyPath + "#anchors-m4u9ygef6",
+      "Parole": therapyPath + "#anchors-m4u9ygef6",
+      "Language": therapyPath + "#anchors-m4u9yger9",
+      "Langage": therapyPath + "#anchors-m4u9yger9",
+      "Assistive devices": therapyPath + "#anchors-m4u9ygfe4",
+      "Appareils fonctionnels": therapyPath + "#anchors-m4u9ygfe4",
+      "Join Our Team": teamPath + "#anchors-m4uaf2y410",
+      "Rejoignez notre équipe": teamPath + "#anchors-m4uaf2y410",
+      "Brain Injury": specializationsPath + "#anchors-m4u9qh0c",
+      "Lésion cérébrale": specializationsPath + "#anchors-m4u9qh0c",
+      "Learning Disabilities": specializationsPath + "#anchors-m4u9qh0m1",
+      "Troubles d'apprentissage": specializationsPath + "#anchors-m4u9qh0m1",
+      "Stroke": specializationsPath + "#anchors-m4u9qh0u6",
+      "Accident vasculaire cérébral": specializationsPath + "#anchors-m4u9qh0u6",
+    };
+
+    document
+      .querySelectorAll('#comp-m4ufk180 a.wixui-rich-text__text')
+      .forEach(function (link) {
+        var label = (link.textContent || "").replace(/\s+/g, " ").trim();
+        var href = targetsByText[label];
+        if (!href) return;
+        link.setAttribute("href", href);
+        link.setAttribute("target", "_self");
+      });
+
+    document
+      .querySelectorAll('#comp-m4ufk180 .itemDepth12472627565__root')
+      .forEach(function (link) {
+        var label = (link.textContent || "").replace(/\s+/g, " ").trim();
+        if (label !== "Contact Us" && label !== "Contactez nous") return;
+        link.setAttribute("href", contactPath + "#anchors-lvfbdtjs");
+        link.setAttribute("target", "_self");
+      });
+  }
+
+  function initHelpCardButtons() {
+    document.querySelectorAll('[id^="comp-m4pvn6av__"] a[href]').forEach(function (link) {
+      link.setAttribute("aria-label", link.href.indexOf("assessments") >= 0
+        ? "Learn more about assessments"
+        : "Learn more about therapy services");
+
+      link.addEventListener(
+        "click",
+        function (event) {
+          var href = link.getAttribute("href");
+          if (!href || href.charAt(0) === "#") return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          window.location.assign(href);
+        },
+        true
+      );
+    });
+  }
+
+  function initConsultationCardButtons() {
+    document
+      .querySelectorAll('[id^="comp-m6awikg0__"] a[href*="therapy.html"]')
+      .forEach(function (link) {
+        link.addEventListener(
+          "click",
+          function (event) {
+            var href = link.getAttribute("href");
+            if (!href) return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            window.location.assign(href);
+          },
+          true
+        );
+      });
+  }
+
+  function loadStylesheet(href) {
+    if (document.querySelector('link[href="' + href + '"]')) return;
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  }
+
+  function loadScript(src, callback) {
+    if (window.L) {
+      callback();
+      return;
+    }
+
+    var existing = document.querySelector('script[src="' + src + '"]');
+    if (existing) {
+      existing.addEventListener("load", callback);
+      return;
+    }
+
+    var script = document.createElement("script");
+    script.src = src;
+    script.onload = callback;
+    document.head.appendChild(script);
+  }
+
+  function initGeographicCoverageMap() {
+    var mount = document.getElementById("comp-m4uh76kx");
+    if (!mount || mount.dataset.tpMapReady === "true") return;
+    mount.dataset.tpMapReady = "true";
+    mount.innerHTML =
+      '<div class="tp-coverage-map" role="img" aria-label="Map of The Therapy Path service areas across Northern Ontario"></div>';
+
+    var mapEl = mount.querySelector(".tp-coverage-map");
+    loadStylesheet("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
+    loadScript("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", function () {
+      if (!window.L || !mapEl) return;
+
+      var map = L.map(mapEl, {
+        scrollWheelZoom: false,
+        zoomControl: true,
+      }).setView([48.95, -81.25], 6);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+        maxZoom: 18,
+      }).addTo(map);
+
+      [
+        ["North Bay", 46.3091, -79.4608],
+        ["Timmins", 48.4758, -81.3305],
+        ["New Liskeard", 47.5095, -79.6759],
+        ["Kirkland Lake", 48.1446, -80.0377],
+        ["Cochrane", 49.0669, -81.0168],
+        ["Iroquois Falls", 48.7675, -80.6830],
+        ["Kapuskasing", 49.4169, -82.4331],
+        ["Hearst", 49.6868, -83.6665],
+        ["James Bay Coast", 51.2720, -80.6400],
+      ].forEach(function (place) {
+        L.marker([place[1], place[2]]).addTo(map).bindPopup(place[0]);
+      });
+
+      window.setTimeout(function () {
+        map.invalidateSize();
+      }, 250);
     });
   }
 
   showSentBanner();
   initContactForm();
   initLanguageSwitcher();
+  initTherapyMenuLinks();
   initHashScroll();
+  initHelpCardButtons();
+  initConsultationCardButtons();
+  initGeographicCoverageMap();
 })();

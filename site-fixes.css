@@ -42,10 +42,20 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   font-family: helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, sans-serif;
 }
 
+/* Keep header and nav menus above Leaflet map panes (z-index 400+) on geographic coverage */
+#SITE_HEADER {
+  position: relative;
+  z-index: 5000;
+}
+
 /* Nav dropdowns: Wix JS sets data-hovered; enable CSS-only hover fallback */
 #comp-m4ufk180 {
   position: relative;
-  z-index: 60;
+  z-index: 5001;
+}
+
+#comp-m4ufk180 .itemDepth02233374943__positionBox {
+  z-index: 5002;
 }
 
 #comp-m4ufk180 .itemDepth02233374943__itemWrapper {
@@ -71,7 +81,7 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   background: #fff;
   border: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  z-index: 1000;
+  z-index: 5002;
 }
 
 #comp-m4ufk180 [aria-label='Products'] .submenu815198092__root {
@@ -207,7 +217,7 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   top: calc(100% + 2px);
   left: 0;
   right: 0;
-  z-index: 2000;
+  z-index: 5010;
   background: #fff;
   border: 1px solid #e8e8e8;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -236,8 +246,52 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   scroll-margin-top: 140px;
 }
 
-#comp-m4uec27w1 {
+#comp-m4uec27w1,
+#comp-m4d289nf {
   scroll-margin-top: 140px;
+}
+
+#comp-m4u9ygeh8,
+#comp-m4u9ygew,
+#comp-m4u9ygfg2,
+#comp-m4uaf2y81,
+#comp-m4u9qh0e6,
+#comp-m4u9qh0q1,
+#comp-m4u9u733,
+#anchors-m4u9ygef6,
+#anchors-m4u9yger9,
+#anchors-m4u9ygfe4,
+#anchors-m4uaf2y410,
+#anchors-m4u9qh0c,
+#anchors-m4u9qh0m1,
+#anchors-m4u9qh0u6,
+#join-our-team {
+  scroll-margin-top: 140px;
+}
+
+/* Geographical Coverage: replace Wix Google Map widget that does not hydrate in static hosting */
+#comp-m4uh76kx {
+  position: relative;
+  z-index: 1;
+  width: 100% !important;
+  min-height: 360px !important;
+}
+
+#comp-m4uh76kx .tp-coverage-map {
+  width: 100%;
+  height: 360px;
+  min-height: 360px;
+  background: #eef3f6;
+  font-family: helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, sans-serif;
+}
+
+#comp-m4uh76kx .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+#comp-m4uh76kx .leaflet-control-attribution {
+  font-size: 10px;
 }
 
 /* Home hero tagline — Avenir Light blocked on HTTPS when @font-face used http:// URLs */
@@ -262,4 +316,41 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 #comp-m4da0lhk3,
 #comp-m4da0lhl1 {
   display: none !important;
+}
+
+/* Home "How We Can Help You" service cards — fix arrow button click targets */
+#comp-m4n1c504,
+#comp-m4pv69w0 {
+  position: relative;
+  z-index: 3;
+}
+
+[data-mesh-id^="comp-m4pv69z62__"] [id^="comp-m4u5cw2j__"] {
+  pointer-events: none;
+}
+
+[id^="comp-m4pvn6av__"] {
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
+}
+
+[id^="comp-m4pvn6av__"] a[data-testid="linkElement"] {
+  display: block;
+  width: 52px;
+  height: 52px;
+  position: relative;
+  z-index: 6;
+}
+
+[id^="comp-m4pvn6av__"] .StylableButton2545352419__label {
+  display: none;
+}
+
+/* Decorative shapes from the section below bleed upward over the cards */
+#comp-m4uie730,
+#comp-m4uie73m,
+#comp-m4uf73xb,
+#comp-m4uf73yf {
+  pointer-events: none;
 }
