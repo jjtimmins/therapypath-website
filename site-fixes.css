@@ -233,10 +233,33 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 }
 
 .tp-page-anchor {
-  position: relative;
-  top: -120px;
-  visibility: hidden;
-  height: 0;
-  margin: 0;
-  padding: 0;
+  scroll-margin-top: 140px;
+}
+
+#comp-m4uec27w1 {
+  scroll-margin-top: 140px;
+}
+
+/* Home hero tagline — Avenir Light blocked on HTTPS when @font-face used http:// URLs */
+@font-face {
+  font-family: 'avenir-lt-w01_35-light1475496';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://static.parastorage.com/fonts/v2/af36905f-3c92-4ef9-b0c1-f91432f16ac1/v1/avenir-lt-w01_35-light1475496.woff2')
+    format('woff2');
+}
+
+#comp-m4rlxan7,
+#comp-m4rlxan7 .wixui-rich-text__text {
+  text-align: center !important;
+  font-family: 'avenir-lt-w01_35-light1475496', 'avenir-lt-w05_35-light', avenir, sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.02em;
+}
+
+/* Footer: remove Wix / Yellow Pages branding */
+#comp-m4da0lhk3,
+#comp-m4da0lhl1 {
+  display: none !important;
 }

@@ -22,6 +22,15 @@
     var form = document.querySelector(".tp-contact-form");
     if (!form) return;
 
+    var captcha = form.querySelector(".Captcha3940957316__checkbox");
+    if (captcha) {
+      captcha.removeAttribute("required");
+      captcha.checked = true;
+    }
+
+    var captchaRoot = form.querySelector("#comp-m4d2ct0y, .wixui-captcha");
+    if (captchaRoot) captchaRoot.remove();
+
     form.addEventListener("submit", function () {
       var btn = form.querySelector('button[type="submit"]');
       if (btn) {
@@ -33,6 +42,28 @@
         }
       }
     });
+
+    var sendButton = form.querySelector('button[type="submit"]');
+    if (sendButton) {
+      sendButton.addEventListener(
+        "click",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            form.reportValidity();
+            return;
+          }
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          if (typeof form.requestSubmit === "function") {
+            form.requestSubmit();
+          } else {
+            form.submit();
+          }
+        },
+        true
+      );
+    }
   }
 
   function resolvePath(href) {
@@ -143,7 +174,50 @@
     });
   }
 
+  function initHashScroll() {
+    var feesHashes = { "comp-m4uec27w1": true, "anchors-m4uec27r6": true };
+
+    function scrollToFees() {
+      var target = document.getElementById("comp-m4uec27w1");
+      if (!target) return false;
+      var top =
+        target.getBoundingClientRect().top + window.pageYOffset - 130;
+      window.scrollTo({ top: top, behavior: "auto" });
+      return true;
+    }
+
+    function handleFeesHash() {
+      var hash = location.hash.replace(/^#/, "");
+      if (!feesHashes[hash]) return;
+      scrollToFees();
+      window.setTimeout(scrollToFees, 150);
+      window.setTimeout(scrollToFees, 500);
+    }
+
+    handleFeesHash();
+    window.addEventListener("hashchange", handleFeesHash);
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest("a[href]");
+      if (!link || !link.href) return;
+      var url;
+      try {
+        url = new URL(link.href, location.href);
+      } catch (err) {
+        return;
+      }
+      var hash = url.hash.replace(/^#/, "");
+      if (!feesHashes[hash]) return;
+      if (url.pathname !== location.pathname) return;
+      if (!document.getElementById("comp-m4uec27w1")) return;
+      event.preventDefault();
+      history.pushState(null, "", url.pathname + url.search + "#comp-m4uec27w1");
+      scrollToFees();
+    });
+  }
+
   showSentBanner();
   initContactForm();
   initLanguageSwitcher();
+  initHashScroll();
 })();

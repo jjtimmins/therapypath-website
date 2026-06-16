@@ -10,6 +10,8 @@ foreach ($file in $htmlFiles) {
 
   $content = $content.Replace('../static.wixstatic.com/', 'https://static.wixstatic.com/')
   $content = $content.Replace('../static.parastorage.com/', 'https://static.parastorage.com/')
+  $content = $content.Replace('http://static.parastorage.com/', 'https://static.parastorage.com/')
+  $content = $content.Replace('http://static.wixstatic.com/', 'https://static.wixstatic.com/')
 
   $content = $content -replace 'href="book-online\.html"', "href=`"$bookingUrl`" target=`"_blank`" rel=`"noopener noreferrer`""
   $content = $content -replace 'href="\.\./book-online\.html"', "href=`"$bookingUrl`" target=`"_blank`" rel=`"noopener noreferrer`""
