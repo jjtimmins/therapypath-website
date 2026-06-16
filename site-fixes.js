@@ -18,9 +18,31 @@
     form.parentNode.insertBefore(note, form);
   }
 
+  function ensureFormSubmitFields(form) {
+    if (!form || location.protocol === "file:") return;
+
+    var pageUrl = location.href.split("#")[0];
+    var urlInput = form.querySelector('input[name="_url"]');
+    if (!urlInput) {
+      urlInput = document.createElement("input");
+      urlInput.type = "hidden";
+      urlInput.name = "_url";
+      form.insertBefore(urlInput, form.firstChild);
+    }
+    urlInput.value = pageUrl;
+
+    var nextInput = form.querySelector('input[name="_next"]');
+    if (nextInput && !/^https?:\/\//i.test(nextInput.value)) {
+      var nextPath = nextInput.value.charAt(0) === "/" ? nextInput.value : "/" + nextInput.value;
+      nextInput.value = location.origin + nextPath;
+    }
+  }
+
   function initContactForm() {
     var form = document.querySelector(".tp-contact-form");
     if (!form) return;
+
+    ensureFormSubmitFields(form);
 
     var captcha = form.querySelector(".Captcha3940957316__checkbox");
     if (captcha) {
@@ -32,6 +54,8 @@
     if (captchaRoot) captchaRoot.remove();
 
     form.addEventListener("submit", function () {
+      ensureFormSubmitFields(form);
+
       var btn = form.querySelector('button[type="submit"]');
       if (btn) {
         btn.disabled = true;
@@ -53,13 +77,7 @@
             form.reportValidity();
             return;
           }
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          if (typeof form.requestSubmit === "function") {
-            form.requestSubmit();
-          } else {
-            form.submit();
-          }
+          ensureFormSubmitFields(form);
         },
         true
       );

@@ -8,6 +8,7 @@ HIDDEN = (
     '<input type="hidden" name="_subject" value="New message from The Therapy Path website" />'
     '<input type="hidden" name="_captcha" value="false" />'
     '<input type="hidden" name="_template" value="table" />'
+    '<input type="hidden" name="_url" value="" />'
 )
 CAPTCHA_RE = re.compile(
     r'<div id="comp-m4d2ct0y" class="Captcha3940957316__root[^"]*"[^>]*>.*?</div>\s*'
@@ -42,6 +43,14 @@ def patch_contact(path: Path, thanks: str):
         content = content.replace(
             '<textarea id="textarea_comp-kq7zyxd1"',
             '<textarea name="message" id="textarea_comp-kq7zyxd1"',
+        )
+
+    if 'name="_url"' not in content:
+        content = content.replace(
+            '<input type="hidden" name="_template" value="table" />',
+            '<input type="hidden" name="_template" value="table" />'
+            '<input type="hidden" name="_url" value="" />',
+            1,
         )
 
     content = re.sub(
