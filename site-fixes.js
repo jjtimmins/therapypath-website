@@ -340,10 +340,94 @@
     });
   }
 
+  function initAccessibleLinkLabels() {
+    document.querySelectorAll("a[href]").forEach(function (link) {
+      if (link.getAttribute("aria-label")) return;
+
+      var text = (link.textContent || "").replace(/\s+/g, " ").trim();
+      if (text) return;
+
+      var img = link.querySelector("img[alt]");
+      if (img && img.alt.trim()) {
+        link.setAttribute("aria-label", img.alt.trim());
+        return;
+      }
+
+      var href = link.getAttribute("href") || "";
+      if (
+        href === "/" ||
+        href === "index.html" ||
+        /\/index\.html$/.test(href) ||
+        href.endsWith("/") && href.split("/").filter(Boolean).length <= 1
+      ) {
+        link.setAttribute("aria-label", "The Therapy Path home");
+        return;
+      }
+      if (href === "fr.html" || href.endsWith("/fr.html")) {
+        link.setAttribute("aria-label", "Accueil");
+        return;
+      }
+      if (href.indexOf("facebook.com") >= 0) {
+        link.setAttribute("aria-label", "The Therapy Path on Facebook");
+        return;
+      }
+      if (href.indexOf("instagram.com") >= 0) {
+        link.setAttribute("aria-label", "The Therapy Path on Instagram");
+        return;
+      }
+      if (href.indexOf("linkedin.com") >= 0) {
+        link.setAttribute("aria-label", "The Therapy Path on LinkedIn");
+        return;
+      }
+
+      var panel =
+        link.closest('[id^="comp-m4u4ll70"]') ||
+        link.closest('[id^="comp-m4pvn6av"]') ||
+        link.closest(".wixui-repeater__item");
+      if (panel) {
+        var description = panel.querySelector(".wixui-rich-text__text");
+        if (description) {
+          var snippet = (description.textContent || "")
+            .replace(/\s+/g, " ")
+            .trim()
+            .slice(0, 100);
+          if (snippet) {
+            link.setAttribute("aria-label", snippet);
+            return;
+          }
+        }
+      }
+
+      if (href.indexOf("assessments") >= 0) {
+        link.setAttribute("aria-label", "Learn more about assessments");
+        return;
+      }
+      if (href.indexOf("therapy") >= 0) {
+        link.setAttribute("aria-label", "Learn more about therapy services");
+        return;
+      }
+
+      var titled = link.closest("[title]");
+      var title = link.getAttribute("title") || (titled && titled.getAttribute("title"));
+      if (title) {
+        link.setAttribute(
+          "aria-label",
+          title
+            .replace(/\.(jpe?g|png|webp|avif)$/i, "")
+            .replace(/[_~-]+/g, " ")
+            .trim()
+        );
+      }
+    });
+  }
+
   function initConsultationCardButtons() {
     document
       .querySelectorAll('[id^="comp-m6awikg0__"] a[href*="therapy.html"]')
       .forEach(function (link) {
+        if (!link.getAttribute("aria-label")) {
+          link.setAttribute("aria-label", "Learn more about language therapy services");
+        }
         link.addEventListener(
           "click",
           function (event) {
@@ -433,5 +517,6 @@
   initHashScroll();
   initHelpCardButtons();
   initConsultationCardButtons();
+  initAccessibleLinkLabels();
   initGeographicCoverageMap();
 })();

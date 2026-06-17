@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yellow-bush-058d9bf0f.7.azurestaticapps.net/sitemap.xml

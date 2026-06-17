@@ -35,6 +35,7 @@ foreach ($file in $htmlFiles) {
 python (Join-Path $PSScriptRoot 'fix-hero.py')
 python (Join-Path $PSScriptRoot 'fix-contact-form.py')
 python (Join-Path $PSScriptRoot 'fix-nav-links.py')
+python (Join-Path $PSScriptRoot 'fix-seo-meta.py')
 python (Join-Path $PSScriptRoot 'inject-site-fixes.py')
 
 Write-Host "Patched $($htmlFiles.Count) HTML files."
