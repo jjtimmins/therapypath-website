@@ -531,6 +531,131 @@
     });
   }
 
+  function initClinicalDatabaseCarousel() {
+    var carousel = document.getElementById("comp-m6aya1jg");
+    if (!carousel) return;
+
+    var imageBlue = "/images/opt/clinical-carousel-blue-1600w.webp";
+    var imageGreen = "/images/opt/clinical-carousel-green-1600w.webp";
+    var imageOrange = "/images/opt/clinical-carousel-orange-1600w.webp";
+    var isFrench = /^\/fr\//.test(window.location.pathname);
+    var title = isFrench ? "Notre base de donnees clinique" : "Our Clinical Database";
+    var slides = isFrench
+      ? [
+          {
+            image: imageBlue,
+            text: "Genere les rapports d'evaluation et de progres en un seul clic.",
+          },
+          {
+            image: imageGreen,
+            text:
+              "Saisit efficacement les resultats de depistage et envoie automatiquement des lettres aux parents. Elle envoie aussi des activites ciblees pour soutenir les enfants qui en ont besoin.",
+          },
+          {
+            image: imageOrange,
+            text: "Automatise certains aspects des programmes a domicile apres les seances de therapie.",
+          },
+          {
+            image: imageBlue,
+            text:
+              "Donne continuellement a nos clients un apercu du statut de chaque enfant de notre charge de cas, avec des mises a jour immediates.",
+          },
+          {
+            image: imageGreen,
+            text:
+              "Simplifie le suivi de la progression des objectifs et la generation des plans de traitement par nos cliniciens.",
+          },
+        ]
+      : [
+          {
+            image: imageBlue,
+            text: "Generates assessment and progress reports with the click of a button.",
+          },
+          {
+            image: imageGreen,
+            text:
+              "Efficiently captures screening results and automatically sends letters to parents. It also sends tailored activities to address weaknesses for children who need it.",
+          },
+          {
+            image: imageOrange,
+            text: "Automates aspects of home program delivery after therapy sessions.",
+          },
+          {
+            image: imageBlue,
+            text:
+              "Continually provides our customers an overview of the status of each child on our caseload with immediate updates of changes.",
+          },
+          {
+            image: imageGreen,
+            text:
+              "Simplifies our clinicians tracking of goal progression and generation of treatment plans.",
+          },
+        ];
+
+    var content = document.createElement("div");
+    content.className = "tp-clinical-carousel__content";
+    content.innerHTML =
+      '<h2 class="tp-clinical-carousel__title"></h2>' +
+      '<p class="tp-clinical-carousel__body"></p>';
+    carousel.appendChild(content);
+    carousel.classList.add("tp-clinical-carousel");
+
+    var titleEl = content.querySelector(".tp-clinical-carousel__title");
+    var bodyEl = content.querySelector(".tp-clinical-carousel__body");
+    var dots = Array.prototype.slice.call(carousel.querySelectorAll(".hImYkx a"));
+    var prev = carousel.querySelector('[data-testid="prevButton"]');
+    var next = carousel.querySelector('[data-testid="nextButton"]');
+    var index = 0;
+    var timer;
+
+    function render(nextIndex) {
+      index = (nextIndex + slides.length) % slides.length;
+      var slide = slides[index];
+      carousel.style.setProperty("--tp-clinical-carousel-bg", "url('" + slide.image + "')");
+      titleEl.textContent = title;
+      bodyEl.textContent = slide.text;
+      dots.forEach(function (dot, dotIndex) {
+        var isCurrent = dotIndex === index;
+        dot.classList.toggle("JPnvZO", isCurrent);
+        dot.parentElement.setAttribute("aria-current", isCurrent ? "true" : "false");
+      });
+    }
+
+    function restart() {
+      window.clearInterval(timer);
+      timer = window.setInterval(function () {
+        render(index + 1);
+      }, 6500);
+    }
+
+    if (prev) {
+      prev.addEventListener("click", function (event) {
+        event.preventDefault();
+        render(index - 1);
+        restart();
+      });
+    }
+
+    if (next) {
+      next.addEventListener("click", function (event) {
+        event.preventDefault();
+        render(index + 1);
+        restart();
+      });
+    }
+
+    dots.forEach(function (dot, dotIndex) {
+      dot.addEventListener("click", function (event) {
+        event.preventDefault();
+        render(dotIndex);
+        restart();
+      });
+    });
+
+    render(0);
+    restart();
+  }
+
   function pinLocalImages() {
     var heroImg = document.querySelector("#img_comp-m4n0yl36 img");
     if (heroImg) {
@@ -579,6 +704,7 @@
   initConsultationCardButtons();
   initAccessibleLinkLabels();
   pinPageHero();
+  initClinicalDatabaseCarousel();
   pinLocalImages();
   initGeographicCoverageMap();
 })();

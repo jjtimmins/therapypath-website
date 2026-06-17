@@ -18,6 +18,20 @@ CONSULTATIONS_WIX_1600 = (
 CONSULTATIONS_WIX_2400 = (
     ROOT / "images" / "opt" / "5f9399_d7cbc8774a6741be918a3fd4a4c280b9-2400w.webp"
 )
+CLINICAL_CAROUSEL = [
+    (
+        ROOT / "images" / "Clinical carousel blue.png",
+        ROOT / "images" / "opt" / "clinical-carousel-blue-1600w.webp",
+    ),
+    (
+        ROOT / "images" / "Clinical carousel green.png",
+        ROOT / "images" / "opt" / "clinical-carousel-green-1600w.webp",
+    ),
+    (
+        ROOT / "images" / "Clinical carousel orange.png",
+        ROOT / "images" / "opt" / "clinical-carousel-orange-1600w.webp",
+    ),
+]
 
 
 def save_webp(source: Path, dest: Path, width: int = 1600) -> None:
@@ -50,6 +64,12 @@ def main() -> None:
         save_webp(CONSULTATIONS_SOURCE, CONSULTATIONS_WIX_2400, 2400)
     else:
         print(f"missing {CONSULTATIONS_SOURCE.relative_to(ROOT)}")
+
+    for source, dest in CLINICAL_CAROUSEL:
+        if source.exists():
+            save_webp(source, dest, 1600)
+        else:
+            print(f"missing {source.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

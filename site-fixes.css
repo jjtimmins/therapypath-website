@@ -63,6 +63,74 @@
   background-position: center center !important;
 }
 
+/* Clinical management page: local carousel fallback for the Wix slideshow hero. */
+#comp-m6aya1jg.tp-clinical-carousel {
+  background-image: var(--tp-clinical-carousel-bg);
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+#comp-m6aya1jg.tp-clinical-carousel .LzcnsT {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#comp-m6aya1jg .tp-clinical-carousel__content {
+  color: #fff;
+  left: calc((100% - 980px) * 0.5);
+  max-width: min(968px, calc(100% - 48px));
+  position: absolute;
+  top: 38px;
+  z-index: 2;
+}
+
+#comp-m6aya1jg .tp-clinical-carousel__title {
+  font-family: avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin: 0 0 28px;
+}
+
+#comp-m6aya1jg .tp-clinical-carousel__body {
+  font-family: avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+  max-width: 980px;
+}
+
+#comp-m6aya1jg.tp-clinical-carousel .eranmg,
+#comp-m6aya1jg.tp-clinical-carousel .hImYkx {
+  z-index: 3;
+}
+
+#comp-m6aya1jg.tp-clinical-carousel .v1smN8 {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+#comp-m6aya1jg.tp-clinical-carousel .v1smN8.JPnvZO {
+  background: #fff;
+}
+
+@media (max-width: 980px) {
+  #comp-m6aya1jg .tp-clinical-carousel__content {
+    left: 32px;
+    max-width: calc(100% - 64px);
+  }
+
+  #comp-m6aya1jg .tp-clinical-carousel__title {
+    font-size: 38px;
+  }
+
+  #comp-m6aya1jg .tp-clinical-carousel__body {
+    font-size: 22px;
+  }
+}
+
 #img_comp-m4u7nvwc5 {
   background-image: url('/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-1600w.webp') !important;
   background-size: cover !important;
