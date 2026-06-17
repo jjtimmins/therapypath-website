@@ -26,6 +26,66 @@
   opacity: 0 !important;
 }
 
+/* Interior page heroes: paint local hero backgrounds before Wix hydrates wow-image. */
+#img_comp-m4uaf2xt6 {
+  background-image: url('/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m4u9ebxq6 {
+  background-image: url('/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m4u9qgzx {
+  background-image: url('/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m21zub4c6 {
+  background-image: url('/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m4uabng46 {
+  background-image: url('/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m6aya26d {
+  background-image: url('/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m4u7nvwc5 {
+  background-image: url('/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m4u9yge25 {
+  background-image: url('/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-1600w.webp') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+#img_comp-m4uaf2xt6 img,
+#img_comp-m4u9ebxq6 img,
+#img_comp-m4u9qgzx img,
+#img_comp-m21zub4c6 img,
+#img_comp-m4uabng46 img,
+#img_comp-m6aya26d img,
+#img_comp-m4u7nvwc5 img,
+#img_comp-m4u9yge25 img {
+  opacity: 0 !important;
+}
+
 a[href*='theramatic.ca/request-appointment'] .wixui-button__label,
 a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   white-space: nowrap;

@@ -510,6 +510,27 @@
     });
   }
 
+  function pinPageHero() {
+    var pages = document.querySelector("#SITE_PAGES");
+    if (!pages) return;
+
+    var heroImg = pages.querySelector("wow-image.bgImage img, wow-image[class*='bgImage'] img");
+    if (heroImg) {
+      heroImg.setAttribute("fetchpriority", "high");
+      heroImg.removeAttribute("loading");
+    }
+
+    pages.querySelectorAll("img[fetchpriority='high']").forEach(function (img) {
+      if (img === heroImg) return;
+      if (img.closest("#SITE_HEADER")) return;
+      img.removeAttribute("fetchpriority");
+      var width = parseInt(img.getAttribute("width") || "0", 10);
+      if (width > 0 && width < 500 && !img.getAttribute("loading")) {
+        img.setAttribute("loading", "lazy");
+      }
+    });
+  }
+
   function pinLocalImages() {
     var heroImg = document.querySelector("#img_comp-m4n0yl36 img");
     if (heroImg) {
@@ -557,6 +578,7 @@
   initHelpCardButtons();
   initConsultationCardButtons();
   initAccessibleLinkLabels();
+  pinPageHero();
   pinLocalImages();
   initGeographicCoverageMap();
 })();
