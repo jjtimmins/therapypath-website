@@ -42,7 +42,7 @@
 #img_comp-m4u9qgzx {
   background-image: url('/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-1600w.webp') !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center top !important;
 }
 
 #img_comp-m21zub4c6 {
@@ -54,21 +54,22 @@
 #img_comp-m4uabng46 {
   background-image: url('/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-1600w.webp') !important;
   background-size: cover !important;
-  background-position: center center !important;
-}
-
-#img_comp-m6aya26d {
-  background-image: url('/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-1600w.webp') !important;
-  background-size: cover !important;
-  background-position: center center !important;
+  background-position: center top !important;
 }
 
 /* Clinical management page: local carousel fallback for the Wix slideshow hero. */
-#comp-m6aya1jg.tp-clinical-carousel {
+#comp-m6aya1jg {
+  --tp-clinical-carousel-bg: url('/images/opt/clinical-carousel-blue-1600w.webp');
   background-image: var(--tp-clinical-carousel-bg);
   background-position: center center;
   background-size: cover;
   overflow: hidden;
+}
+
+#comp-m6aya1jg #img_comp-m6aya26d,
+#comp-m6aya1jg #comp-m6aya26d {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 #comp-m6aya1jg.tp-clinical-carousel .LzcnsT {
@@ -154,10 +155,52 @@
   z-index: 1 !important;
 }
 
+/* Our accomplishments hero: raise caption box and headline. */
+#comp-m6glqwbc {
+  margin-top: 36px !important;
+}
+
+#comp-m4u9ebxu10 {
+  margin-top: 50px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Our specializations hero: top-crop image and widen caption box + text ~10%. */
+#comp-m68nkxsr {
+  width: 716px !important;
+  left: 248px !important;
+  z-index: 0 !important;
+}
+
+#comp-m68nkxsr svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#comp-m4u9qh014,
+#comp-m4u9qh0210 {
+  position: relative !important;
+  z-index: 1 !important;
+  grid-area: 1 / 1 / 2 / 2 !important;
+}
+
+#comp-m4u9qh014 {
+  width: 660px !important;
+  left: 262px !important;
+  margin: 62px 0 0 calc((100% - 980px) * 0.5) !important;
+}
+
+#comp-m4u9qh0210 {
+  width: 677px !important;
+  left: 261px !important;
+  margin: 166px 0 10px calc((100% - 980px) * 0.5) !important;
+}
+
 #img_comp-m4u9yge25 {
   background-image: url('/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-1600w.webp') !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center -24px !important;
 }
 
 #img_comp-m4uaf2xt6 img,
@@ -196,6 +239,11 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 #SITE_HEADER {
   position: relative;
   z-index: 5000;
+}
+
+/* Header logo: restore the original Wix crop without changing the header layout box. */
+#SITE_HEADER #img_comp-m4u3wh0r {
+  content: url('/images/opt/therapy-path-header-logo-143w.webp');
 }
 
 /* Nav dropdowns: Wix JS sets data-hovered; enable CSS-only hover fallback */

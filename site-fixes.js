@@ -536,6 +536,17 @@
     if (!carousel) return;
 
     var imageBlue = "/images/opt/clinical-carousel-blue-1600w.webp";
+    carousel.classList.add("tp-clinical-carousel");
+    carousel.style.setProperty("--tp-clinical-carousel-bg", "url('" + imageBlue + "')");
+
+    var legacySlide = document.getElementById("img_comp-m6aya26d");
+    if (legacySlide) {
+      legacySlide.style.backgroundImage = "none";
+      legacySlide.querySelectorAll("img").forEach(function (img) {
+        img.removeAttribute("src");
+        img.removeAttribute("srcset");
+      });
+    }
     var imageGreen = "/images/opt/clinical-carousel-green-1600w.webp";
     var imageOrange = "/images/opt/clinical-carousel-orange-1600w.webp";
     var isFrench = /^\/fr\//.test(window.location.pathname);
@@ -598,7 +609,6 @@
       '<h2 class="tp-clinical-carousel__title"></h2>' +
       '<p class="tp-clinical-carousel__body"></p>';
     carousel.appendChild(content);
-    carousel.classList.add("tp-clinical-carousel");
 
     var titleEl = content.querySelector(".tp-clinical-carousel__title");
     var bodyEl = content.querySelector(".tp-clinical-carousel__body");
@@ -657,6 +667,14 @@
   }
 
   function pinLocalImages() {
+    var headerLogo = document.getElementById("img_comp-m4u3wh0r");
+    if (headerLogo) {
+      headerLogo.src = "/images/opt/therapy-path-header-logo-143w.webp";
+      headerLogo.srcset =
+        "/images/opt/therapy-path-header-logo-143w.webp 1x, /images/opt/therapy-path-header-logo-286w.webp 2x";
+      headerLogo.sizes = "143px";
+    }
+
     var heroImg = document.querySelector("#img_comp-m4n0yl36 img");
     if (heroImg) {
       heroImg.src = "/images/opt/adobestock_495222202-980w.webp";

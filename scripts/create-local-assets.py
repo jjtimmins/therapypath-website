@@ -4,6 +4,9 @@ from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
+HEADER_LOGO_SOURCE = ROOT / "images" / "The Therapy logo2_edited.png"
+HEADER_LOGO_143 = ROOT / "images" / "opt" / "therapy-path-header-logo-143w.webp"
+HEADER_LOGO_286 = ROOT / "images" / "opt" / "therapy-path-header-logo-286w.webp"
 OUR_TEAM_SOURCE = ROOT / "images" / "Our Team hero hands.png"
 OUR_TEAM_WEBP = ROOT / "images" / "opt" / "our-team-hero-hands-1600w.webp"
 OUR_TEAM_WIX_1600 = ROOT / "images" / "opt" / "11062b_1c1dad37976a477086dea4fefabe1e09-1600w.webp"
@@ -45,7 +48,24 @@ def save_webp(source: Path, dest: Path, width: int = 1600) -> None:
         print(f"created {dest.relative_to(ROOT)} ({image.width}x{image.height})")
 
 
+def save_header_logo(source: Path, dest: Path, width: int) -> None:
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with Image.open(source) as image:
+        # Match the original Wix crop used in the header logo.
+        image = image.convert("RGBA").crop((145, 185, 871, 870))
+        height = round(image.height * width / image.width)
+        image = image.resize((width, height), Image.Resampling.LANCZOS)
+        image.save(dest, "WEBP", quality=90, method=6)
+        print(f"created {dest.relative_to(ROOT)} ({image.width}x{image.height})")
+
+
 def main() -> None:
+    if HEADER_LOGO_SOURCE.exists():
+        save_header_logo(HEADER_LOGO_SOURCE, HEADER_LOGO_143, 143)
+        save_header_logo(HEADER_LOGO_SOURCE, HEADER_LOGO_286, 286)
+    else:
+        print(f"missing {HEADER_LOGO_SOURCE.relative_to(ROOT)}")
+
     if OUR_TEAM_SOURCE.exists():
         save_webp(OUR_TEAM_SOURCE, OUR_TEAM_WEBP)
         save_webp(OUR_TEAM_SOURCE, OUR_TEAM_WIX_1600, 1600)
