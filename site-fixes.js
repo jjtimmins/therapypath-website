@@ -442,6 +442,86 @@
       });
   }
 
+  function initMobileNavigation() {
+    var header = document.getElementById("SITE_HEADER");
+    var desktopNav = document.getElementById("comp-m4ufk180");
+    if (!header || header.querySelector(".tp-mobile-nav")) return;
+    if (!desktopNav) {
+      window.setTimeout(initMobileNavigation, 250);
+      return;
+    }
+
+    var links = [];
+    desktopNav.querySelectorAll("a[href]").forEach(function (link) {
+      var href = link.getAttribute("href");
+      var label = (link.textContent || "").replace(/\s+/g, " ").trim();
+      if (!href || !label || href === "#" || href.indexOf("javascript:") === 0) return;
+      if (links.some(function (item) { return item.href === href && item.label === label; })) return;
+      links.push({ href: href, label: label });
+    });
+
+    if (!links.length) {
+      window.setTimeout(initMobileNavigation, 250);
+      return;
+    }
+
+    var isFrench = isFrenchPage();
+    var nav = document.createElement("nav");
+    nav.className = "tp-mobile-nav";
+    nav.setAttribute("aria-label", isFrench ? "Navigation mobile" : "Mobile navigation");
+    nav.innerHTML =
+      '<button type="button" class="tp-mobile-nav__toggle" aria-expanded="false">' +
+      '<span class="tp-mobile-nav__bars" aria-hidden="true"></span>' +
+      '<span class="tp-mobile-nav__label">' +
+      (isFrench ? "Menu" : "Menu") +
+      "</span>" +
+      "</button>" +
+      '<div class="tp-mobile-nav__panel" hidden></div>';
+
+    var panel = nav.querySelector(".tp-mobile-nav__panel");
+    links.forEach(function (item) {
+      var menuLink = document.createElement("a");
+      menuLink.className = "tp-mobile-nav__link";
+      menuLink.href = item.href;
+      menuLink.textContent = item.label;
+      panel.appendChild(menuLink);
+    });
+
+    header.appendChild(nav);
+
+    var toggle = nav.querySelector(".tp-mobile-nav__toggle");
+
+    function closeMenu() {
+      nav.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+    }
+
+    function openMenu() {
+      nav.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+      panel.hidden = false;
+    }
+
+    toggle.addEventListener("click", function (event) {
+      event.stopPropagation();
+      if (panel.hidden) openMenu();
+      else closeMenu();
+    });
+
+    panel.addEventListener("click", function (event) {
+      if (event.target.closest("a[href]")) closeMenu();
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!nav.contains(event.target)) closeMenu();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMenu();
+    });
+  }
+
   function loadStylesheet(href) {
     if (document.querySelector('link[href="' + href + '"]')) return;
     var link = document.createElement("link");
@@ -666,6 +746,74 @@
     restart();
   }
 
+  var APPOINTMENT_CARD_IMAGES = {
+    "5353ca_b05e9a98bc264a0480d92a702e808975":
+      "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-864w.webp",
+    "dda575_7d642f34c3524555a2dabdd59ecd1e3f":
+      "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
+    "dda575_098fc47f424e46909702a5d5dd49f04f":
+      "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-1600w.webp",
+    "5f9399_230005879ba74374bc83c6d80f34cb61":
+      "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-1600w.webp",
+    "dda575_725e8414dd764046a35c7d310b0fe9bd":
+      "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-1600w.webp",
+  };
+
+  function parseWowImageInfo(wowImage) {
+    var raw = wowImage.getAttribute("data-image-info");
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw.replace(/&quot;/g, '"'));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function localAppointmentImage(uri) {
+    if (!uri) return null;
+    return APPOINTMENT_CARD_IMAGES[uri.split("~")[0]] || null;
+  }
+
+  function pinAppointmentCardImages() {
+    var widget = document.getElementById("comp-m52p2p3b");
+    if (!widget) return;
+
+    widget.querySelectorAll("wow-image[data-image-info] img").forEach(function (img) {
+      var wowImage = img.closest("wow-image");
+      if (!wowImage) return;
+      var info = parseWowImageInfo(wowImage);
+      var localSrc =
+        info && info.imageData ? localAppointmentImage(info.imageData.uri) : null;
+      if (!localSrc) return;
+      if (img.getAttribute("src") === localSrc && img.src.indexOf("wixstatic.com") === -1) {
+        return;
+      }
+      img.src = localSrc;
+      img.removeAttribute("srcset");
+    });
+  }
+
+  function initAppointmentCardImages() {
+    var widget = document.getElementById("comp-m52p2p3b");
+    if (!widget) return;
+
+    pinAppointmentCardImages();
+    [250, 1000, 3000].forEach(function (delay) {
+      window.setTimeout(pinAppointmentCardImages, delay);
+    });
+
+    if (!window.MutationObserver) return;
+    var observer = new MutationObserver(function () {
+      pinAppointmentCardImages();
+    });
+    observer.observe(widget, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["src", "srcset", "data-image-info"],
+    });
+  }
+
   function pinLocalImages() {
     var headerLogo = document.getElementById("img_comp-m4u3wh0r");
     if (headerLogo) {
@@ -716,6 +864,9 @@
   showSentBanner();
   initContactForm();
   initLanguageSwitcher();
+  initMobileNavigation();
+  window.setTimeout(initMobileNavigation, 500);
+  window.setTimeout(initMobileNavigation, 1500);
   initTherapyMenuLinks();
   initHashScroll();
   initHelpCardButtons();
@@ -724,5 +875,6 @@
   pinPageHero();
   initClinicalDatabaseCarousel();
   pinLocalImages();
+  initAppointmentCardImages();
   initGeographicCoverageMap();
 })();
