@@ -1,3 +1,4 @@
+import html as html_module
 import json
 import re
 import urllib.parse
@@ -11,8 +12,10 @@ MANIFEST_PATH = ROOT / "scripts" / "image-usage.json"
 
 WIX_RE = re.compile(r"https://static\.wixstatic\.com/media/[^\"'\s)]+", re.I)
 FILL_WIDTH_RE = re.compile(r"/fill/w_(\d+)", re.I)
+FIT_WIDTH_RE = re.compile(r"/fit/w_(\d+)", re.I)
 TITLE_RE = re.compile(r'title="([^"]+)"')
 URI_RE = re.compile(r"&quot;uri&quot;:&quot;([^&]+)&quot;")
+IMAGE_INFO_RE = re.compile(r'data-image-info="([^"]+)"')
 
 
 def slugify(name: str) -> str:
@@ -36,6 +39,32 @@ def local_source_path(source_name: str) -> Path | None:
     return None
 
 
+def record_usage(
+    usage: dict[str, dict],
+    source_name: str,
+    url: str,
+    width: int,
+    page: str,
+) -> None:
+    slug = slugify(source_name)
+    entry = usage.setdefault(
+        slug,
+        {
+            "source_name": source_name,
+            "max_width": 0,
+            "sample_url": url,
+            "pages": set(),
+        },
+    )
+    entry["max_width"] = max(entry["max_width"], width)
+    entry["pages"].add(page)
+    if width >= entry.get("_best_width", 0):
+        entry["sample_url"] = url
+        entry["_best_width"] = width
+    if width == 0 and entry["max_width"] == 0:
+        entry["max_width"] = 800
+
+
 def collect_usage() -> dict[str, dict]:
     usage: dict[str, dict] = {}
 
@@ -43,11 +72,37 @@ def collect_usage() -> dict[str, dict]:
         if "_archive" in html_path.parts:
             continue
         text = html_path.read_text(encoding="utf-8", errors="ignore")
+        page = html_path.relative_to(ROOT).as_posix()
+
+        for info_match in IMAGE_INFO_RE.finditer(text):
+            try:
+                info = json.loads(html_module.unescape(info_match.group(1)))
+            except json.JSONDecodeError:
+                continue
+            image = info.get("imageData", {})
+            source_name = image.get("name") or image.get("uri")
+            if not source_name:
+                continue
+            native_width = int(image.get("width") or 0)
+            target_width = int(info.get("targetWidth") or 0)
+            width = max(native_width, target_width, 400)
+            media_id = source_name.replace("~mv2", "_mv2").split(".")[0]
+            if "~" in source_name:
+                media_id = source_name.split("~")[0] + "~mv2"
+            ext = Path(source_name).suffix or ".jpg"
+            sample_url = (
+                f"https://static.wixstatic.com/media/{media_id}{ext}"
+                f"/v1/fit/w_{min(width, 1600)},h_{min(width, 1600)},al_c/{source_name}"
+            )
+            record_usage(usage, source_name, sample_url, min(width, 1600), page)
+
         for url in WIX_RE.findall(text):
             if "blur_" in url:
                 continue
             width = 0
             for match in FILL_WIDTH_RE.finditer(url):
+                width = max(width, int(match.group(1)))
+            for match in FIT_WIDTH_RE.finditer(url):
                 width = max(width, int(match.group(1)))
             pos = text.find(url)
             window = text[max(0, pos - 1200) : pos + 200]
@@ -61,25 +116,14 @@ def collect_usage() -> dict[str, dict]:
                 uri_match = URI_RE.search(window)
                 if uri_match:
                     source_name = uri_match.group(1)
-            if not source_name:
-                source_name = Path(urllib.parse.unquote(url.split("/")[-1].split("?")[0])).name
-            slug = slugify(source_name)
-            entry = usage.setdefault(
-                slug,
-                {
-                    "source_name": source_name,
-                    "max_width": 0,
-                    "sample_url": url,
-                    "pages": set(),
-                },
-            )
-            entry["max_width"] = max(entry["max_width"], width)
-            entry["pages"].add(html_path.relative_to(ROOT).as_posix())
-            if width >= entry.get("_best_width", 0):
-                entry["sample_url"] = url
-                entry["_best_width"] = width
-            if width == 0 and entry["max_width"] == 0:
-                entry["max_width"] = 800
+            url_filename = Path(urllib.parse.unquote(url.split("?")[0].split("/")[-1])).name
+            if url_filename and re.search(
+                r"\.(jpe?g|png|webp|avif|gif)$", url_filename, re.I
+            ):
+                source_name = url_filename
+            elif not source_name:
+                source_name = url_filename
+            record_usage(usage, source_name, url, width, page)
 
     for entry in usage.values():
         entry["pages"] = sorted(entry["pages"])

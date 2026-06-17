@@ -14,12 +14,17 @@ USAGE_PATH = ROOT / "scripts" / "image-usage.json"
 MANIFEST_PATH = ROOT / "scripts" / "image-manifest.json"
 
 LOCAL_ALIASES = {
-    "AdobeStock_363566581.jpeg": "Assessment speech service_edited_edited.png",
+    "AdobeStock_363566581.jpeg": "AdobeStock_486112793.jpeg",
     "ba2cd3_501a358c30d1498d855bbdeacb20d2ae~mv2.png": "The Therapy logo2_edited.png",
+    "ba2cd3_ce429fe317704238b6b68ffe39659f77~mv2.jpeg": "wix/ba2cd3_ce429fe317704238b6b68ffe39659f77.jpg",
     "dda575_0c007f24a248480781cff40e0d157f46~mv2.png": "favicon.png",
     "dda575_0c007f24a248480781cff40e0d157f46_mv2.png": "favicon.png",
     "dda575_6b7dc4ddcb124f1bbcce99b3a046fa26~mv2.png": "The Therapy logo2_edited.png",
     "dda575_6b7dc4ddcb124f1bbcce99b3a046fa26_mv2.png": "The Therapy logo2_edited.png",
+    "dda575_7d642f34c3524555a2dabdd59ecd1e3f~mv2.jpeg": "wix/dda575_7d642f34c3524555a2dabdd59ecd1e3f.jpg",
+    "5f9399_30ec07ce19d84aa1823ac391f5b926a5~mv2.jpg": "wix/5f9399_30ec07ce19d84aa1823ac391f5b926a5.jpg",
+    "5f9399_30ec07ce19d84aa1823ac391f5b926a5_mv2.jpg": "wix/5f9399_30ec07ce19d84aa1823ac391f5b926a5.jpg",
+    "Yellow Pages for business.webp": "wix/Yellow_Pages_for_business.webp",
     "Picture2.png": "Picture2_edited.png",
     "a3c153_017c8cfe7afd4435b2951f0dc0b8429d~mv2.jpg": "iView Notes_edited.jpg",
     "11062b_1c1dad37976a477086dea4fefabe1e09~mv2.jpg": "Owner profile Photo - The therapy path.jpg",
@@ -32,7 +37,13 @@ EXTRA_USAGE = {
         "max_width": 980,
         "sample_url": "",
         "pages": ["index.html", "fr.html"],
-    }
+    },
+    "assessment-speech-service": {
+        "source_name": "Assessment speech service_edited_cropped.JPG",
+        "max_width": 864,
+        "sample_url": "",
+        "pages": ["index.html", "fr.html"],
+    },
 }
 
 
@@ -64,6 +75,13 @@ def download(url: str, dest: Path) -> None:
     print(f"downloaded {dest.relative_to(ROOT)}")
 
 
+def wix_cache_match(stem: str) -> Path | None:
+    for candidate in WIX_CACHE.glob(stem + ".*"):
+        if candidate.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".avif"}:
+            return candidate
+    return None
+
+
 def resolve_source(source_name: str, sample_url: str, max_width: int) -> Path:
     alias = LOCAL_ALIASES.get(source_name)
     if alias:
@@ -79,6 +97,10 @@ def resolve_source(source_name: str, sample_url: str, max_width: int) -> Path:
     for candidate in IMAGES.glob(stem + ".*"):
         if candidate.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".avif"}:
             return candidate
+
+    cached = wix_cache_match(stem)
+    if cached:
+        return cached
 
     if not sample_url:
         raise RuntimeError(f"No source or download URL for {source_name}")

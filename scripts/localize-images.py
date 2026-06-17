@@ -20,7 +20,24 @@ def media_key_from_url(url: str) -> str | None:
     return urllib.parse.unquote(match.group(1)).split(".")[0]
 
 
+def display_name_from_url(url: str) -> str | None:
+    name = Path(urllib.parse.unquote(url.split("?")[0].split("/")[-1])).name
+    if name and re.search(r"\.(jpe?g|png|webp|avif|gif)$", name, re.I):
+        return name
+    return None
+
+
 def lookup_variant(manifest: dict, url: str) -> str | None:
+    display_name = display_name_from_url(url)
+    if display_name:
+        display_key = Path(display_name).stem.lower()
+        for manifest_key, entry in manifest.items():
+            source = entry.get("source_name", "")
+            if Path(source).name.lower() == display_name.lower():
+                return entry["variants"]["default"]
+            if entry.get("slug", "").lower() == display_key:
+                return entry["variants"]["default"]
+
     key = media_key_from_url(url)
     if not key:
         return None
@@ -67,8 +84,22 @@ def simplify_img_tag(tag: str, manifest: dict) -> str:
     return tag
 
 
+def fix_malformed_paths(content: str) -> str:
+    content = re.sub(
+        r'(?:\.\./)+https://static\.wixstatic\.com/',
+        "https://static.wixstatic.com/",
+        content,
+    )
+    content = re.sub(
+        r'src="(?:\.\./)+(/images/opt/[^"]+)"',
+        r'src="\1"',
+        content,
+    )
+    return content
+
+
 def localize_html(content: str, manifest: dict) -> str:
-    original = content
+    content = fix_malformed_paths(content)
 
     def replace_url(match: re.Match[str]) -> str:
         url = match.group(0)

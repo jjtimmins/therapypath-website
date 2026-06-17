@@ -519,6 +519,26 @@
       heroImg.setAttribute("alt", "Speech therapy session");
     }
 
+    var helpCardImages = {
+      "img_comp-m4rmsvne__item1": {
+        src: "/images/opt/assessment-speech-service-864w.webp",
+        srcset:
+          "/images/opt/assessment-speech-service-864w.webp 1x, /images/opt/assessment-speech-service-1728w.webp 2x",
+      },
+      "img_comp-m4rmsvne__item-j9r9uz7e": {
+        src: "/images/opt/adobestock_363566581-864w.webp",
+        srcset:
+          "/images/opt/adobestock_363566581-864w.webp 1x, /images/opt/adobestock_363566581-1728w.webp 2x",
+      },
+    };
+
+    Object.keys(helpCardImages).forEach(function (id) {
+      var img = document.getElementById(id);
+      if (!img) return;
+      img.src = helpCardImages[id].src;
+      img.srcset = helpCardImages[id].srcset;
+    });
+
     document.querySelectorAll('img[src*="wixstatic.com"]').forEach(function (img) {
       if (img.closest("#img_pageBackground_c1dmp")) return;
       var localSrc = img.getAttribute("data-tp-local-src");

@@ -1,42 +1,102 @@
 {
-  "11062b_99c706e72c024eeb959405e90bee0bfc": {
-    "slug": "ba2cd3_ce429fe317704238b6b68ffe39659f77",
-    "source_name": "ba2cd3_ce429fe317704238b6b68ffe39659f77~mv2.jpeg",
+  "11062b_1c1dad37976a477086dea4fefabe1e09": {
+    "slug": "11062b_1c1dad37976a477086dea4fefabe1e09",
+    "source_name": "11062b_1c1dad37976a477086dea4fefabe1e09~mv2.jpg",
     "variants": {
-      "1076": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
-      "2152": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp",
-      "default": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
-      "retina": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp"
+      "1600": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-1600w.webp",
+      "2400": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-2400w.webp",
+      "default": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-1600w.webp",
+      "retina": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-2400w.webp"
     }
   },
-  "11062b_99c706e72c024eeb959405e90bee0bfc~mv2": {
-    "slug": "ba2cd3_ce429fe317704238b6b68ffe39659f77",
-    "source_name": "ba2cd3_ce429fe317704238b6b68ffe39659f77~mv2.jpeg",
+  "11062b_1c1dad37976a477086dea4fefabe1e09~mv2": {
+    "slug": "11062b_1c1dad37976a477086dea4fefabe1e09",
+    "source_name": "11062b_1c1dad37976a477086dea4fefabe1e09~mv2.jpg",
     "variants": {
-      "1076": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
-      "2152": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp",
-      "default": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
-      "retina": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp"
+      "1600": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-1600w.webp",
+      "2400": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-2400w.webp",
+      "default": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-1600w.webp",
+      "retina": "/images/opt/11062b_1c1dad37976a477086dea4fefabe1e09-2400w.webp"
     }
   },
-  "5f9399_30ec07ce19d84aa1823ac391f5b926a5": {
-    "slug": "5f9399_30ec07ce19d84aa1823ac391f5b926a5",
-    "source_name": "5f9399_30ec07ce19d84aa1823ac391f5b926a5~mv2.jpg",
+  "5353ca_b05e9a98bc264a0480d92a702e808975": {
+    "slug": "5353ca_b05e9a98bc264a0480d92a702e808975",
+    "source_name": "5353ca_b05e9a98bc264a0480d92a702e808975~mv2.png",
     "variants": {
-      "557": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
-      "1114": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp",
-      "default": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
-      "retina": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp"
+      "864": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-864w.webp",
+      "1728": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-1728w.webp",
+      "default": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-864w.webp",
+      "retina": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-1728w.webp"
     }
   },
-  "5f9399_30ec07ce19d84aa1823ac391f5b926a5~mv2": {
-    "slug": "5f9399_30ec07ce19d84aa1823ac391f5b926a5",
-    "source_name": "5f9399_30ec07ce19d84aa1823ac391f5b926a5~mv2.jpg",
+  "5353ca_b05e9a98bc264a0480d92a702e808975~mv2": {
+    "slug": "5353ca_b05e9a98bc264a0480d92a702e808975",
+    "source_name": "5353ca_b05e9a98bc264a0480d92a702e808975~mv2.png",
     "variants": {
-      "557": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
-      "1114": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp",
-      "default": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
-      "retina": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp"
+      "864": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-864w.webp",
+      "1728": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-1728w.webp",
+      "default": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-864w.webp",
+      "retina": "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-1728w.webp"
+    }
+  },
+  "5f9399_230005879ba74374bc83c6d80f34cb61": {
+    "slug": "5f9399_230005879ba74374bc83c6d80f34cb61",
+    "source_name": "5f9399_230005879ba74374bc83c6d80f34cb61~mv2.jpg",
+    "variants": {
+      "1600": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-1600w.webp",
+      "2400": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-2400w.webp",
+      "default": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-1600w.webp",
+      "retina": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-2400w.webp"
+    }
+  },
+  "5f9399_230005879ba74374bc83c6d80f34cb61~mv2": {
+    "slug": "5f9399_230005879ba74374bc83c6d80f34cb61",
+    "source_name": "5f9399_230005879ba74374bc83c6d80f34cb61~mv2.jpg",
+    "variants": {
+      "1600": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-1600w.webp",
+      "2400": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-2400w.webp",
+      "default": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-1600w.webp",
+      "retina": "/images/opt/5f9399_230005879ba74374bc83c6d80f34cb61-2400w.webp"
+    }
+  },
+  "5f9399_860df26f4e2e49729d0e5cc9c962d9a6": {
+    "slug": "20240630_185048_magic_edited",
+    "source_name": "20240630_185048_magic_edited.jpg",
+    "variants": {
+      "256": "/images/opt/20240630_185048_magic_edited-256w.webp",
+      "512": "/images/opt/20240630_185048_magic_edited-512w.webp",
+      "default": "/images/opt/20240630_185048_magic_edited-256w.webp",
+      "retina": "/images/opt/20240630_185048_magic_edited-512w.webp"
+    }
+  },
+  "5f9399_860df26f4e2e49729d0e5cc9c962d9a6~mv2": {
+    "slug": "20240630_185048_magic_edited",
+    "source_name": "20240630_185048_magic_edited.jpg",
+    "variants": {
+      "256": "/images/opt/20240630_185048_magic_edited-256w.webp",
+      "512": "/images/opt/20240630_185048_magic_edited-512w.webp",
+      "default": "/images/opt/20240630_185048_magic_edited-256w.webp",
+      "retina": "/images/opt/20240630_185048_magic_edited-512w.webp"
+    }
+  },
+  "5f9399_d7cbc8774a6741be918a3fd4a4c280b9": {
+    "slug": "5f9399_d7cbc8774a6741be918a3fd4a4c280b9",
+    "source_name": "5f9399_d7cbc8774a6741be918a3fd4a4c280b9~mv2.jpg",
+    "variants": {
+      "1600": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-1600w.webp",
+      "2400": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-2400w.webp",
+      "default": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-1600w.webp",
+      "retina": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-2400w.webp"
+    }
+  },
+  "5f9399_d7cbc8774a6741be918a3fd4a4c280b9~mv2": {
+    "slug": "5f9399_d7cbc8774a6741be918a3fd4a4c280b9",
+    "source_name": "5f9399_d7cbc8774a6741be918a3fd4a4c280b9~mv2.jpg",
+    "variants": {
+      "1600": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-1600w.webp",
+      "2400": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-2400w.webp",
+      "default": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-1600w.webp",
+      "retina": "/images/opt/5f9399_d7cbc8774a6741be918a3fd4a4c280b9-2400w.webp"
     }
   },
   "AdobeStock_495222202.jpeg": {
@@ -49,124 +109,414 @@
       "retina": "/images/opt/adobestock_495222202-1960w.webp"
     }
   },
-  "b89123_dc8dae68f20c4cd69c05ffc9711db9b2": {
-    "slug": "yellow-pages-for-business",
-    "source_name": "Yellow Pages for business.webp",
+  "Assessment speech service_edited_cropped.JPG": {
+    "slug": "assessment-speech-service",
+    "source_name": "Assessment speech service_edited_cropped.JPG",
     "variants": {
-      "153": "/images/opt/yellow-pages-for-business-153w.webp",
-      "306": "/images/opt/yellow-pages-for-business-306w.webp",
-      "default": "/images/opt/yellow-pages-for-business-153w.webp",
-      "retina": "/images/opt/yellow-pages-for-business-306w.webp"
+      "864": "/images/opt/assessment-speech-service-864w.webp",
+      "1728": "/images/opt/assessment-speech-service-1728w.webp",
+      "default": "/images/opt/assessment-speech-service-864w.webp",
+      "retina": "/images/opt/assessment-speech-service-1728w.webp"
     }
   },
-  "b89123_dc8dae68f20c4cd69c05ffc9711db9b2~mv2": {
-    "slug": "yellow-pages-for-business",
-    "source_name": "Yellow Pages for business.webp",
+  "a3c153_017c8cfe7afd4435b2951f0dc0b8429d": {
+    "slug": "a3c153_017c8cfe7afd4435b2951f0dc0b8429d",
+    "source_name": "a3c153_017c8cfe7afd4435b2951f0dc0b8429d~mv2.jpg",
     "variants": {
-      "153": "/images/opt/yellow-pages-for-business-153w.webp",
-      "306": "/images/opt/yellow-pages-for-business-306w.webp",
-      "default": "/images/opt/yellow-pages-for-business-153w.webp",
-      "retina": "/images/opt/yellow-pages-for-business-306w.webp"
+      "1600": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-1600w.webp",
+      "2400": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-2400w.webp",
+      "default": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-1600w.webp",
+      "retina": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-2400w.webp"
     }
   },
-  "dda575_09b569cae0d7440a8a7a1e4103d7d7d9": {
-    "slug": "adobestock_363566581",
-    "source_name": "AdobeStock_363566581.jpeg",
+  "a3c153_017c8cfe7afd4435b2951f0dc0b8429d~mv2": {
+    "slug": "a3c153_017c8cfe7afd4435b2951f0dc0b8429d",
+    "source_name": "a3c153_017c8cfe7afd4435b2951f0dc0b8429d~mv2.jpg",
     "variants": {
-      "908": "/images/opt/adobestock_363566581-908w.webp",
-      "1816": "/images/opt/adobestock_363566581-1816w.webp",
-      "default": "/images/opt/adobestock_363566581-908w.webp",
-      "retina": "/images/opt/adobestock_363566581-1816w.webp"
+      "1600": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-1600w.webp",
+      "2400": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-2400w.webp",
+      "default": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-1600w.webp",
+      "retina": "/images/opt/a3c153_017c8cfe7afd4435b2951f0dc0b8429d-2400w.webp"
     }
   },
-  "dda575_09b569cae0d7440a8a7a1e4103d7d7d9~mv2": {
-    "slug": "adobestock_363566581",
-    "source_name": "AdobeStock_363566581.jpeg",
+  "dda575_00841ccea84e4730ac152e9f20c1092b": {
+    "slug": "dda575_00841ccea84e4730ac152e9f20c1092b",
+    "source_name": "dda575_00841ccea84e4730ac152e9f20c1092b~mv2.jpeg",
     "variants": {
-      "908": "/images/opt/adobestock_363566581-908w.webp",
-      "1816": "/images/opt/adobestock_363566581-1816w.webp",
-      "default": "/images/opt/adobestock_363566581-908w.webp",
-      "retina": "/images/opt/adobestock_363566581-1816w.webp"
+      "1600": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-1600w.webp",
+      "2400": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-2400w.webp",
+      "default": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-1600w.webp",
+      "retina": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-2400w.webp"
     }
   },
-  "dda575_0c007f24a248480781cff40e0d157f46": {
-    "slug": "dda575_0c007f24a248480781cff40e0d157f46_mv2",
-    "source_name": "dda575_0c007f24a248480781cff40e0d157f46_mv2.png",
+  "dda575_00841ccea84e4730ac152e9f20c1092b~mv2": {
+    "slug": "dda575_00841ccea84e4730ac152e9f20c1092b",
+    "source_name": "dda575_00841ccea84e4730ac152e9f20c1092b~mv2.jpeg",
     "variants": {
-      "192": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
-      "384": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp",
-      "default": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
-      "retina": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp"
+      "1600": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-1600w.webp",
+      "2400": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-2400w.webp",
+      "default": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-1600w.webp",
+      "retina": "/images/opt/dda575_00841ccea84e4730ac152e9f20c1092b-2400w.webp"
     }
   },
-  "dda575_0c007f24a248480781cff40e0d157f46_mv2": {
-    "slug": "dda575_0c007f24a248480781cff40e0d157f46_mv2",
-    "source_name": "dda575_0c007f24a248480781cff40e0d157f46_mv2.png",
+  "dda575_098fc47f424e46909702a5d5dd49f04f": {
+    "slug": "dda575_098fc47f424e46909702a5d5dd49f04f",
+    "source_name": "dda575_098fc47f424e46909702a5d5dd49f04f~mv2.jpeg",
     "variants": {
-      "192": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
-      "384": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp",
-      "default": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
-      "retina": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp"
+      "1600": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-1600w.webp",
+      "2400": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-2400w.webp",
+      "default": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-1600w.webp",
+      "retina": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-2400w.webp"
     }
   },
-  "dda575_6b7dc4ddcb124f1bbcce99b3a046fa26": {
-    "slug": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae",
-    "source_name": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae~mv2.png",
+  "dda575_098fc47f424e46909702a5d5dd49f04f~mv2": {
+    "slug": "dda575_098fc47f424e46909702a5d5dd49f04f",
+    "source_name": "dda575_098fc47f424e46909702a5d5dd49f04f~mv2.jpeg",
     "variants": {
-      "620": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
-      "1240": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp",
-      "default": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
-      "retina": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp"
+      "1600": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-1600w.webp",
+      "2400": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-2400w.webp",
+      "default": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-1600w.webp",
+      "retina": "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-2400w.webp"
     }
   },
-  "dda575_6b7dc4ddcb124f1bbcce99b3a046fa26~mv2": {
-    "slug": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae",
-    "source_name": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae~mv2.png",
+  "dda575_18347e0b44bd48c8934c80c7d2eb9ade": {
+    "slug": "adobestock_400955937",
+    "source_name": "AdobeStock_400955937.jpeg",
     "variants": {
-      "620": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
-      "1240": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp",
-      "default": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
-      "retina": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp"
+      "758": "/images/opt/adobestock_400955937-758w.webp",
+      "1516": "/images/opt/adobestock_400955937-1516w.webp",
+      "default": "/images/opt/adobestock_400955937-758w.webp",
+      "retina": "/images/opt/adobestock_400955937-1516w.webp"
+    }
+  },
+  "dda575_18347e0b44bd48c8934c80c7d2eb9ade~mv2": {
+    "slug": "adobestock_400955937",
+    "source_name": "AdobeStock_400955937.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_400955937-758w.webp",
+      "1516": "/images/opt/adobestock_400955937-1516w.webp",
+      "default": "/images/opt/adobestock_400955937-758w.webp",
+      "retina": "/images/opt/adobestock_400955937-1516w.webp"
+    }
+  },
+  "dda575_1a85fb412075441db6709263564cfd02": {
+    "slug": "adobestock_256823010",
+    "source_name": "AdobeStock_256823010.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_256823010-758w.webp",
+      "1516": "/images/opt/adobestock_256823010-1516w.webp",
+      "default": "/images/opt/adobestock_256823010-758w.webp",
+      "retina": "/images/opt/adobestock_256823010-1516w.webp"
+    }
+  },
+  "dda575_1a85fb412075441db6709263564cfd02~mv2": {
+    "slug": "adobestock_256823010",
+    "source_name": "AdobeStock_256823010.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_256823010-758w.webp",
+      "1516": "/images/opt/adobestock_256823010-1516w.webp",
+      "default": "/images/opt/adobestock_256823010-758w.webp",
+      "retina": "/images/opt/adobestock_256823010-1516w.webp"
+    }
+  },
+  "dda575_1cca3c064ce84bc8921f5a24884226f2": {
+    "slug": "adobestock_270148767",
+    "source_name": "AdobeStock_270148767.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_270148767-758w.webp",
+      "1516": "/images/opt/adobestock_270148767-1516w.webp",
+      "default": "/images/opt/adobestock_270148767-758w.webp",
+      "retina": "/images/opt/adobestock_270148767-1516w.webp"
+    }
+  },
+  "dda575_1cca3c064ce84bc8921f5a24884226f2~mv2": {
+    "slug": "adobestock_270148767",
+    "source_name": "AdobeStock_270148767.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_270148767-758w.webp",
+      "1516": "/images/opt/adobestock_270148767-1516w.webp",
+      "default": "/images/opt/adobestock_270148767-758w.webp",
+      "retina": "/images/opt/adobestock_270148767-1516w.webp"
+    }
+  },
+  "dda575_305e536189b742d39fec911c1d16502e": {
+    "slug": "adobestock_134033196",
+    "source_name": "AdobeStock_134033196.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_134033196-758w.webp",
+      "1516": "/images/opt/adobestock_134033196-1516w.webp",
+      "default": "/images/opt/adobestock_134033196-758w.webp",
+      "retina": "/images/opt/adobestock_134033196-1516w.webp"
+    }
+  },
+  "dda575_305e536189b742d39fec911c1d16502e~mv2": {
+    "slug": "adobestock_134033196",
+    "source_name": "AdobeStock_134033196.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_134033196-758w.webp",
+      "1516": "/images/opt/adobestock_134033196-1516w.webp",
+      "default": "/images/opt/adobestock_134033196-758w.webp",
+      "retina": "/images/opt/adobestock_134033196-1516w.webp"
+    }
+  },
+  "dda575_47066d3a8c5a4fe9b5a8ddd6d9b77198": {
+    "slug": "adobestock_229573892",
+    "source_name": "AdobeStock_229573892.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_229573892-758w.webp",
+      "1516": "/images/opt/adobestock_229573892-1516w.webp",
+      "default": "/images/opt/adobestock_229573892-758w.webp",
+      "retina": "/images/opt/adobestock_229573892-1516w.webp"
+    }
+  },
+  "dda575_47066d3a8c5a4fe9b5a8ddd6d9b77198~mv2": {
+    "slug": "adobestock_229573892",
+    "source_name": "AdobeStock_229573892.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_229573892-758w.webp",
+      "1516": "/images/opt/adobestock_229573892-1516w.webp",
+      "default": "/images/opt/adobestock_229573892-758w.webp",
+      "retina": "/images/opt/adobestock_229573892-1516w.webp"
+    }
+  },
+  "dda575_64d9ad5f5bee47b2864b17dd9b546e1b": {
+    "slug": "adobestock_1033082784",
+    "source_name": "AdobeStock_1033082784.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_1033082784-758w.webp",
+      "1516": "/images/opt/adobestock_1033082784-1516w.webp",
+      "default": "/images/opt/adobestock_1033082784-758w.webp",
+      "retina": "/images/opt/adobestock_1033082784-1516w.webp"
+    }
+  },
+  "dda575_64d9ad5f5bee47b2864b17dd9b546e1b~mv2": {
+    "slug": "adobestock_1033082784",
+    "source_name": "AdobeStock_1033082784.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_1033082784-758w.webp",
+      "1516": "/images/opt/adobestock_1033082784-1516w.webp",
+      "default": "/images/opt/adobestock_1033082784-758w.webp",
+      "retina": "/images/opt/adobestock_1033082784-1516w.webp"
+    }
+  },
+  "dda575_725e8414dd764046a35c7d310b0fe9bd": {
+    "slug": "dda575_725e8414dd764046a35c7d310b0fe9bd",
+    "source_name": "dda575_725e8414dd764046a35c7d310b0fe9bd~mv2.jpeg",
+    "variants": {
+      "1600": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-1600w.webp",
+      "2400": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-2400w.webp",
+      "default": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-1600w.webp",
+      "retina": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-2400w.webp"
+    }
+  },
+  "dda575_725e8414dd764046a35c7d310b0fe9bd~mv2": {
+    "slug": "dda575_725e8414dd764046a35c7d310b0fe9bd",
+    "source_name": "dda575_725e8414dd764046a35c7d310b0fe9bd~mv2.jpeg",
+    "variants": {
+      "1600": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-1600w.webp",
+      "2400": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-2400w.webp",
+      "default": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-1600w.webp",
+      "retina": "/images/opt/dda575_725e8414dd764046a35c7d310b0fe9bd-2400w.webp"
     }
   },
   "dda575_7d642f34c3524555a2dabdd59ecd1e3f": {
     "slug": "dda575_7d642f34c3524555a2dabdd59ecd1e3f",
     "source_name": "dda575_7d642f34c3524555a2dabdd59ecd1e3f~mv2.jpeg",
     "variants": {
-      "800": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
       "1600": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp",
-      "default": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
-      "retina": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp"
+      "2400": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-2400w.webp",
+      "default": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp",
+      "retina": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-2400w.webp"
     }
   },
   "dda575_7d642f34c3524555a2dabdd59ecd1e3f~mv2": {
     "slug": "dda575_7d642f34c3524555a2dabdd59ecd1e3f",
     "source_name": "dda575_7d642f34c3524555a2dabdd59ecd1e3f~mv2.jpeg",
     "variants": {
-      "800": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
       "1600": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp",
-      "default": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
-      "retina": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp"
+      "2400": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-2400w.webp",
+      "default": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp",
+      "retina": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-2400w.webp"
     }
   },
-  "dda575_804520771b144b679e15c47d0c0d81f2": {
-    "slug": "picture2",
-    "source_name": "Picture2.png",
+  "dda575_988cdc3f2b7f42348fc1df4507baaba9": {
+    "slug": "dda575_988cdc3f2b7f42348fc1df4507baaba9",
+    "source_name": "dda575_988cdc3f2b7f42348fc1df4507baaba9~mv2.jpeg",
     "variants": {
-      "62": "/images/opt/picture2-62w.webp",
-      "124": "/images/opt/picture2-124w.webp",
-      "default": "/images/opt/picture2-62w.webp",
-      "retina": "/images/opt/picture2-124w.webp"
+      "1600": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-1600w.webp",
+      "2400": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-2400w.webp",
+      "default": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-1600w.webp",
+      "retina": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-2400w.webp"
     }
   },
-  "dda575_804520771b144b679e15c47d0c0d81f2~mv2": {
-    "slug": "picture2",
-    "source_name": "Picture2.png",
+  "dda575_988cdc3f2b7f42348fc1df4507baaba9~mv2": {
+    "slug": "dda575_988cdc3f2b7f42348fc1df4507baaba9",
+    "source_name": "dda575_988cdc3f2b7f42348fc1df4507baaba9~mv2.jpeg",
     "variants": {
-      "62": "/images/opt/picture2-62w.webp",
-      "124": "/images/opt/picture2-124w.webp",
-      "default": "/images/opt/picture2-62w.webp",
-      "retina": "/images/opt/picture2-124w.webp"
+      "1600": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-1600w.webp",
+      "2400": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-2400w.webp",
+      "default": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-1600w.webp",
+      "retina": "/images/opt/dda575_988cdc3f2b7f42348fc1df4507baaba9-2400w.webp"
+    }
+  },
+  "dda575_aac9ef35d639490c9ef0f24df642e5f8": {
+    "slug": "adobestock_422031915",
+    "source_name": "AdobeStock_422031915.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_422031915-758w.webp",
+      "1516": "/images/opt/adobestock_422031915-1516w.webp",
+      "default": "/images/opt/adobestock_422031915-758w.webp",
+      "retina": "/images/opt/adobestock_422031915-1516w.webp"
+    }
+  },
+  "dda575_aac9ef35d639490c9ef0f24df642e5f8~mv2": {
+    "slug": "adobestock_422031915",
+    "source_name": "AdobeStock_422031915.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_422031915-758w.webp",
+      "1516": "/images/opt/adobestock_422031915-1516w.webp",
+      "default": "/images/opt/adobestock_422031915-758w.webp",
+      "retina": "/images/opt/adobestock_422031915-1516w.webp"
+    }
+  },
+  "dda575_b207077c026348b4996d3b4cabcd7970": {
+    "slug": "adobestock_1041045833",
+    "source_name": "AdobeStock_1041045833.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_1041045833-758w.webp",
+      "1516": "/images/opt/adobestock_1041045833-1516w.webp",
+      "default": "/images/opt/adobestock_1041045833-758w.webp",
+      "retina": "/images/opt/adobestock_1041045833-1516w.webp"
+    }
+  },
+  "dda575_b207077c026348b4996d3b4cabcd7970~mv2": {
+    "slug": "adobestock_1041045833",
+    "source_name": "AdobeStock_1041045833.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_1041045833-758w.webp",
+      "1516": "/images/opt/adobestock_1041045833-1516w.webp",
+      "default": "/images/opt/adobestock_1041045833-758w.webp",
+      "retina": "/images/opt/adobestock_1041045833-1516w.webp"
+    }
+  },
+  "dda575_c8edf8e0260d482480c438dc37b35731": {
+    "slug": "dda575_c8edf8e0260d482480c438dc37b35731",
+    "source_name": "dda575_c8edf8e0260d482480c438dc37b35731~mv2.jpeg",
+    "variants": {
+      "1600": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-1600w.webp",
+      "2400": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-2400w.webp",
+      "default": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-1600w.webp",
+      "retina": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-2400w.webp"
+    }
+  },
+  "dda575_c8edf8e0260d482480c438dc37b35731~mv2": {
+    "slug": "dda575_c8edf8e0260d482480c438dc37b35731",
+    "source_name": "dda575_c8edf8e0260d482480c438dc37b35731~mv2.jpeg",
+    "variants": {
+      "1600": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-1600w.webp",
+      "2400": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-2400w.webp",
+      "default": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-1600w.webp",
+      "retina": "/images/opt/dda575_c8edf8e0260d482480c438dc37b35731-2400w.webp"
+    }
+  },
+  "dda575_d1d2d796162b4531ade76865f496122b": {
+    "slug": "adobestock_306159378",
+    "source_name": "AdobeStock_306159378.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_306159378-758w.webp",
+      "1516": "/images/opt/adobestock_306159378-1516w.webp",
+      "default": "/images/opt/adobestock_306159378-758w.webp",
+      "retina": "/images/opt/adobestock_306159378-1516w.webp"
+    }
+  },
+  "dda575_d1d2d796162b4531ade76865f496122b~mv2": {
+    "slug": "adobestock_306159378",
+    "source_name": "AdobeStock_306159378.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_306159378-758w.webp",
+      "1516": "/images/opt/adobestock_306159378-1516w.webp",
+      "default": "/images/opt/adobestock_306159378-758w.webp",
+      "retina": "/images/opt/adobestock_306159378-1516w.webp"
+    }
+  },
+  "dda575_e3b36d8577324932b51ea80aa78cbc82": {
+    "slug": "adobestock_510004966",
+    "source_name": "AdobeStock_510004966.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_510004966-758w.webp",
+      "1516": "/images/opt/adobestock_510004966-1516w.webp",
+      "default": "/images/opt/adobestock_510004966-758w.webp",
+      "retina": "/images/opt/adobestock_510004966-1516w.webp"
+    }
+  },
+  "dda575_e3b36d8577324932b51ea80aa78cbc82~mv2": {
+    "slug": "adobestock_510004966",
+    "source_name": "AdobeStock_510004966.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_510004966-758w.webp",
+      "1516": "/images/opt/adobestock_510004966-1516w.webp",
+      "default": "/images/opt/adobestock_510004966-758w.webp",
+      "retina": "/images/opt/adobestock_510004966-1516w.webp"
+    }
+  },
+  "dda575_fc7774bb9faf43679a3cfb692c47b790": {
+    "slug": "adobestock_39979035",
+    "source_name": "AdobeStock_39979035.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_39979035-758w.webp",
+      "1516": "/images/opt/adobestock_39979035-1516w.webp",
+      "default": "/images/opt/adobestock_39979035-758w.webp",
+      "retina": "/images/opt/adobestock_39979035-1516w.webp"
+    }
+  },
+  "dda575_fc7774bb9faf43679a3cfb692c47b790~mv2": {
+    "slug": "adobestock_39979035",
+    "source_name": "AdobeStock_39979035.jpeg",
+    "variants": {
+      "758": "/images/opt/adobestock_39979035-758w.webp",
+      "1516": "/images/opt/adobestock_39979035-1516w.webp",
+      "default": "/images/opt/adobestock_39979035-758w.webp",
+      "retina": "/images/opt/adobestock_39979035-1516w.webp"
+    }
+  },
+  "dda575_ffa1bf76c2514f8080345ec5786a2824": {
+    "slug": "dda575_ffa1bf76c2514f8080345ec5786a2824",
+    "source_name": "dda575_ffa1bf76c2514f8080345ec5786a2824~mv2.png",
+    "variants": {
+      "1600": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-1600w.webp",
+      "2400": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-2400w.webp",
+      "default": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-1600w.webp",
+      "retina": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-2400w.webp"
+    }
+  },
+  "dda575_ffa1bf76c2514f8080345ec5786a2824~mv2": {
+    "slug": "dda575_ffa1bf76c2514f8080345ec5786a2824",
+    "source_name": "dda575_ffa1bf76c2514f8080345ec5786a2824~mv2.png",
+    "variants": {
+      "1600": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-1600w.webp",
+      "2400": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-2400w.webp",
+      "default": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-1600w.webp",
+      "retina": "/images/opt/dda575_ffa1bf76c2514f8080345ec5786a2824-2400w.webp"
+    }
+  },
+  "dda575_ffac9453a2674134948a9f0a446cbca2": {
+    "slug": "dda575_ffac9453a2674134948a9f0a446cbca2",
+    "source_name": "dda575_ffac9453a2674134948a9f0a446cbca2~mv2.jpeg",
+    "variants": {
+      "1600": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-1600w.webp",
+      "2400": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-2400w.webp",
+      "default": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-1600w.webp",
+      "retina": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-2400w.webp"
+    }
+  },
+  "dda575_ffac9453a2674134948a9f0a446cbca2~mv2": {
+    "slug": "dda575_ffac9453a2674134948a9f0a446cbca2",
+    "source_name": "dda575_ffac9453a2674134948a9f0a446cbca2~mv2.jpeg",
+    "variants": {
+      "1600": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-1600w.webp",
+      "2400": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-2400w.webp",
+      "default": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-1600w.webp",
+      "retina": "/images/opt/dda575_ffac9453a2674134948a9f0a446cbca2-2400w.webp"
     }
   }
 }
