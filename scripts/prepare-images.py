@@ -28,7 +28,7 @@ LOCAL_ALIASES = {
     "Picture2.png": "Picture2_edited.png",
     "a3c153_017c8cfe7afd4435b2951f0dc0b8429d~mv2.jpg": "iView Notes_edited.jpg",
     "11062b_1c1dad37976a477086dea4fefabe1e09~mv2.jpg": "Our Team hero hands.png",
-    "5f9399_d7cbc8774a6741be918a3fd4a4c280b9~mv2.jpg": "Click_Reader.jpg",
+    "5f9399_d7cbc8774a6741be918a3fd4a4c280b9~mv2.jpg": "AdobeStock_315113823_edited.jpg",
 }
 
 EXTRA_USAGE = {

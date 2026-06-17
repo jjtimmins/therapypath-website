@@ -11,6 +11,13 @@ OUR_TEAM_WIX_2400 = ROOT / "images" / "opt" / "11062b_1c1dad37976a477086dea4fefa
 ASSISTIVE_SOURCE = ROOT / "images" / "AdobeStock_364584967.jpeg"
 ASSISTIVE_758 = ROOT / "images" / "opt" / "adobestock_364584967-758w.webp"
 ASSISTIVE_1516 = ROOT / "images" / "opt" / "adobestock_364584967-1516w.webp"
+CONSULTATIONS_SOURCE = ROOT / "images" / "AdobeStock_315113823_edited.jpg"
+CONSULTATIONS_WIX_1600 = (
+    ROOT / "images" / "opt" / "5f9399_d7cbc8774a6741be918a3fd4a4c280b9-1600w.webp"
+)
+CONSULTATIONS_WIX_2400 = (
+    ROOT / "images" / "opt" / "5f9399_d7cbc8774a6741be918a3fd4a4c280b9-2400w.webp"
+)
 
 
 def save_webp(source: Path, dest: Path, width: int = 1600) -> None:
@@ -37,6 +44,12 @@ def main() -> None:
         save_webp(ASSISTIVE_SOURCE, ASSISTIVE_1516, 1516)
     else:
         print(f"missing {ASSISTIVE_SOURCE.relative_to(ROOT)}")
+
+    if CONSULTATIONS_SOURCE.exists():
+        save_webp(CONSULTATIONS_SOURCE, CONSULTATIONS_WIX_1600, 1600)
+        save_webp(CONSULTATIONS_SOURCE, CONSULTATIONS_WIX_2400, 2400)
+    else:
+        print(f"missing {CONSULTATIONS_SOURCE.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
