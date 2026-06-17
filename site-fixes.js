@@ -510,6 +510,25 @@
     });
   }
 
+  function pinLocalImages() {
+    var heroImg = document.querySelector("#img_comp-m4n0yl36 img");
+    if (heroImg) {
+      heroImg.src = "/images/opt/adobestock_495222202-980w.webp";
+      heroImg.removeAttribute("srcset");
+      heroImg.setAttribute("fetchpriority", "high");
+      heroImg.setAttribute("alt", "Speech therapy session");
+    }
+
+    document.querySelectorAll('img[src*="wixstatic.com"]').forEach(function (img) {
+      if (img.closest("#img_pageBackground_c1dmp")) return;
+      var localSrc = img.getAttribute("data-tp-local-src");
+      if (localSrc) {
+        img.src = localSrc;
+        img.removeAttribute("srcset");
+      }
+    });
+  }
+
   showSentBanner();
   initContactForm();
   initLanguageSwitcher();
@@ -518,5 +537,6 @@
   initHelpCardButtons();
   initConsultationCardButtons();
   initAccessibleLinkLabels();
+  pinLocalImages();
   initGeographicCoverageMap();
 })();

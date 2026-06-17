@@ -6,13 +6,18 @@
   display: none !important;
 }
 
-/* Home hero: use local AdobeStock image (Wix runtime rewrites img src to a broken CDN URL) */
+#img_pageBackground_c1dmp,
+#bgMedia_pageBackground_c1dmp {
+  display: none !important;
+}
+
+/* Home hero: use local optimized WebP (Wix runtime rewrites img src to CDN URLs) */
 #bgLayers_comp-m4n0yl36 [data-testid='colorUnderlay'] {
   display: none !important;
 }
 
 #img_comp-m4n0yl36 {
-  background-image: url('/images/AdobeStock_495222202.jpeg') !important;
+  background-image: url('/images/opt/adobestock_495222202-980w.webp') !important;
   background-size: cover !important;
   background-position: center center !important;
 }

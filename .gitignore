@@ -14,6 +14,7 @@ dist-ssr
 *.local
 _archive/node_modules
 public/images
+images/wix
 
 # Editor directories and files
 .vscode/*

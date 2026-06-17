@@ -1,0 +1,172 @@
+{
+  "11062b_99c706e72c024eeb959405e90bee0bfc": {
+    "slug": "ba2cd3_ce429fe317704238b6b68ffe39659f77",
+    "source_name": "ba2cd3_ce429fe317704238b6b68ffe39659f77~mv2.jpeg",
+    "variants": {
+      "1076": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
+      "2152": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp",
+      "default": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
+      "retina": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp"
+    }
+  },
+  "11062b_99c706e72c024eeb959405e90bee0bfc~mv2": {
+    "slug": "ba2cd3_ce429fe317704238b6b68ffe39659f77",
+    "source_name": "ba2cd3_ce429fe317704238b6b68ffe39659f77~mv2.jpeg",
+    "variants": {
+      "1076": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
+      "2152": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp",
+      "default": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp",
+      "retina": "/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-2152w.webp"
+    }
+  },
+  "5f9399_30ec07ce19d84aa1823ac391f5b926a5": {
+    "slug": "5f9399_30ec07ce19d84aa1823ac391f5b926a5",
+    "source_name": "5f9399_30ec07ce19d84aa1823ac391f5b926a5~mv2.jpg",
+    "variants": {
+      "557": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
+      "1114": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp",
+      "default": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
+      "retina": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp"
+    }
+  },
+  "5f9399_30ec07ce19d84aa1823ac391f5b926a5~mv2": {
+    "slug": "5f9399_30ec07ce19d84aa1823ac391f5b926a5",
+    "source_name": "5f9399_30ec07ce19d84aa1823ac391f5b926a5~mv2.jpg",
+    "variants": {
+      "557": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
+      "1114": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp",
+      "default": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-557w.webp",
+      "retina": "/images/opt/5f9399_30ec07ce19d84aa1823ac391f5b926a5-1114w.webp"
+    }
+  },
+  "AdobeStock_495222202.jpeg": {
+    "slug": "adobestock_495222202",
+    "source_name": "AdobeStock_495222202.jpeg",
+    "variants": {
+      "980": "/images/opt/adobestock_495222202-980w.webp",
+      "1960": "/images/opt/adobestock_495222202-1960w.webp",
+      "default": "/images/opt/adobestock_495222202-980w.webp",
+      "retina": "/images/opt/adobestock_495222202-1960w.webp"
+    }
+  },
+  "b89123_dc8dae68f20c4cd69c05ffc9711db9b2": {
+    "slug": "yellow-pages-for-business",
+    "source_name": "Yellow Pages for business.webp",
+    "variants": {
+      "153": "/images/opt/yellow-pages-for-business-153w.webp",
+      "306": "/images/opt/yellow-pages-for-business-306w.webp",
+      "default": "/images/opt/yellow-pages-for-business-153w.webp",
+      "retina": "/images/opt/yellow-pages-for-business-306w.webp"
+    }
+  },
+  "b89123_dc8dae68f20c4cd69c05ffc9711db9b2~mv2": {
+    "slug": "yellow-pages-for-business",
+    "source_name": "Yellow Pages for business.webp",
+    "variants": {
+      "153": "/images/opt/yellow-pages-for-business-153w.webp",
+      "306": "/images/opt/yellow-pages-for-business-306w.webp",
+      "default": "/images/opt/yellow-pages-for-business-153w.webp",
+      "retina": "/images/opt/yellow-pages-for-business-306w.webp"
+    }
+  },
+  "dda575_09b569cae0d7440a8a7a1e4103d7d7d9": {
+    "slug": "adobestock_363566581",
+    "source_name": "AdobeStock_363566581.jpeg",
+    "variants": {
+      "908": "/images/opt/adobestock_363566581-908w.webp",
+      "1816": "/images/opt/adobestock_363566581-1816w.webp",
+      "default": "/images/opt/adobestock_363566581-908w.webp",
+      "retina": "/images/opt/adobestock_363566581-1816w.webp"
+    }
+  },
+  "dda575_09b569cae0d7440a8a7a1e4103d7d7d9~mv2": {
+    "slug": "adobestock_363566581",
+    "source_name": "AdobeStock_363566581.jpeg",
+    "variants": {
+      "908": "/images/opt/adobestock_363566581-908w.webp",
+      "1816": "/images/opt/adobestock_363566581-1816w.webp",
+      "default": "/images/opt/adobestock_363566581-908w.webp",
+      "retina": "/images/opt/adobestock_363566581-1816w.webp"
+    }
+  },
+  "dda575_0c007f24a248480781cff40e0d157f46": {
+    "slug": "dda575_0c007f24a248480781cff40e0d157f46_mv2",
+    "source_name": "dda575_0c007f24a248480781cff40e0d157f46_mv2.png",
+    "variants": {
+      "192": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
+      "384": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp",
+      "default": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
+      "retina": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp"
+    }
+  },
+  "dda575_0c007f24a248480781cff40e0d157f46_mv2": {
+    "slug": "dda575_0c007f24a248480781cff40e0d157f46_mv2",
+    "source_name": "dda575_0c007f24a248480781cff40e0d157f46_mv2.png",
+    "variants": {
+      "192": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
+      "384": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp",
+      "default": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-192w.webp",
+      "retina": "/images/opt/dda575_0c007f24a248480781cff40e0d157f46_mv2-384w.webp"
+    }
+  },
+  "dda575_6b7dc4ddcb124f1bbcce99b3a046fa26": {
+    "slug": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae",
+    "source_name": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae~mv2.png",
+    "variants": {
+      "620": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
+      "1240": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp",
+      "default": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
+      "retina": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp"
+    }
+  },
+  "dda575_6b7dc4ddcb124f1bbcce99b3a046fa26~mv2": {
+    "slug": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae",
+    "source_name": "ba2cd3_501a358c30d1498d855bbdeacb20d2ae~mv2.png",
+    "variants": {
+      "620": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
+      "1240": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp",
+      "default": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp",
+      "retina": "/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-1240w.webp"
+    }
+  },
+  "dda575_7d642f34c3524555a2dabdd59ecd1e3f": {
+    "slug": "dda575_7d642f34c3524555a2dabdd59ecd1e3f",
+    "source_name": "dda575_7d642f34c3524555a2dabdd59ecd1e3f~mv2.jpeg",
+    "variants": {
+      "800": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
+      "1600": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp",
+      "default": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
+      "retina": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp"
+    }
+  },
+  "dda575_7d642f34c3524555a2dabdd59ecd1e3f~mv2": {
+    "slug": "dda575_7d642f34c3524555a2dabdd59ecd1e3f",
+    "source_name": "dda575_7d642f34c3524555a2dabdd59ecd1e3f~mv2.jpeg",
+    "variants": {
+      "800": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
+      "1600": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp",
+      "default": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp",
+      "retina": "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-1600w.webp"
+    }
+  },
+  "dda575_804520771b144b679e15c47d0c0d81f2": {
+    "slug": "picture2",
+    "source_name": "Picture2.png",
+    "variants": {
+      "62": "/images/opt/picture2-62w.webp",
+      "124": "/images/opt/picture2-124w.webp",
+      "default": "/images/opt/picture2-62w.webp",
+      "retina": "/images/opt/picture2-124w.webp"
+    }
+  },
+  "dda575_804520771b144b679e15c47d0c0d81f2~mv2": {
+    "slug": "picture2",
+    "source_name": "Picture2.png",
+    "variants": {
+      "62": "/images/opt/picture2-62w.webp",
+      "124": "/images/opt/picture2-124w.webp",
+      "default": "/images/opt/picture2-62w.webp",
+      "retina": "/images/opt/picture2-124w.webp"
+    }
+  }
+}

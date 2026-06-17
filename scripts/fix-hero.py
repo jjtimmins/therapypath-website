@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-HERO_IMAGE = "/images/AdobeStock_495222202.jpeg"
+HERO_IMAGE = "/images/opt/adobestock_495222202-980w.webp"
 HERO_BLOCK = (
     '<wow-image id="img_comp-m4n0yl36" class="Qh0lWW ayCf9D fO4mKs NgeJ4N bgImage" '
     'data-image-info="{&quot;containerId&quot;:&quot;comp-m4n0yl36&quot;,&quot;alignType&quot;:&quot;center&quot;,'

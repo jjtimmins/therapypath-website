@@ -4,6 +4,12 @@
   },
   "routes": [
     {
+      "route": "/images/opt/*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
       "route": "/images/*",
       "headers": {
         "Cache-Control": "public, max-age=2592000"

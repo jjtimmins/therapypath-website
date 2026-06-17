@@ -36,6 +36,10 @@ python (Join-Path $PSScriptRoot 'fix-hero.py')
 python (Join-Path $PSScriptRoot 'fix-contact-form.py')
 python (Join-Path $PSScriptRoot 'fix-nav-links.py')
 python (Join-Path $PSScriptRoot 'fix-seo-meta.py')
+python (Join-Path $PSScriptRoot 'collect-image-usage.py')
+python (Join-Path $PSScriptRoot 'prepare-images.py')
+python (Join-Path $PSScriptRoot 'localize-images.py')
+python (Join-Path $PSScriptRoot 'inject-lcp-preload.py')
 python (Join-Path $PSScriptRoot 'inject-site-fixes.py')
 
 Write-Host "Patched $($htmlFiles.Count) HTML files."
