@@ -9,7 +9,7 @@ FONTS = ROOT / "fonts"
 MANIFEST_PATH = ROOT / "scripts" / "font-manifest.json"
 
 FONT_URL_RE = re.compile(
-    r"https://static\.(?:wixstatic\.com/ufonts|parastorage\.com/fonts)/[^\s\"')]+",
+    r"https://static\.(?:wixstatic\.com/ufonts|parastorage\.com/(?:fonts|tag-bundler/api/v1/fonts-cache))/[^\s\"')]+",
     re.I,
 )
 
@@ -26,6 +26,10 @@ def font_local_path(url: str) -> str:
         idx = parts.index("fonts")
         tail = "/".join(parts[idx + 1 :])
         return f"/fonts/parastorage/{tail}"
+    if "fonts-cache" in parts:
+        idx = parts.index("fonts-cache")
+        tail = "/".join(parts[idx + 1 :])
+        return f"/fonts/parastorage/fonts-cache/{tail}"
     raise ValueError(f"Unrecognized font URL: {url}")
 
 
