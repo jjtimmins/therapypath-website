@@ -224,8 +224,7 @@
   }
 
   function getHomepageUrl() {
-    var urls = getLanguageUrls();
-    return isFrenchPage() ? urls.fr : urls.en;
+    return isFrenchPage() ? "/fr.html" : "/";
   }
 
   function initHeaderLogoLinks() {
