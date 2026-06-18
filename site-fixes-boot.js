@@ -1,5 +1,6 @@
 (function () {
   var MOBILE_QUERY = "(max-width: 980px)";
+  var DESKTOP_VIEWPORT_WIDTH = 1024;
   var SYNC_CLASSES = ["tp-mobile-site", "tp-home-mobile-template-page", "tp-mobile-booting", "tp-mobile-ready"];
 
   function isFrenchPath(path) {
@@ -17,6 +18,31 @@
     return !!(master && master.classList.contains("landingPage"));
   }
 
+  function isDesktopSiteRequested() {
+    var ua = navigator.userAgent || "";
+    if (/Android/i.test(ua) && !/Mobile/i.test(ua)) return true;
+    if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return true;
+    return false;
+  }
+
+  function shouldUseMobileSite() {
+    if (isDesktopSiteRequested()) return false;
+    return window.matchMedia(MOBILE_QUERY).matches;
+  }
+
+  function applyDesktopViewport() {
+    var viewport = document.querySelector('meta[name="viewport"]');
+    if (!viewport) return;
+    viewport.setAttribute("content", "width=" + DESKTOP_VIEWPORT_WIDTH);
+  }
+
+  window.__tpDesktopSiteRequested = isDesktopSiteRequested();
+  window.__tpShouldUseMobileSite = shouldUseMobileSite;
+
+  if (window.__tpDesktopSiteRequested) {
+    applyDesktopViewport();
+  }
+
   function syncBodyClasses() {
     if (!document.body) return;
     var html = document.documentElement;
@@ -28,7 +54,7 @@
 
   function applyMobileBoot() {
     var html = document.documentElement;
-    var mobile = window.matchMedia(MOBILE_QUERY).matches;
+    var mobile = shouldUseMobileSite();
 
     if (!mobile || isLandingPage()) {
       SYNC_CLASSES.forEach(function (cls) {
@@ -70,7 +96,7 @@
   else if (mq.addListener) mq.addListener(applyMobileBoot);
 
   window.__tpMarkMobileReady = function () {
-    if (!window.matchMedia(MOBILE_QUERY).matches) return;
+    if (!shouldUseMobileSite()) return;
     document.documentElement.classList.remove("tp-mobile-booting");
     document.documentElement.classList.add("tp-mobile-ready");
     syncBodyClasses();

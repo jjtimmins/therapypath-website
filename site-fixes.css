@@ -63,6 +63,7 @@
   background-image: var(--tp-clinical-carousel-bg);
   background-position: center center;
   background-size: cover;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
@@ -1931,23 +1932,30 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   #comp-m6aya1jg {
-    min-height: 420px !important;
+    height: 315px !important;
+    min-height: 315px !important;
+    max-height: 315px !important;
+    left: 0 !important;
+    margin-left: 0 !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center 42% !important;
   }
 
   #comp-m6aya1jg .tp-clinical-carousel__content {
-    top: 34px;
+    top: 24px;
     left: 20px;
     max-width: calc(100% - 40px);
   }
 
   #comp-m6aya1jg .tp-clinical-carousel__title {
-    font-size: clamp(32px, 9vw, 42px);
+    font-size: clamp(28px, 8vw, 36px);
     line-height: 1;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   #comp-m6aya1jg .tp-clinical-carousel__body {
-    font-size: clamp(18px, 5vw, 24px);
+    font-size: clamp(16px, 4.5vw, 20px);
     line-height: 1.2;
   }
 
@@ -2368,6 +2376,191 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [id^='comp-m5ftto7m'],
   :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [id^='comp-m6edyah'] {
     margin-bottom: 12px !important;
+  }
+
+  /* Therapy page: crop mobile hero image and remove gap before Speech Therapy. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero {
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [data-motion-part*='BG_MEDIA'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [data-motion-part*='BG_LAYER'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [data-motion-part*='BG_IMG'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [data-testid='columns'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [class*='wixui-column-strip__column'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [data-mesh-id$='inlineContent'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [data-mesh-id$='gridContainer'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero wow-image.bgImage,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero wow-image[class*='bgImage'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero [id^='img_comp-'] {
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9yge04,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9yge16,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9yge25 {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 [data-mesh-id='comp-m4u9yge25inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: 308px !important;
+    grid-template-rows: min-content !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #img_comp-m4u9yge25 {
+    background-position: center top !important;
+    background-size: cover !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero #img_comp-m4u9yge25 img {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero__copy {
+    margin: 16px 0 12px 17px !important;
+    padding-bottom: 18px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9ygee7,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9ygef8,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9ygeg8,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9ygeh8 {
+    margin-top: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9ygeh8 {
+    margin-bottom: 12px !important;
+  }
+
+  /* Consultations/Reading Groups: crop mobile hero image and remove gap before content. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero {
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [data-motion-part*='BG_MEDIA'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [data-motion-part*='BG_LAYER'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [data-motion-part*='BG_IMG'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [data-testid='columns'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [class*='wixui-column-strip__column'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [data-mesh-id$='inlineContent'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [data-mesh-id$='gridContainer'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero wow-image.bgImage,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero wow-image[class*='bgImage'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero [id^='img_comp-'] {
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m4u7nvwa,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m4u7nvwb7,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m4u7nvwc5 {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m4u7nvwa {
+    margin-bottom: 24px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 [data-mesh-id='comp-m4u7nvwc5inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: 308px !important;
+    grid-template-rows: min-content !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #img_comp-m4u7nvwc5 {
+    background-position: center top !important;
+    background-size: cover !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero #img_comp-m4u7nvwc5 img {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero__copy {
+    margin: 16px 0 12px 17px !important;
+    padding-bottom: 18px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m4u7nvwm9 {
+    display: none !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m4u7nvwm2,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m6782her,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m4u7nvwo2 {
+    margin-top: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 [data-mesh-id='comp-m4u7nvwm2inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+    grid-template-rows: min-content !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 #comp-m6782her {
+    margin-bottom: 12px !important;
+  }
+
+  /* Clinical management: crop carousel, zoom out slides, tighten gap before Click Reader. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #advaq #comp-m4wzb8kt {
+    margin-bottom: 24px !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #advaq [data-mesh-id='comp-m4wzb8ktinlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+    grid-template-rows: min-content !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #advaq #comp-m6aya1jg {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    margin: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #advaq #comp-m4wzb8lh10 {
+    display: none !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #advaq #comp-m4wzb8lh3,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #advaq #comp-m4wzb8lj6 {
+    margin-top: 0 !important;
+    min-width: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #advaq [data-mesh-id='comp-m4wzb8lh3inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+    grid-template-rows: min-content !important;
   }
 
   /* Our Team page: Employment Opportunities heading + job list. */

@@ -9,6 +9,9 @@
   ];
 
   function isMobileViewport() {
+    if (typeof window.__tpShouldUseMobileSite === "function") {
+      return window.__tpShouldUseMobileSite();
+    }
     return window.matchMedia(MOBILE_VIEWPORT_QUERY).matches;
   }
 
@@ -725,6 +728,8 @@
   }
 
   function initMobileNavigation() {
+    if (!isMobileViewport()) return;
+
     var header = document.getElementById("SITE_HEADER");
     var desktopNav = document.getElementById("comp-m4ufk180");
     if (!header) return;
@@ -1396,9 +1401,20 @@
   function teardownMobileRetrofit() {
     restoreMobilePageHeroes();
     clearTpMotionInlineStyles();
+    removeMobileChrome();
     removeMobileShellClasses();
     var nav = document.querySelector(".tp-mobile-nav");
     if (nav) closeMobileNavMenu(nav);
+  }
+
+  function removeMobileChrome() {
+    document
+      .querySelectorAll(
+        ".tp-mobile-home, .tp-mobile-footer, .tp-mobile-nav, .tp-mobile-header-row, .tp-mobile-contact-bar, .tp-mobile-appointment"
+      )
+      .forEach(function (node) {
+        node.remove();
+      });
   }
 
   function applyMobileRetrofit() {
@@ -1446,7 +1462,7 @@
   }
 
   function revealMobileMotionContent() {
-    if (!window.matchMedia("(max-width: 980px)").matches) return;
+    if (!isMobileViewport()) return;
     if (
       document.documentElement.classList.contains("tp-home-mobile-template-page") ||
       document.body.classList.contains("tp-home-mobile-template-page")
@@ -1526,7 +1542,7 @@
   }
 
   function markMobileSiteReady() {
-    if (!window.matchMedia("(max-width: 980px)").matches) return;
+    if (!isMobileViewport()) return;
 
     function reveal() {
       if (typeof window.__tpMarkMobileReady === "function") {
@@ -1562,7 +1578,7 @@
   }
 
   function maybeRevealMobileSite() {
-    if (!window.matchMedia("(max-width: 980px)").matches) return;
+    if (!isMobileViewport()) return;
     if (mobileShellReady.revealed) return;
 
     var navDone = mobileShellReady.nav || !!document.querySelector(".tp-mobile-nav");
@@ -1676,7 +1692,7 @@
     }
 
     function scheduleCoverageMapInvalidate(map) {
-      var delays = window.matchMedia("(max-width: 980px)").matches
+      var delays = isMobileViewport()
         ? [0, 100, 250, 500]
         : [0, 100, 250, 500, 1000, 2000];
 
@@ -1691,7 +1707,7 @@
     }
 
     function scheduleMobileCoverageMapTileKick(map) {
-      if (!window.matchMedia("(max-width: 980px)").matches) return;
+      if (!isMobileViewport()) return;
 
       [1200].forEach(function (delay) {
         window.setTimeout(function () {
@@ -1765,7 +1781,7 @@
 
     function whenCoverageMapCanRender(callback) {
       if (
-        !window.matchMedia("(max-width: 980px)").matches ||
+        !isMobileViewport() ||
         document.documentElement.classList.contains("tp-mobile-ready")
       ) {
         callback();
