@@ -2138,6 +2138,40 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     margin-bottom: 12px !important;
   }
 
+  /* Our Team page: Employment Opportunities heading + job list. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 #comp-m4uaf2y68,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 #comp-m4uaf2y77,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 #comp-m4uaf2ya6,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 #comp-m5mwwbp4 {
+    display: none !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 [data-mesh-id='comp-m4uaf2y59inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-rows: min-content !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 #comp-m4uaf2y81 {
+    min-height: 0 !important;
+    height: auto !important;
+    margin-bottom: 8px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 #comp-m4uaf2y81 h2 {
+    margin-bottom: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uaf2y43 #comp-m4uaf2y911 {
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
   :is(html.tp-home-mobile-template-page, body.tp-home-mobile-template-page) .tp-home-booking {
     padding-bottom: 15px;
   }
