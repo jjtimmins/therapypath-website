@@ -1820,6 +1820,36 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     min-height: 411px !important;
     height: auto !important;
     overflow: hidden;
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Real phones (especially iOS Safari) mishandle Wix parallax lvh layers; flatten hero media */
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-motion-part*='BG_MEDIA'],
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-motion-part*='BG_LAYER'],
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-motion-part*='BG_IMG'] {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 411px !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    will-change: auto !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-testid='richTextElement'],
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    -webkit-animation: none !important;
+    transform: none !important;
+    -webkit-transform: none !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-tp-mobile-hero-hidden='true'],
@@ -1861,7 +1891,7 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 
   :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     width: min(492px, calc(100vw - 44px));
     margin: 20px 0 22px 17px;
     padding: 14px 12px 32px;
@@ -1976,21 +2006,58 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     box-sizing: border-box;
   }
 
+  /* Wix scroll motion: paused entrance animations leave content invisible on real mobile browsers. */
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES [id^='comp-']:not([data-motion-enter='done']),
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-rich-text,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-button,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .mu5PoX,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES [class*='StylableButton'] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    -webkit-animation: none !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+
   :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-image,
-  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .ih2JY1 {
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .ih2JY1,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .W4V2qg {
     position: relative !important;
     left: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    -webkit-animation: none !important;
+    transform: none !important;
+    -webkit-transform: none !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-image img,
-  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .ih2JY1 img {
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .ih2JY1 img,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .W4V2qg img {
     width: 100% !important;
     height: auto !important;
     max-height: none !important;
     object-fit: cover;
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    -webkit-animation: none !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES wow-image.bgImage img,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES wow-image[class*='bgImage'] img,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES [id^='img_comp-'] img,
+  :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #comp-m6aya1jg img {
+    opacity: 0 !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site):not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-vector-image {

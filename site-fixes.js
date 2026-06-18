@@ -1189,7 +1189,112 @@
     mesh.insertBefore(copy, texts[0]);
     texts.forEach(function (el) {
       copy.appendChild(el);
+      resetHeroTextMotion(el);
     });
+  }
+
+  function resetWixMotionEnter(root) {
+    if (!root) return;
+    var nodes = [root];
+    if (root.querySelectorAll) {
+      nodes = nodes.concat(Array.prototype.slice.call(root.querySelectorAll("*")));
+    }
+    nodes.forEach(function (node) {
+      if (!node || !node.setAttribute) return;
+      node.setAttribute("data-motion-enter", "done");
+      if (node.style) {
+        node.style.opacity = "1";
+        node.style.animation = "none";
+        node.style.transform = "none";
+        node.style.webkitTransform = "none";
+      }
+    });
+  }
+
+  function resetHeroTextMotion(root) {
+    resetWixMotionEnter(root);
+  }
+
+  function shouldSkipMobileMotionReveal(el) {
+    if (!el) return true;
+    if (el.closest("#SITE_HEADER, #SITE_FOOTER")) return true;
+    if (el.getAttribute("data-tp-mobile-hero-hidden") === "true") return true;
+    if (el.classList && el.classList.contains("wixui-vector-image")) return true;
+    if (el.closest("#comp-m6aya1jg")) return true;
+    return false;
+  }
+
+  function isPinnedHeroBackgroundImage(img) {
+    if (!img) return false;
+    if (img.id && img.id.indexOf("img_comp-") === 0) return true;
+    if (img.closest("wow-image.bgImage, wow-image[class*='bgImage']")) return true;
+    if (img.closest("#comp-m6aya1jg")) return true;
+    return false;
+  }
+
+  function revealMobileMotionContent() {
+    if (!window.matchMedia("(max-width: 980px)").matches) return;
+    if (
+      document.documentElement.classList.contains("tp-home-mobile-template-page") ||
+      document.body.classList.contains("tp-home-mobile-template-page")
+    ) {
+      return;
+    }
+
+    var sitePages = document.getElementById("SITE_PAGES");
+    if (!sitePages) return;
+
+    sitePages.querySelectorAll("[id^='comp-']").forEach(function (comp) {
+      if (shouldSkipMobileMotionReveal(comp)) return;
+      resetWixMotionEnter(comp);
+    });
+
+    sitePages.querySelectorAll(".wixui-image, .ih2JY1, .W4V2qg").forEach(function (wrapper) {
+      if (shouldSkipMobileMotionReveal(wrapper)) return;
+
+      resetWixMotionEnter(wrapper);
+      wrapper.querySelectorAll("img").forEach(function (img) {
+        if (!img || isPinnedHeroBackgroundImage(img)) return;
+        img.setAttribute("data-motion-enter", "done");
+        img.style.opacity = "1";
+        img.style.animation = "none";
+        img.style.transform = "none";
+        img.style.webkitTransform = "none";
+        img.style.webkitMaskImage = "none";
+        img.style.maskImage = "none";
+        if (img.loading === "lazy") {
+          img.loading = "eager";
+        }
+        if (img.dataset && img.dataset.src && !img.getAttribute("src")) {
+          img.setAttribute("src", img.dataset.src);
+        }
+      });
+    });
+  }
+
+  function scheduleMobileMotionRetries() {
+    window.setTimeout(revealMobileMotionContent, 0);
+    window.setTimeout(revealMobileMotionContent, 500);
+    window.setTimeout(revealMobileMotionContent, 1500);
+    window.addEventListener(
+      "load",
+      function () {
+        window.setTimeout(revealMobileMotionContent, 0);
+      },
+      { once: true }
+    );
+  }
+
+  function scheduleMobilePageHeroRetries() {
+    window.setTimeout(initMobilePageHero, 500);
+    window.setTimeout(initMobilePageHero, 1500);
+    window.addEventListener(
+      "load",
+      function () {
+        window.setTimeout(initMobilePageHero, 0);
+      },
+      { once: true }
+    );
   }
 
   function initMobileSite() {
@@ -1201,6 +1306,7 @@
 
     initMobileFooter();
     initMobilePageHero();
+    revealMobileMotionContent();
     notifyMobileSiteShellReady();
   }
 
@@ -1666,7 +1772,8 @@
   initHomeMobileTemplate();
   initMobileSite();
   window.setTimeout(initMobileSite, 500);
-  window.setTimeout(initMobilePageHero, 500);
+  scheduleMobilePageHeroRetries();
+  scheduleMobileMotionRetries();
   window.setTimeout(notifyMobileSiteShellReady, 550);
   initTherapyMenuLinks();
   syncMobileMenuFromDesktop();

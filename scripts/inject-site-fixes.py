@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "3"
+VERSION = "6"
 CSS = f'  <link rel="stylesheet" href="/site-fixes.css?v={VERSION}" />\n'
 BOOT_STYLE = (
     '  <style id="tp-mobile-boot-style">'
