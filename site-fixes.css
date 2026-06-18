@@ -355,6 +355,153 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   text-decoration: underline !important;
 }
 
+/* Services mega-menu: keep Reading Groups in the left column under Consultations */
+@media (min-width: 981px) {
+  #comp-m4ufk180 [aria-label='Services'].itemDepth02233374943__positionBox,
+  #comp-m4ufk180 [aria-label='Services'] .itemDepth02233374943__animationBox,
+  #comp-m4ufk180 [aria-label='Services'] .StylableHorizontalMenu3372578893__megaMenuWrapper,
+  #comp-m4ufk180 [aria-label='Services'] .submenu815198092__containerPageStretchWrapper,
+  #comp-m4ufk180 [aria-label='Services'] #comp-m4uflx2i,
+  #comp-m4ufk180 [aria-label='Services'] .submenu815198092__root,
+  #comp-m4ufk180 [aria-label='Services'] #comp-m4uflx392,
+  #comp-m4ufk180 [aria-label='Services'] #comp-m4uflx3a,
+  #comp-m4ufk180 [aria-label='Services'] [data-mesh-id='comp-m4uflx3ainlineContent'],
+  #comp-m4ufk180 [aria-label='Services'] [data-mesh-id='comp-m4uflx3ainlineContent-gridContainer'] {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #comp-m4ufk180 [aria-label='Services'].itemDepth02233374943__positionBox {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #comp-m4ufk180 [aria-label='Services'] .itemDepth02233374943__animationBox,
+  #comp-m4ufk180 [aria-label='Services'] .StylableHorizontalMenu3372578893__megaMenuWrapper,
+  #comp-m4ufk180 [aria-label='Services'] .submenu815198092__containerPageStretchWrapper,
+  #comp-m4ufk180 [aria-label='Services'] .submenu815198092__pageStretchWrapper,
+  #comp-m4ufk180 [aria-label='Services'] .submenu815198092__pageWrapper {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #comp-m4ufk180 [aria-label='Services'] #comp-m4uflx2i {
+    width: 100% !important;
+    min-width: 980px !important;
+    max-width: none !important;
+  }
+
+  #comp-m4ufk180 [aria-label='Services'] .submenu815198092__root {
+    padding: 12px 16px 18px !important;
+  }
+
+  #comp-m4ufk180 [aria-label='Services'] #comp-m4uflx392,
+  #comp-m4ufk180 [aria-label='Services'] #comp-m4uflx3a {
+    min-width: 980px !important;
+    width: 100% !important;
+    max-width: 980px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #comp-m4ufk180 [aria-label='Services'] [data-mesh-id='comp-m4uflx3ainlineContent-gridContainer'] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: repeat(6, min-content) !important;
+    column-gap: 28px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    max-width: 980px !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 8px !important;
+  }
+
+  #comp-m4ug2vsg {
+    grid-area: 1 / 1 / 2 / 2 !important;
+    left: 0 !important;
+    margin: 8px 0 0 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  #comp-m4uhtnzw {
+    grid-area: 2 / 1 / 3 / 2 !important;
+    left: 0 !important;
+    margin: 0 0 8px 0 !important;
+    width: auto !important;
+    max-width: 390px !important;
+  }
+
+  #comp-m4ug49sj {
+    grid-area: 3 / 1 / 4 / 2 !important;
+    left: 0 !important;
+    margin: 0 0 0 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  #comp-m4uhw6h1 {
+    grid-area: 4 / 1 / 5 / 2 !important;
+    left: 0 !important;
+    margin: 0 0 6px 0 !important;
+    width: auto !important;
+    max-width: 390px !important;
+  }
+
+  #comp-m6pddgv7 {
+    grid-area: 5 / 1 / 6 / 2 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    width: 390px !important;
+    max-width: 100% !important;
+  }
+
+  #comp-m6pddgv7 [data-mesh-id$='gridContainer'] > #comp-m6glhm9s {
+    margin-bottom: 2px !important;
+  }
+
+  #comp-m6glikrr {
+    margin: 0 !important;
+    line-height: 1.35 !important;
+  }
+
+  #comp-m4ug3unj {
+    grid-area: 1 / 2 / 2 / 3 !important;
+    left: 0 !important;
+    margin: 8px 0 0 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  #comp-m4ugahlb {
+    grid-area: 2 / 2 / 3 / 3 !important;
+    left: 0 !important;
+    margin: 0 0 6px 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  #comp-m4ugakdy {
+    grid-area: 3 / 2 / 5 / 3 !important;
+    left: 0 !important;
+    margin: 0 0 6px 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  #comp-m4ugdisp {
+    grid-area: 5 / 2 / 6 / 3 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+}
+
 /* Language switcher (replaces Wix LanguageSelector widget) */
 #comp-m6k5baee {
   display: flex !important;
@@ -476,6 +623,9 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 #comp-m4uh76kx {
   position: relative;
   z-index: 1;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   width: 100% !important;
   min-height: 360px !important;
 }
@@ -1689,6 +1839,62 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     width: 100% !important;
     min-height: 320px !important;
     height: 320px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uh3w2i {
+    display: block !important;
+    min-height: 320px !important;
+    overflow: visible !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) [data-mesh-id='Containermm74dinlineContent-gridContainer'] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(280px, auto) auto auto !important;
+    row-gap: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uh3w2i {
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 0;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xn2 {
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 1;
+    align-self: stretch;
+    width: 100% !important;
+    margin: 0 !important;
+    pointer-events: none;
+    background: transparent !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xn2 a,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xn2 button {
+    pointer-events: auto;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xp {
+    background: rgba(var(--color_42), 0.82) !important;
+    min-height: 100% !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xx11 {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .tp-mobile-nav__subitems a,
+  .tp-mobile-nav__sublink {
+    touch-action: manipulation;
+    cursor: pointer;
   }
 
   .tp-page-anchor,

@@ -1,4 +1,24 @@
 (function () {
+  var MOBILE_VIEWPORT_QUERY = "(max-width: 980px)";
+  var MOBILE_SHELL_CLASSES = [
+    "tp-mobile-site",
+    "tp-home-mobile-template-page",
+    "tp-mobile-booting",
+    "tp-mobile-ready",
+    "tp-mobile-nav-open",
+  ];
+
+  function isMobileViewport() {
+    return window.matchMedia(MOBILE_VIEWPORT_QUERY).matches;
+  }
+
+  function removeMobileShellClasses() {
+    MOBILE_SHELL_CLASSES.forEach(function (cls) {
+      document.documentElement.classList.remove(cls);
+      if (document.body) document.body.classList.remove(cls);
+    });
+  }
+
   var CA_FLAG =
     "data:image/svg+xml," +
     encodeURIComponent(
@@ -122,17 +142,115 @@
     return map;
   }
 
+  function getMobileMenuAnchorTargets() {
+    var isFrench = isFrenchPage();
+    var therapyPath = isFrench ? "/fr/services/therapy.html" : "/services/therapy.html";
+    var teamPath = isFrench ? "/fr/about-us/our-team.html" : "/about-us/our-team.html";
+    var specializationsPath = isFrench
+      ? "/fr/about-us/our-specializations.html"
+      : "/about-us/our-specializations.html";
+    var contactPath = isFrench ? "/fr/contact-us.html" : "/contact-us.html";
+    var readingGroupsPath = isFrench
+      ? "/fr/services/consultations-workshops-reading-groups.html"
+      : "/services/consultations-workshops-reading-groups.html";
+    var clickReaderPath = isFrench
+      ? "/fr/services/clinical-management-software.html"
+      : "/services/clinical-management-software.html";
+
+    return {
+      Therapy: therapyPath,
+      Therapie: therapyPath,
+      "Thérapie": therapyPath,
+      Speech: therapyPath + "#anchors-m4u9ygef6",
+      Parole: therapyPath + "#anchors-m4u9ygef6",
+      Language: therapyPath + "#anchors-m4u9yger9",
+      Langage: therapyPath + "#anchors-m4u9yger9",
+      "Assistive devices": therapyPath + "#anchors-m4u9ygfe4",
+      "Appareils fonctionnels": therapyPath + "#anchors-m4u9ygfe4",
+      "Join Our Team": teamPath + "#anchors-m4uaf2y410",
+      "Rejoignez notre équipe": teamPath + "#anchors-m4uaf2y410",
+      "Brain Injury": specializationsPath + "#anchors-m4u9qh0c",
+      "Lésion cérébrale": specializationsPath + "#anchors-m4u9qh0c",
+      "Learning Disabilities": specializationsPath + "#anchors-m4u9qh0m1",
+      "Troubles d'apprentissage": specializationsPath + "#anchors-m4u9qh0m1",
+      Stroke: specializationsPath + "#anchors-m4u9qh0u6",
+      "Accident vasculaire cérébral": specializationsPath + "#anchors-m4u9qh0u6",
+      "Reading Groups": readingGroupsPath + "#anchors-m4u7nvwq6",
+      "Groupes de lecture": readingGroupsPath + "#anchors-m4u7nvwq6",
+      "Click Reader": clickReaderPath + "#comp-m4wzb8lj6",
+      Fees: contactPath + "#comp-m4uec27w1",
+      Frais: contactPath + "#comp-m4uec27w1",
+      "Contact Us": contactPath + "#anchors-lvfbdtjs",
+      "Contactez nous": contactPath + "#anchors-lvfbdtjs",
+    };
+  }
+
+  function findMobileNavLink(target) {
+    if (!target || !target.closest) return null;
+    return target.closest(
+      "a.tp-mobile-nav__link[href], a.tp-mobile-nav__sublink[href], a.tp-mobile-nav__lang-link[href]"
+    );
+  }
+
+  function bindMobileNavLink(link) {
+    if (!link || link.dataset.tpNavBound === "true") return;
+    link.dataset.tpNavBound = "true";
+    var touchedAt = 0;
+
+    function activateFromLink(event) {
+      var href = link.getAttribute("href");
+      if (!href || href.charAt(0) === "#") return;
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+      }
+      navigateFromMobileMenu(href);
+    }
+
+    link.addEventListener(
+      "touchend",
+      function (event) {
+        touchedAt = Date.now();
+        activateFromLink(event);
+      },
+      { capture: true, passive: false }
+    );
+
+    link.addEventListener(
+      "click",
+      function (event) {
+        if (Date.now() - touchedAt < 500) {
+          event.preventDefault();
+          return;
+        }
+        activateFromLink(event);
+      },
+      true
+    );
+  }
+
+  function bindAllMobileNavLinks(root) {
+    if (!root) return;
+    root.querySelectorAll(
+      "a.tp-mobile-nav__link[href], a.tp-mobile-nav__sublink[href], a.tp-mobile-nav__lang-link[href]"
+    ).forEach(bindMobileNavLink);
+  }
+
   function syncMobileMenuFromDesktop() {
     var mobileNav = document.querySelector(".tp-mobile-nav");
     if (!mobileNav) return;
 
-    var map = getDesktopNavLinkMap();
+    var desktopMap = getDesktopNavLinkMap();
+    var anchorMap = getMobileMenuAnchorTargets();
     mobileNav.querySelectorAll(".tp-mobile-nav__sublink, .tp-mobile-nav__link").forEach(function (link) {
       var label = (link.textContent || "").replace(/\s+/g, " ").trim();
-      if (map[label]) {
-        link.setAttribute("href", map[label]);
+      var href = anchorMap[label] || desktopMap[label];
+      if (href) {
+        link.setAttribute("href", href);
       }
     });
+    bindAllMobileNavLinks(mobileNav);
   }
 
   function closeMobileNavMenu(nav) {
@@ -155,7 +273,7 @@
     if (nav) closeMobileNavMenu(nav);
 
     if (/^(mailto:|tel:)/i.test(href)) {
-      window.top.location.href = href;
+      window.location.href = href;
       return;
     }
 
@@ -163,7 +281,7 @@
       href.indexOf("http") === 0
         ? href
         : window.location.origin + (href.charAt(0) === "/" ? href : "/" + href);
-    window.top.location.href = absolute;
+    window.location.assign(absolute);
   }
 
   function initMobileNavRouting() {
@@ -173,7 +291,7 @@
     var lastNav = { href: "", time: 0 };
 
     function handleMobileNavActivate(event) {
-      var link = event.target.closest(".tp-mobile-nav a[href]");
+      var link = findMobileNavLink(event.target);
       if (!link) return;
 
       var href = link.getAttribute("href");
@@ -190,6 +308,7 @@
     }
 
     document.addEventListener("click", handleMobileNavActivate, true);
+    bindAllMobileNavLinks(document.querySelector(".tp-mobile-nav"));
   }
 
   function isFrenchPage() {
@@ -355,6 +474,9 @@
       "comp-m4u9qh0q1": "comp-m4u9qh0q1",
       "anchors-m4u9qh0u6": "comp-m4u9u733",
       "comp-m4u9u733": "comp-m4u9u733",
+      "anchors-m4u7nvwq6": "comp-m4u7nvwq8",
+      "comp-m4u7nvwq6": "comp-m4u7nvwq8",
+      "comp-m4wzb8lj6": "comp-m4wzb8lh3",
     };
 
     function scrollToHashTarget(hash) {
@@ -404,7 +526,11 @@
         (url.pathname.endsWith("/our-specializations.html") &&
           location.pathname.endsWith("/our-specializations.html")) ||
         (url.pathname.endsWith("/contact-us.html") &&
-          location.pathname.endsWith("/contact-us.html"));
+          location.pathname.endsWith("/contact-us.html")) ||
+        (url.pathname.endsWith("/consultations-workshops-reading-groups.html") &&
+          location.pathname.endsWith("/consultations-workshops-reading-groups.html")) ||
+        (url.pathname.endsWith("/clinical-management-software.html") &&
+          location.pathname.endsWith("/clinical-management-software.html"));
 
       if (!samePage) return;
 
@@ -418,45 +544,12 @@
   }
 
   function initTherapyMenuLinks() {
-    var isFrench = location.pathname === "/fr.html" || location.pathname.indexOf("/fr/") === 0;
-    var therapyPath = isFrench ? "/fr/services/therapy.html" : "/services/therapy.html";
-    var teamPath = isFrench ? "/fr/about-us/our-team.html" : "/about-us/our-team.html";
-    var specializationsPath = isFrench
-      ? "/fr/about-us/our-specializations.html"
-      : "/about-us/our-specializations.html";
-    var contactPath = isFrench ? "/fr/contact-us.html" : "/contact-us.html";
-    var targetsByText = {
-      Therapy: therapyPath,
-      Therapie: therapyPath,
-      "Thérapie": therapyPath,
-      "Speech": therapyPath + "#anchors-m4u9ygef6",
-      "Parole": therapyPath + "#anchors-m4u9ygef6",
-      "Language": therapyPath + "#anchors-m4u9yger9",
-      "Langage": therapyPath + "#anchors-m4u9yger9",
-      "Assistive devices": therapyPath + "#anchors-m4u9ygfe4",
-      "Appareils fonctionnels": therapyPath + "#anchors-m4u9ygfe4",
-      "Join Our Team": teamPath + "#anchors-m4uaf2y410",
-      "Rejoignez notre équipe": teamPath + "#anchors-m4uaf2y410",
-      "Brain Injury": specializationsPath + "#anchors-m4u9qh0c",
-      "Lésion cérébrale": specializationsPath + "#anchors-m4u9qh0c",
-      "Learning Disabilities": specializationsPath + "#anchors-m4u9qh0m1",
-      "Troubles d'apprentissage": specializationsPath + "#anchors-m4u9qh0m1",
-      "Stroke": specializationsPath + "#anchors-m4u9qh0u6",
-      "Accident vasculaire cérébral": specializationsPath + "#anchors-m4u9qh0u6",
-      "Reading Groups":
-        (isFrench ? "/fr" : "") +
-        "/services/consultations-workshops-reading-groups.html#anchors-m4u7nvwq6",
-      "Groupes de lecture":
-        "/fr/services/consultations-workshops-reading-groups.html#anchors-m4u7nvwq6",
-      "Click Reader":
-        (isFrench ? "/fr" : "") +
-        "/services/clinical-management-software.html#comp-m4wzb8lj6",
-      "Fees": contactPath + "#comp-m4uec27w1",
-      "Frais": contactPath + "#comp-m4uec27w1",
-    };
+    var targetsByText = getMobileMenuAnchorTargets();
 
     document
-      .querySelectorAll('#comp-m4ufk180 a.wixui-rich-text__text')
+      .querySelectorAll(
+        '#comp-m4ufk180 a.wixui-rich-text__text, #comp-m4ufk180 a.itemDepth12472627565__root'
+      )
       .forEach(function (link) {
         var label = (link.textContent || "").replace(/\s+/g, " ").trim();
         var href = targetsByText[label];
@@ -465,22 +558,48 @@
         link.setAttribute("target", "_self");
       });
 
-    document
-      .querySelectorAll('#comp-m4ufk180 .itemDepth12472627565__root')
-      .forEach(function (link) {
-        var label = (link.textContent || "").replace(/\s+/g, " ").trim();
-        if (label === "Contact Us" || label === "Contactez nous") {
-          link.setAttribute("href", contactPath + "#anchors-lvfbdtjs");
-          link.setAttribute("target", "_self");
-          return;
-        }
-        if (label === "Fees" || label === "Frais") {
-          link.setAttribute("href", contactPath + "#comp-m4uec27w1");
-          link.setAttribute("target", "_self");
-        }
-      });
-
     syncMobileMenuFromDesktop();
+  }
+
+  function initDesktopServicesMegaMenu() {
+    if (isMobileViewport()) return;
+
+    var nav = document.getElementById("comp-m4ufk180");
+    if (!nav) return;
+
+    var servicesItem = nav.querySelector(
+      '.itemDepth02233374943__itemWrapper [aria-label="Services"]'
+    );
+    if (!servicesItem) return;
+
+    var itemWrapper = servicesItem.closest(".itemDepth02233374943__itemWrapper");
+    if (!itemWrapper) return;
+
+    var heightProps = ["height", "maxHeight", "minHeight"];
+
+    function clearServicesMenuHeights() {
+      var selectors = [
+        '.itemDepth02233374943__positionBox[aria-label="Services"]',
+        '[aria-label="Services"] .itemDepth02233374943__animationBox',
+        '[aria-label="Services"] .StylableHorizontalMenu3372578893__megaMenuWrapper',
+        '[aria-label="Services"] .submenu815198092__containerPageStretchWrapper',
+        '[aria-label="Services"] #comp-m4uflx2i',
+        '[aria-label="Services"] .submenu815198092__root',
+        '[aria-label="Services"] [data-mesh-id="comp-m4uflx3ainlineContent-gridContainer"]',
+      ];
+
+      selectors.forEach(function (selector) {
+        var node = itemWrapper.querySelector(selector);
+        if (!node) return;
+        heightProps.forEach(function (prop) {
+          node.style[prop] = "";
+        });
+        node.style.overflow = "";
+      });
+    }
+
+    itemWrapper.addEventListener("mouseenter", clearServicesMenuHeights);
+    itemWrapper.addEventListener("focusin", clearServicesMenuHeights);
   }
 
   function initHelpCardButtons() {
@@ -719,6 +838,7 @@
       link.className = "tp-mobile-nav__link";
       link.href = item.href;
       link.textContent = item.label;
+      bindMobileNavLink(link);
       wrapper.appendChild(link);
       return wrapper;
     }
@@ -731,6 +851,7 @@
     main.className = "tp-mobile-nav__link";
     main.href = item.href;
     main.textContent = item.label;
+    bindMobileNavLink(main);
     row.appendChild(main);
 
     var toggle = document.createElement("button");
@@ -752,6 +873,7 @@
       childLink.className = "tp-mobile-nav__sublink";
       childLink.setAttribute("href", child.href);
       childLink.textContent = child.label;
+      bindMobileNavLink(childLink);
       group.appendChild(childLink);
     });
     wrapper.appendChild(group);
@@ -771,6 +893,7 @@
       (isFrench ? "FR" : "EN") +
       "</span>" +
       '<span aria-hidden="true">v</span>';
+    bindMobileNavLink(link);
     return link;
   }
 
@@ -955,6 +1078,8 @@
   }
 
   function initHomeMobileTemplate() {
+    if (!isMobileViewport()) return;
+
     var path = window.location.pathname.toLowerCase();
     var isEnglishHome =
       path === "/" || path === "/index.html" || path === "/index";
@@ -963,6 +1088,8 @@
     var sitePages = document.getElementById("SITE_PAGES");
     if (!sitePages) return;
     if (sitePages.querySelector(".tp-mobile-home")) {
+      document.documentElement.classList.add("tp-home-mobile-template-page");
+      document.body.classList.add("tp-home-mobile-template-page");
       notifyMobileSiteShellReady();
       return;
     }
@@ -1104,6 +1231,7 @@
   }
 
   function initMobileFooter() {
+    if (!isMobileViewport()) return;
     var footer = document.getElementById("SITE_FOOTER");
     var grid = footer && footer.querySelector("[data-mesh-id='SITE_FOOTERinlineContent-gridContainer']");
     if (!grid || grid.querySelector(".tp-mobile-footer")) return;
@@ -1135,6 +1263,7 @@
   }
 
   function initMobilePageHero() {
+    if (!isMobileViewport()) return;
     if (
       document.documentElement.classList.contains("tp-home-mobile-template-page") ||
       document.body.classList.contains("tp-home-mobile-template-page")
@@ -1184,6 +1313,13 @@
 
     if (!texts.length) return;
 
+    section.dataset.tpHeroTextIds = texts
+      .map(function (el) {
+        return el.id || "";
+      })
+      .filter(Boolean)
+      .join(",");
+
     var copy = document.createElement("div");
     copy.className = "tp-mobile-page-hero__copy";
     mesh.insertBefore(copy, texts[0]);
@@ -1202,6 +1338,7 @@
     nodes.forEach(function (node) {
       if (!node || !node.setAttribute) return;
       node.setAttribute("data-motion-enter", "done");
+      node.setAttribute("data-tp-motion-reset", "true");
       if (node.style) {
         node.style.opacity = "1";
         node.style.animation = "none";
@@ -1209,6 +1346,82 @@
         node.style.webkitTransform = "none";
       }
     });
+  }
+
+  function clearTpMotionInlineStyles() {
+    var sitePages = document.getElementById("SITE_PAGES");
+    if (!sitePages) return;
+
+    sitePages.querySelectorAll("[data-tp-motion-reset='true']").forEach(function (node) {
+      if (node.style) {
+        node.style.removeProperty("opacity");
+        node.style.removeProperty("animation");
+        node.style.removeProperty("transform");
+        node.style.removeProperty("-webkit-transform");
+        node.style.removeProperty("-webkit-mask-image");
+        node.style.removeProperty("mask-image");
+      }
+      node.removeAttribute("data-tp-motion-reset");
+      node.removeAttribute("data-motion-enter");
+    });
+  }
+
+  function restoreMobilePageHeroes() {
+    document.querySelectorAll(".tp-mobile-page-hero").forEach(function (section) {
+      var mesh = section.querySelector("[data-mesh-id$='gridContainer']");
+      var copy = section.querySelector(".tp-mobile-page-hero__copy");
+      if (!mesh) return;
+
+      var ids = (section.dataset.tpHeroTextIds || "").split(",").filter(Boolean);
+      ids.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && copy && copy.contains(el)) {
+          mesh.appendChild(el);
+        }
+      });
+
+      if (copy && !copy.children.length) {
+        copy.remove();
+      }
+
+      section.querySelectorAll("[data-tp-mobile-hero-hidden='true']").forEach(function (el) {
+        el.removeAttribute("data-tp-mobile-hero-hidden");
+      });
+
+      section.classList.remove("tp-mobile-page-hero");
+      delete section.dataset.tpHeroTextIds;
+    });
+  }
+
+  function teardownMobileRetrofit() {
+    restoreMobilePageHeroes();
+    clearTpMotionInlineStyles();
+    removeMobileShellClasses();
+    var nav = document.querySelector(".tp-mobile-nav");
+    if (nav) closeMobileNavMenu(nav);
+  }
+
+  function applyMobileRetrofit() {
+    var master = document.getElementById("masterPage");
+    if (master && master.classList.contains("landingPage")) return;
+
+    document.documentElement.classList.add("tp-mobile-site");
+    document.body.classList.add("tp-mobile-site");
+
+    initHomeMobileTemplate();
+    initMobileFooter();
+    initMobilePageHero();
+    revealMobileMotionContent();
+    notifyMobileSiteShellReady();
+  }
+
+  function syncMobileViewportState() {
+    if (isMobileViewport()) {
+      applyMobileRetrofit();
+      maybeRevealMobileSite();
+      return;
+    }
+    teardownMobileRetrofit();
   }
 
   function resetHeroTextMotion(root) {
@@ -1256,6 +1469,7 @@
       wrapper.querySelectorAll("img").forEach(function (img) {
         if (!img || isPinnedHeroBackgroundImage(img)) return;
         img.setAttribute("data-motion-enter", "done");
+        img.setAttribute("data-tp-motion-reset", "true");
         img.style.opacity = "1";
         img.style.animation = "none";
         img.style.transform = "none";
@@ -1273,41 +1487,42 @@
   }
 
   function scheduleMobileMotionRetries() {
-    window.setTimeout(revealMobileMotionContent, 0);
-    window.setTimeout(revealMobileMotionContent, 500);
-    window.setTimeout(revealMobileMotionContent, 1500);
+    function run() {
+      if (!isMobileViewport()) return;
+      revealMobileMotionContent();
+    }
+
+    window.setTimeout(run, 0);
+    window.setTimeout(run, 500);
+    window.setTimeout(run, 1500);
     window.addEventListener(
       "load",
       function () {
-        window.setTimeout(revealMobileMotionContent, 0);
+        window.setTimeout(run, 0);
       },
       { once: true }
     );
   }
 
   function scheduleMobilePageHeroRetries() {
-    window.setTimeout(initMobilePageHero, 500);
-    window.setTimeout(initMobilePageHero, 1500);
+    function run() {
+      if (!isMobileViewport()) return;
+      initMobilePageHero();
+    }
+
+    window.setTimeout(run, 500);
+    window.setTimeout(run, 1500);
     window.addEventListener(
       "load",
       function () {
-        window.setTimeout(initMobilePageHero, 0);
+        window.setTimeout(run, 0);
       },
       { once: true }
     );
   }
 
   function initMobileSite() {
-    var master = document.getElementById("masterPage");
-    if (master && master.classList.contains("landingPage")) return;
-
-    document.documentElement.classList.add("tp-mobile-site");
-    document.body.classList.add("tp-mobile-site");
-
-    initMobileFooter();
-    initMobilePageHero();
-    revealMobileMotionContent();
-    notifyMobileSiteShellReady();
+    syncMobileViewportState();
   }
 
   function markMobileSiteReady() {
@@ -1316,12 +1531,15 @@
     function reveal() {
       if (typeof window.__tpMarkMobileReady === "function") {
         window.__tpMarkMobileReady();
-        return;
+      } else {
+        document.documentElement.classList.remove("tp-mobile-booting");
+        document.documentElement.classList.add("tp-mobile-ready");
+        document.body.classList.remove("tp-mobile-booting");
+        document.body.classList.add("tp-mobile-ready");
       }
-      document.documentElement.classList.remove("tp-mobile-booting");
-      document.documentElement.classList.add("tp-mobile-ready");
-      document.body.classList.remove("tp-mobile-booting");
-      document.body.classList.add("tp-mobile-ready");
+      if (document.getElementById("comp-m4uh76kx")) {
+        initGeographicCoverageMap();
+      }
     }
 
     requestAnimationFrame(function () {
@@ -1450,43 +1668,113 @@
 
   function initGeographicCoverageMap() {
     var mount = document.getElementById("comp-m4uh76kx");
-    if (!mount || mount.dataset.tpMapReady === "true") return;
-    mount.dataset.tpMapReady = "true";
-    mount.innerHTML =
-      '<div class="tp-coverage-map" role="img" aria-label="Map of The Therapy Path service areas across Northern Ontario"></div>';
+    if (!mount) return;
 
-    var mapEl = mount.querySelector(".tp-coverage-map");
-    loadStylesheet("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
-    loadScript("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", function () {
-      if (!window.L || !mapEl) return;
+    function invalidateCoverageMap(map) {
+      if (!map) return;
+      map.invalidateSize();
+    }
 
-      var map = L.map(mapEl, {
-        scrollWheelZoom: false,
-        zoomControl: true,
-      }).setView([48.95, -81.25], 6);
-
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-        maxZoom: 18,
-      }).addTo(map);
-
-      [
-        ["North Bay", 46.3091, -79.4608],
-        ["Timmins", 48.4758, -81.3305],
-        ["New Liskeard", 47.5095, -79.6759],
-        ["Kirkland Lake", 48.1446, -80.0377],
-        ["Cochrane", 49.0669, -81.0168],
-        ["Iroquois Falls", 48.7675, -80.6830],
-        ["Kapuskasing", 49.4169, -82.4331],
-        ["Hearst", 49.6868, -83.6665],
-        ["James Bay Coast", 51.2720, -80.6400],
-      ].forEach(function (place) {
-        L.marker([place[1], place[2]]).addTo(map).bindPopup(place[0]);
+    function scheduleCoverageMapInvalidate(map) {
+      [0, 100, 250, 500, 1000, 2000].forEach(function (delay) {
+        window.setTimeout(function () {
+          invalidateCoverageMap(map);
+        }, delay);
       });
+      window.addEventListener("resize", function () {
+        invalidateCoverageMap(map);
+      });
+    }
 
-      window.setTimeout(function () {
-        map.invalidateSize();
-      }, 250);
+    function mountHasSize() {
+      var rect = mount.getBoundingClientRect();
+      return rect.width >= 20 && rect.height >= 20;
+    }
+
+    function buildCoverageMap() {
+      if (mount.dataset.tpMapReady === "true") {
+        if (mount._tpLeafletMap) invalidateCoverageMap(mount._tpLeafletMap);
+        return;
+      }
+      if (!mountHasSize()) {
+        window.requestAnimationFrame(buildCoverageMap);
+        return;
+      }
+
+      mount.dataset.tpMapReady = "true";
+      mount.innerHTML =
+        '<div class="tp-coverage-map" role="img" aria-label="Map of The Therapy Path service areas across Northern Ontario"></div>';
+
+      var mapEl = mount.querySelector(".tp-coverage-map");
+      loadStylesheet("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
+      loadScript("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", function () {
+        if (!window.L || !mapEl) return;
+
+        var map = L.map(mapEl, {
+          scrollWheelZoom: false,
+          zoomControl: true,
+        }).setView([48.95, -81.25], 6);
+
+        mount._tpLeafletMap = map;
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "&copy; OpenStreetMap contributors",
+          maxZoom: 18,
+        }).addTo(map);
+
+        [
+          ["North Bay", 46.3091, -79.4608],
+          ["Timmins", 48.4758, -81.3305],
+          ["New Liskeard", 47.5095, -79.6759],
+          ["Kirkland Lake", 48.1446, -80.0377],
+          ["Cochrane", 49.0669, -81.0168],
+          ["Iroquois Falls", 48.7675, -80.6830],
+          ["Kapuskasing", 49.4169, -82.4331],
+          ["Hearst", 49.6868, -83.6665],
+          ["James Bay Coast", 51.2720, -80.6400],
+        ].forEach(function (place) {
+          L.marker([place[1], place[2]]).addTo(map).bindPopup(place[0]);
+        });
+
+        scheduleCoverageMapInvalidate(map);
+      });
+    }
+
+    function whenCoverageMapCanRender(callback) {
+      if (
+        !window.matchMedia("(max-width: 980px)").matches ||
+        document.documentElement.classList.contains("tp-mobile-ready")
+      ) {
+        callback();
+        return;
+      }
+
+      var done = false;
+      function run() {
+        if (done) return;
+        done = true;
+        callback();
+      }
+
+      window.addEventListener("load", run, { once: true });
+      window.setTimeout(run, 4500);
+
+      var observer = new MutationObserver(function () {
+        if (document.documentElement.classList.contains("tp-mobile-ready")) {
+          observer.disconnect();
+          run();
+        }
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+    }
+
+    whenCoverageMapCanRender(function () {
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(buildCoverageMap);
+      });
     });
   }
 
@@ -1769,13 +2057,20 @@
   initMobileNavigation();
   window.setTimeout(initMobileNavigation, 500);
   window.setTimeout(initMobileNavigation, 1500);
-  initHomeMobileTemplate();
-  initMobileSite();
-  window.setTimeout(initMobileSite, 500);
+  syncMobileViewportState();
+  window.setTimeout(syncMobileViewportState, 500);
   scheduleMobilePageHeroRetries();
   scheduleMobileMotionRetries();
   window.setTimeout(notifyMobileSiteShellReady, 550);
+
+  var viewportMq = window.matchMedia(MOBILE_VIEWPORT_QUERY);
+  if (viewportMq.addEventListener) {
+    viewportMq.addEventListener("change", syncMobileViewportState);
+  } else if (viewportMq.addListener) {
+    viewportMq.addListener(syncMobileViewportState);
+  }
   initTherapyMenuLinks();
+  initDesktopServicesMegaMenu();
   syncMobileMenuFromDesktop();
   window.setTimeout(syncMobileMenuFromDesktop, 500);
   window.setTimeout(syncMobileMenuFromDesktop, 1500);
