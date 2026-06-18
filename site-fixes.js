@@ -223,6 +223,47 @@
     return { en: en, fr: fr };
   }
 
+  function getHomepageUrl() {
+    var urls = getLanguageUrls();
+    return isFrenchPage() ? urls.fr : urls.en;
+  }
+
+  function initHeaderLogoLinks() {
+    var homeUrl = getHomepageUrl();
+    var french = isFrenchPage();
+    var homeLabel = french ? "Accueil" : "The Therapy Path home";
+
+    var desktopLogoLink = document.querySelector(
+      "#comp-m4u3wh0r a[data-testid='linkElement']"
+    );
+    if (desktopLogoLink) {
+      desktopLogoLink.setAttribute("href", homeUrl);
+      desktopLogoLink.setAttribute("target", "_self");
+      if (!desktopLogoLink.getAttribute("aria-label")) {
+        desktopLogoLink.setAttribute("aria-label", homeLabel);
+      }
+    } else {
+      var logoRoot = document.getElementById("comp-m4u3wh0r");
+      var logoImage = logoRoot && logoRoot.querySelector("img");
+      if (logoRoot && logoImage && !logoImage.closest("a[href]")) {
+        var wrap = document.createElement("a");
+        wrap.href = homeUrl;
+        wrap.className = "tp-header-logo-link";
+        wrap.setAttribute("aria-label", homeLabel);
+        logoImage.parentNode.insertBefore(wrap, logoImage);
+        wrap.appendChild(logoImage);
+      }
+    }
+
+    var mobileLogoLink = document.querySelector(".tp-mobile-header-logo");
+    if (mobileLogoLink) {
+      mobileLogoLink.setAttribute("href", homeUrl);
+      if (!mobileLogoLink.getAttribute("aria-label")) {
+        mobileLogoLink.setAttribute("aria-label", homeLabel);
+      }
+    }
+  }
+
   function initLanguageSwitcher() {
     var mount = document.getElementById("comp-m6k5baee");
     if (!mount || mount.querySelector(".tp-lang-switch")) return;
@@ -568,7 +609,11 @@
   function initMobileNavigation() {
     var header = document.getElementById("SITE_HEADER");
     var desktopNav = document.getElementById("comp-m4ufk180");
-    if (!header || header.querySelector(".tp-mobile-nav")) return;
+    if (!header) return;
+    if (header.querySelector(".tp-mobile-nav")) {
+      notifyMobileNavReady();
+      return;
+    }
     if (!desktopNav) {
       window.setTimeout(initMobileNavigation, 250);
       return;
@@ -663,6 +708,7 @@
     });
 
     syncMobileMenuFromDesktop();
+    notifyMobileNavReady();
   }
 
   function buildMobileMenuItem(item) {
@@ -782,7 +828,7 @@
 
     var logoLink = document.createElement("a");
     logoLink.className = "tp-mobile-header-logo";
-    logoLink.href = isFrench ? "/fr.html" : "/";
+    logoLink.href = getHomepageUrl();
 
     var logo = document.createElement("img");
     logo.src = "/images/opt/therapy-path-header-logo-286w.webp";
@@ -905,7 +951,11 @@
     if (!isEnglishHome || isFrenchPage()) return;
 
     var sitePages = document.getElementById("SITE_PAGES");
-    if (!sitePages || sitePages.querySelector(".tp-mobile-home")) return;
+    if (!sitePages) return;
+    if (sitePages.querySelector(".tp-mobile-home")) {
+      notifyMobileSiteShellReady();
+      return;
+    }
 
     document.documentElement.classList.add("tp-home-mobile-template-page");
     document.body.classList.add("tp-home-mobile-template-page");
@@ -975,6 +1025,7 @@
       "</section>";
 
     sitePages.insertBefore(home, sitePages.firstChild);
+    notifyMobileSiteShellReady();
   }
 
   function getMobileFooterHtml(isFrench) {
@@ -1074,7 +1125,12 @@
   }
 
   function initMobilePageHero() {
-    if (document.body.classList.contains("tp-home-mobile-template-page")) return;
+    if (
+      document.documentElement.classList.contains("tp-home-mobile-template-page") ||
+      document.body.classList.contains("tp-home-mobile-template-page")
+    ) {
+      return;
+    }
 
     var page = getActiveSitePage();
     if (!page || page.querySelector(".tp-mobile-page-hero")) return;
@@ -1135,6 +1191,7 @@
 
     initMobileFooter();
     initMobilePageHero();
+    notifyMobileSiteShellReady();
   }
 
   function markMobileSiteReady() {
@@ -1154,6 +1211,53 @@
     requestAnimationFrame(function () {
       requestAnimationFrame(reveal);
     });
+  }
+
+  var mobileShellReady = {
+    revealed: false,
+    nav: false,
+    site: false,
+  };
+
+  function isEnglishHomePath() {
+    var path = window.location.pathname.toLowerCase();
+    return (
+      !isFrenchPage() &&
+      (path === "/" || path === "/index.html" || path === "/index")
+    );
+  }
+
+  function maybeRevealMobileSite() {
+    if (!window.matchMedia("(max-width: 980px)").matches) return;
+    if (mobileShellReady.revealed) return;
+
+    var navDone = mobileShellReady.nav || !!document.querySelector(".tp-mobile-nav");
+    var siteDone = mobileShellReady.site;
+
+    if (!siteDone) {
+      if (isEnglishHomePath()) {
+        siteDone = !!document.querySelector(".tp-mobile-home");
+      } else {
+        siteDone =
+          document.documentElement.classList.contains("tp-mobile-site") ||
+          document.body.classList.contains("tp-mobile-site");
+      }
+    }
+
+    if (!navDone || !siteDone) return;
+
+    mobileShellReady.revealed = true;
+    markMobileSiteReady();
+  }
+
+  function notifyMobileNavReady() {
+    mobileShellReady.nav = true;
+    maybeRevealMobileSite();
+  }
+
+  function notifyMobileSiteShellReady() {
+    mobileShellReady.site = true;
+    maybeRevealMobileSite();
   }
 
   function buildHomeServiceCard(title, body, href) {
@@ -1543,6 +1647,7 @@
 
   showSentBanner();
   initContactForm();
+  initHeaderLogoLinks();
   initLanguageSwitcher();
   initMobileNavRouting();
   initMobileNavigation();
@@ -1551,6 +1656,8 @@
   initHomeMobileTemplate();
   initMobileSite();
   window.setTimeout(initMobileSite, 500);
+  window.setTimeout(initMobilePageHero, 500);
+  window.setTimeout(notifyMobileSiteShellReady, 550);
   initTherapyMenuLinks();
   syncMobileMenuFromDesktop();
   window.setTimeout(syncMobileMenuFromDesktop, 500);
@@ -1564,7 +1671,12 @@
   pinLocalImages();
   initAppointmentCardImages();
   initGeographicCoverageMap();
-  markMobileSiteReady();
-  window.setTimeout(markMobileSiteReady, 600);
-  window.setTimeout(markMobileSiteReady, 1600);
+  window.setTimeout(notifyMobileNavReady, 1600);
+  window.setTimeout(function () {
+    if (!mobileShellReady.revealed) {
+      mobileShellReady.nav = true;
+      mobileShellReady.site = true;
+      maybeRevealMobileSite();
+    }
+  }, 2500);
 })();

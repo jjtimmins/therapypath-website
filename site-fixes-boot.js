@@ -60,7 +60,10 @@
   applyMobileBoot();
   watchForBody();
 
-  document.addEventListener("DOMContentLoaded", syncBodyClasses);
+  document.addEventListener("DOMContentLoaded", function () {
+    applyMobileBoot();
+    syncBodyClasses();
+  });
 
   var mq = window.matchMedia(MOBILE_QUERY);
   if (mq.addEventListener) mq.addEventListener("change", applyMobileBoot);
@@ -78,5 +81,5 @@
     if (html.classList.contains("tp-mobile-booting") && !html.classList.contains("tp-mobile-ready")) {
       window.__tpMarkMobileReady();
     }
-  }, 3000);
+  }, 4000);
 })();
