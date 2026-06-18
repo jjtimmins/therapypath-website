@@ -1676,13 +1676,35 @@
     }
 
     function scheduleCoverageMapInvalidate(map) {
-      [0, 100, 250, 500, 1000, 2000].forEach(function (delay) {
+      var delays = window.matchMedia("(max-width: 980px)").matches
+        ? [0, 100, 250, 500]
+        : [0, 100, 250, 500, 1000, 2000];
+
+      delays.forEach(function (delay) {
         window.setTimeout(function () {
           invalidateCoverageMap(map);
         }, delay);
       });
       window.addEventListener("resize", function () {
         invalidateCoverageMap(map);
+      });
+    }
+
+    function scheduleMobileCoverageMapTileKick(map) {
+      if (!window.matchMedia("(max-width: 980px)").matches) return;
+
+      [1200].forEach(function (delay) {
+        window.setTimeout(function () {
+          if (!map || !map.getContainer()) return;
+
+          var zoom = map.getZoom();
+          map.invalidateSize();
+          map.setZoom(zoom - 1, { animate: false });
+          window.setTimeout(function () {
+            map.setZoom(zoom, { animate: false });
+            map.invalidateSize();
+          }, 80);
+        }, delay);
       });
     }
 
@@ -1737,6 +1759,7 @@
         });
 
         scheduleCoverageMapInvalidate(map);
+        scheduleMobileCoverageMapTileKick(map);
       });
     }
 

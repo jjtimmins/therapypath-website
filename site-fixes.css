@@ -1844,6 +1844,32 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     opacity: 1 !important;
   }
 
+  #comp-m4uh76kx .leaflet-pane,
+  #comp-m4uh76kx .leaflet-tile-pane,
+  #comp-m4uh76kx .leaflet-layer,
+  #comp-m4uh76kx .leaflet-marker-pane,
+  #comp-m4uh76kx .leaflet-shadow-pane {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #comp-m4uh76kx .leaflet-marker-icon,
+  #comp-m4uh76kx .leaflet-marker-shadow {
+    max-width: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #comp-m4uh76kx .leaflet-tile {
+    width: 256px !important;
+    height: 256px !important;
+    max-width: none !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    object-fit: initial !important;
+  }
+
   :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4uh3w2i {
     display: block !important;
     min-height: 320px !important;
