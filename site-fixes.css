@@ -2079,6 +2079,65 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     margin-bottom: 0 !important;
   }
 
+  /* Our Team page: flatten Wix two-column strips and remove photo-placeholder gaps. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 #comp-m5fr151k {
+    display: none !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-testid='columns'] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-mesh-id$='inlineContent'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [class*='wixui-column-strip__column'] {
+    min-height: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-mesh-id$='gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+    grid-template-rows: min-content !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-mesh-id$='gridContainer'] > *,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-mesh-id$='gridContainer'] > interact-element,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-mesh-id$='gridContainer'] > interact-element > * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+    left: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-testid='columns'] > * {
+    margin-bottom: 16px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] [data-testid='columns'] > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [class*='wixui-column-strip'] .wixui-rich-text {
+    margin-left: 0 !important;
+    left: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [id^='comp-m5fr152'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [id^='comp-m5ftto7m'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m5fqnke0 [id^='comp-m6edyah'] {
+    margin-bottom: 12px !important;
+  }
+
   :is(html.tp-home-mobile-template-page, body.tp-home-mobile-template-page) .tp-home-booking {
     padding-bottom: 15px;
   }
