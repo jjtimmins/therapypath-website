@@ -29,6 +29,24 @@
       }
     },
     {
+      "route": "/site-fixes.css",
+      "headers": {
+        "Cache-Control": "no-cache"
+      }
+    },
+    {
+      "route": "/site-fixes.js",
+      "headers": {
+        "Cache-Control": "no-cache"
+      }
+    },
+    {
+      "route": "/site-fixes-boot.js",
+      "headers": {
+        "Cache-Control": "no-cache"
+      }
+    },
+    {
       "route": "/*.css",
       "headers": {
         "Cache-Control": "public, max-age=86400"

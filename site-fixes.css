@@ -641,6 +641,15 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     display: none !important;
   }
 
+  #SITE_HEADER > section,
+  #SITE_HEADER > [id^='comp-']:not(.tp-mobile-nav),
+  #SITE_HEADER [data-testid='columns'],
+  #SITE_HEADER [data-mesh-id='SITE_HEADERinlineContent'],
+  #SITE_HEADER [data-mesh-id='SITE_HEADERinlineContent-gridContainer'],
+  #SITE_HEADER [data-mesh-id='SITE_HEADERinlineContent'] * {
+    pointer-events: none !important;
+  }
+
   .tp-mobile-header-row {
     display: flex;
     align-items: center;
@@ -651,6 +660,18 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     padding: 0 12px 0 0;
     background: #fff;
     box-sizing: border-box;
+    position: relative;
+    z-index: 5022;
+    pointer-events: auto !important;
+  }
+
+  .tp-mobile-header-row *,
+  .tp-mobile-nav,
+  .tp-mobile-nav *,
+  .tp-mobile-appointment,
+  .tp-mobile-contact-bar,
+  .tp-mobile-contact-bar * {
+    pointer-events: auto !important;
   }
 
   .tp-mobile-header-logo {
@@ -660,6 +681,9 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     margin: 0;
     padding: 0;
     line-height: 0;
+    position: relative;
+    z-index: 5023;
+    cursor: pointer;
   }
 
   .tp-mobile-header-logo img {

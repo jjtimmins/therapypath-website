@@ -839,6 +839,17 @@
     logoLink.appendChild(logo);
     row.appendChild(logoLink);
 
+    logoLink.addEventListener(
+      "click",
+      function (event) {
+        var homeUrl = getHomepageUrl();
+        event.preventDefault();
+        event.stopPropagation();
+        window.location.href = homeUrl;
+      },
+      true
+    );
+
     header.appendChild(row);
     return row;
   }
