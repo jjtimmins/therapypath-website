@@ -558,6 +558,20 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   display: none;
 }
 
+.tp-mobile-header-row,
+.tp-mobile-appointment,
+.tp-mobile-contact-bar {
+  display: none;
+}
+
+.tp-mobile-home {
+  display: none;
+}
+
+.tp-mobile-footer {
+  display: none;
+}
+
 @media (max-width: 980px) {
   html,
   body {
@@ -590,10 +604,43 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   #SITE_HEADER {
-    min-height: 76px !important;
+    min-height: 138px !important;
     height: auto !important;
     background: #fff;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  #SITE_HEADER [data-mesh-id='SITE_HEADERinlineContent'] {
+    display: none !important;
+  }
+
+  .tp-mobile-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 0;
+    padding: 0 12px 0 0;
+    background: #fff;
+    box-sizing: border-box;
+  }
+
+  .tp-mobile-header-logo {
+    display: block;
+    flex: 0 0 auto;
+    width: clamp(100px, 31.7vw, 132px);
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+  }
+
+  .tp-mobile-header-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
   }
 
   #SITE_HEADER [data-mesh-id='SITE_HEADERinlineContent'],
@@ -603,6 +650,7 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+    flex-wrap: nowrap !important;
     gap: 12px !important;
     padding: 12px 16px !important;
     box-sizing: border-box;
@@ -616,6 +664,14 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     margin-left: 0 !important;
     margin-right: 0 !important;
     grid-area: auto !important;
+  }
+
+  #SITE_HEADER [data-mesh-id='SITE_HEADERinlineContent'] {
+    display: none !important;
+  }
+
+  #SITE_HEADER > [data-mesh-id='SITE_HEADERinlineContent'] {
+    display: none !important;
   }
 
   #SITE_HEADER section,
@@ -653,54 +709,56 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     position: relative !important;
     left: auto !important;
     top: auto !important;
-    width: 116px !important;
+    width: clamp(82px, 25vw, 104px) !important;
     height: auto !important;
     margin: 0 !important;
     flex: 0 0 auto;
+    order: 1;
   }
 
   #SITE_HEADER #img_comp-m4u3wh0r,
   #SITE_HEADER #img_comp-m4u3wh0r img {
-    width: 116px !important;
+    width: clamp(82px, 25vw, 104px) !important;
     height: auto !important;
     object-fit: contain !important;
   }
 
-  #comp-m4ufk180 {
+  #comp-m4ufk180,
+  #comp-m4u40z0g,
+  #comp-m4cysm7d,
+  #comp-m6k5baee {
     display: none !important;
   }
 
-  #comp-m4cysm7d,
   #comp-m677fr86 {
     display: none !important;
   }
 
-  #comp-m6k5baee {
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    width: 84px !important;
-    min-width: 84px !important;
-    height: 40px !important;
-    margin-left: auto !important;
-    flex: 0 0 auto;
-  }
-
-  .tp-lang-current {
-    min-width: 84px;
-    height: 40px;
-    padding: 0 10px;
-  }
-
-  .tp-lang-code {
-    flex: 0 0 auto;
+  .tp-mobile-appointment {
+    order: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 1 150px;
+    max-width: 150px;
+    min-height: 42px;
+    margin-left: auto;
+    padding: 0 6px;
+    border-radius: 6px;
+    background: #5d83df;
+    color: #fff;
+    font: 700 clamp(11px, 3.2vw, 16px)/1.1 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    box-shadow: inset 0 0 0 1px #345ebd, 0 2px 4px rgba(0, 0, 0, 0.18);
   }
 
   .tp-mobile-nav {
     display: block;
-    position: absolute;
-    top: 16px;
-    right: 12px;
+    position: relative;
+    order: 3;
+    flex: 0 0 auto;
     z-index: 5020;
   }
 
@@ -708,8 +766,10 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    min-height: 44px;
-    padding: 0 12px;
+    min-height: 62px;
+    min-width: 66px;
+    justify-content: center;
+    padding: 0 14px;
     border: 1px solid #d9d9d9;
     border-radius: 4px;
     background: #fff;
@@ -722,9 +782,9 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   .tp-mobile-nav__bars::before,
   .tp-mobile-nav__bars::after {
     display: block;
-    width: 18px;
-    height: 2px;
-    border-radius: 2px;
+    width: 27px;
+    height: 3px;
+    border-radius: 3px;
     background: currentColor;
     content: '';
   }
@@ -740,25 +800,27 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   .tp-mobile-nav__bars::before {
-    top: -6px;
+    top: -9px;
   }
 
   .tp-mobile-nav__bars::after {
-    top: 6px;
+    top: 9px;
   }
 
   .tp-mobile-nav__panel {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    width: min(330px, calc(100vw - 32px));
-    max-height: calc(100vh - 104px);
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    min-height: 100vh;
+    max-height: 100vh;
     overflow-y: auto;
-    padding: 8px;
-    background: #fff;
-    border: 1px solid #e3e3e3;
-    border-radius: 6px;
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+    padding: 30px 36px 52px;
+    background: #f7f7f7;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .tp-mobile-nav__panel[hidden] {
@@ -767,10 +829,12 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 
   .tp-mobile-nav__link {
     display: block;
-    padding: 13px 12px;
+    flex: 1;
+    padding: 18px 0;
     border-radius: 4px;
-    color: #17214d;
-    font: 700 15px/1.25 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, sans-serif;
+    color: #050505;
+    font: 700 24px/1.25 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+    text-align: center;
     text-decoration: none;
   }
 
@@ -778,6 +842,562 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   .tp-mobile-nav__link:focus {
     background: #eef5ff;
     color: #1d67cd;
+  }
+
+  .tp-mobile-nav__login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: #d1d1cd;
+    font: 400 25px/1 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+  }
+
+  .tp-mobile-nav__login span {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #d9dad5;
+    position: relative;
+  }
+
+  .tp-mobile-nav__login span::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 13px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .tp-mobile-nav__login span::after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    bottom: 7px;
+    width: 22px;
+    height: 10px;
+    border-radius: 12px 12px 0 0;
+    background: #fff;
+  }
+
+  .tp-mobile-nav__close {
+    position: absolute;
+    top: 48px;
+    right: 34px;
+    border: 0;
+    background: transparent;
+    color: #000;
+    font: 400 54px/0.8 Arial, sans-serif;
+    cursor: pointer;
+  }
+
+  .tp-mobile-nav__items {
+    margin-top: 18px;
+  }
+
+  .tp-mobile-nav__item {
+    max-width: 320px;
+    margin: 0 auto 26px;
+  }
+
+  .tp-mobile-nav__section {
+    display: flex;
+    align-items: center;
+  }
+
+  .tp-mobile-nav__section-toggle {
+    width: 44px;
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    color: #000;
+    font: 400 24px/1 Arial, sans-serif;
+    cursor: pointer;
+  }
+
+  .tp-mobile-nav__section-toggle[aria-expanded='true'] {
+    transform: rotate(180deg);
+  }
+
+  .tp-mobile-nav__subitems {
+    padding: 4px 0 0 26px;
+  }
+
+  .tp-mobile-nav__subitems[hidden] {
+    display: none !important;
+  }
+
+  .tp-mobile-nav__subitems a {
+    display: block;
+    padding: 10px 0;
+    color: #152251;
+    font: 700 18px/1.25 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+    text-decoration: none;
+  }
+
+  .tp-mobile-nav__language {
+    display: flex;
+    justify-content: center;
+    margin-top: 34px;
+  }
+
+  .tp-mobile-nav__lang-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 42px;
+    padding: 8px 22px;
+    border: 1px solid #e4e4e4;
+    background: #fff;
+    color: #000;
+    font: 400 24px/1 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+    text-decoration: none;
+  }
+
+  .tp-mobile-contact-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px 10px;
+    background: #3d86e4;
+    color: #fff;
+    order: 4;
+    flex-basis: 100%;
+  }
+
+  .tp-mobile-contact-bar a {
+    color: #fff;
+    font: 700 clamp(14px, 3.8vw, 20px)/1.15 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  }
+
+  .tp-mobile-contact-bar span {
+    display: inline-block;
+    margin-right: 10px;
+    letter-spacing: 0;
+    font-size: clamp(20px, 5.4vw, 28px);
+    line-height: 1;
+    vertical-align: -0.12em;
+  }
+
+  body.tp-home-mobile-template-page #SITE_PAGES > :not(.tp-mobile-home) {
+    display: none !important;
+  }
+
+  html.tp-home-mobile-template-page,
+  body.tp-home-mobile-template-page {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_CONTAINER,
+  body.tp-home-mobile-template-page #site-root,
+  body.tp-home-mobile-template-page #masterPage,
+  body.tp-home-mobile-template-page #PAGES_CONTAINER,
+  body.tp-home-mobile-template-page #SITE_PAGES {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .tp-mobile-home {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f5f1ff 0%, #ffffff 38%, #f7f4ff 100%);
+    color: #090909;
+    font-family: helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+  }
+
+  .tp-mobile-home *,
+  .tp-mobile-home *::before,
+  .tp-mobile-home *::after {
+    box-sizing: border-box;
+  }
+
+  .tp-mobile-home h1,
+  .tp-mobile-home h2,
+  .tp-mobile-home h3,
+  .tp-mobile-home p {
+    margin: 0;
+  }
+
+  .tp-mobile-home h1,
+  .tp-mobile-home h2,
+  .tp-mobile-home h3 {
+    color: #192a88;
+    font-family: 'Libre Baskerville', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .tp-home-hero {
+    min-height: 411px;
+    padding: 81px 22px 22px;
+    background-image: url('/images/opt/adobestock_495222202-980w.webp');
+    background-position: center top;
+    background-size: cover;
+    position: relative;
+  }
+
+  .tp-home-hero__copy {
+    width: min(492px, calc(100vw - 44px));
+    padding: 14px 12px 32px;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
+  }
+
+  .tp-home-hero h1 {
+    font-size: clamp(24px, 6.4vw, 33px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .tp-home-hero p {
+    margin-top: 8px;
+    font-size: clamp(18px, 4.4vw, 22px);
+    line-height: 1.12;
+  }
+
+  .tp-home-intro {
+    padding: 32px 22px 42px;
+    background: rgba(255, 255, 255, 0.92);
+    text-align: center;
+  }
+
+  .tp-home-intro__tagline {
+    margin-bottom: 36px !important;
+    color: #192a88;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .tp-home-intro p:not(.tp-home-intro__tagline) {
+    font-size: 21px;
+    line-height: 1.48;
+  }
+
+  .tp-home-intro p + p {
+    margin-top: 20px;
+  }
+
+  .tp-home-help,
+  .tp-home-services,
+  .tp-home-rapid,
+  .tp-home-booking {
+    padding: 30px 22px;
+  }
+
+  .tp-home-help h2,
+  .tp-home-services h2,
+  .tp-home-booking h2 {
+    margin-bottom: 22px;
+    font-size: clamp(28px, 6.48vw, 36px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .tp-home-feature-card,
+  .tp-home-booking-card {
+    margin: 0 0 34px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: rgba(247, 246, 255, 0.92);
+    box-shadow: 0 0 0 1px rgba(25, 42, 136, 0.08);
+  }
+
+  .tp-home-feature-card img,
+  .tp-home-booking-card img,
+  .tp-home-rapid > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .tp-home-feature-card__body {
+    position: relative;
+    min-height: 260px;
+    padding: 34px 34px 70px 17px;
+  }
+
+  .tp-home-feature-card h3,
+  .tp-home-booking-card h3 {
+    font-size: 22px !important;
+    line-height: 1.28 !important;
+  }
+
+  .tp-home-services > p {
+    font-size: clamp(23px, 5.7vw, 29px);
+    line-height: 1.48;
+  }
+
+  .tp-home-feature-card p,
+  .tp-home-booking-card p,
+  .tp-home-service-card p,
+  .tp-home-rapid p {
+    font-size: 22px;
+    line-height: 1.48;
+  }
+
+  .tp-home-feature-card p {
+    margin-top: 18px;
+  }
+
+  .tp-home-feature-card a,
+  .tp-home-service-card a {
+    position: absolute;
+    right: 14px;
+    bottom: 18px;
+    display: grid;
+    place-items: center;
+    width: 74px;
+    height: 74px;
+    border: 1px solid #0d3f93;
+    border-radius: 50%;
+    background: #4869b8;
+    color: #fff;
+    font-size: 66px;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .tp-home-services {
+    background: rgba(237, 234, 255, 0.8);
+  }
+
+  .tp-home-services > p {
+    margin-bottom: 26px;
+  }
+
+  .tp-home-service-card {
+    position: relative;
+    min-height: 284px;
+    margin: 0 0 24px;
+    padding: 34px 34px 74px 17px;
+    border-radius: 18px;
+    background: rgba(247, 246, 255, 0.88);
+    box-shadow: 0 0 0 1px rgba(25, 42, 136, 0.05);
+  }
+
+  .tp-home-service-card__icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 12px;
+    border: 3px solid #315f9d;
+    border-radius: 14px;
+    opacity: 0.85;
+  }
+
+  .tp-home-service-card__icon::before,
+  .tp-home-service-card__icon::after {
+    content: '';
+    position: absolute;
+    border-color: #315f9d;
+  }
+
+  .tp-home-service-card--speech-therapy .tp-home-service-card__icon::before {
+    width: 26px;
+    height: 18px;
+    border: 3px solid #315f9d;
+    border-radius: 50%;
+  }
+
+  .tp-home-service-card--speech-therapy .tp-home-service-card__icon::after {
+    right: 8px;
+    bottom: 10px;
+    width: 11px;
+    height: 11px;
+    border-right: 3px solid #315f9d;
+    border-bottom: 3px solid #315f9d;
+    transform: rotate(35deg);
+  }
+
+  .tp-home-service-card--language-therapy .tp-home-service-card__icon::before {
+    width: 28px;
+    height: 22px;
+    border: 3px solid #315f9d;
+    border-radius: 6px;
+  }
+
+  .tp-home-service-card--language-therapy .tp-home-service-card__icon::after {
+    left: 14px;
+    bottom: 8px;
+    width: 12px;
+    height: 12px;
+    border-left: 3px solid #315f9d;
+    border-bottom: 3px solid #315f9d;
+    transform: rotate(-45deg);
+  }
+
+  .tp-home-service-card--reading-therapy .tp-home-service-card__icon::before {
+    width: 30px;
+    height: 24px;
+    border: 3px solid #315f9d;
+    border-radius: 2px;
+  }
+
+  .tp-home-service-card--reading-therapy .tp-home-service-card__icon::after {
+    top: 13px;
+    left: 24px;
+    height: 26px;
+    border-left: 3px solid #315f9d;
+  }
+
+  .tp-home-service-card--consultation-services .tp-home-service-card__icon::before {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #315f9d;
+    border-radius: 50%;
+  }
+
+  .tp-home-service-card--consultation-services .tp-home-service-card__icon::after {
+    bottom: 8px;
+    right: 8px;
+    width: 16px;
+    border-top: 3px solid #315f9d;
+    transform: rotate(45deg);
+  }
+
+  .tp-home-service-card--presentations .tp-home-service-card__icon::before {
+    width: 30px;
+    height: 20px;
+    border: 3px solid #315f9d;
+    border-radius: 4px;
+  }
+
+  .tp-home-service-card--presentations .tp-home-service-card__icon::after {
+    bottom: 8px;
+    left: 22px;
+    height: 16px;
+    border-left: 3px solid #315f9d;
+    box-shadow: -7px 9px 0 -1px #315f9d, 7px 9px 0 -1px #315f9d;
+  }
+
+  .tp-home-service-card--assistive-devices .tp-home-service-card__icon::before {
+    width: 24px;
+    height: 30px;
+    border: 3px solid #315f9d;
+    border-radius: 12px;
+  }
+
+  .tp-home-service-card--assistive-devices .tp-home-service-card__icon::after {
+    bottom: 8px;
+    left: 15px;
+    width: 22px;
+    border-top: 3px solid #315f9d;
+  }
+
+  .tp-home-service-card h3 {
+    margin-bottom: 22px;
+    font-size: 22px !important;
+    line-height: 1.16 !important;
+  }
+
+  .tp-home-service-card a {
+    top: 96px;
+    bottom: auto;
+    width: 66px;
+    height: 66px;
+    border-color: #2875bd;
+    background: transparent;
+    color: #2875bd;
+    font-size: 54px;
+  }
+
+  .tp-home-rapid > img {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .tp-home-rapid__card {
+    padding: 36px 36px 38px 18px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  }
+
+  .tp-home-rapid h2 {
+    margin-bottom: 22px;
+    font-size: clamp(24px, 5.76vw, 31px) !important;
+    line-height: 1.18 !important;
+  }
+
+  .tp-home-rapid p + p {
+    margin-top: 34px;
+  }
+
+  .tp-home-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+    margin-top: 34px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: #4466ad;
+    color: #fff;
+    font-size: clamp(24px, 5.8vw, 30px);
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    box-shadow: inset 0 0 0 1px #173f91;
+  }
+
+  .tp-home-booking {
+    background: rgba(240, 237, 255, 0.78);
+  }
+
+  .tp-home-booking-card {
+    border-radius: 0;
+    background: rgba(247, 246, 255, 0.96);
+  }
+
+  .tp-home-booking-card__body {
+    padding: 34px 34px 34px 17px;
+  }
+
+  .tp-home-booking-card p {
+    margin-top: 22px;
+  }
+
+  .tp-home-booking-card dl {
+    margin: 30px 0 0;
+    padding-top: 26px;
+    border-top: 1px solid rgba(25, 42, 136, 0.16);
+  }
+
+  .tp-home-booking-card dl div + div {
+    margin-top: 8px;
+  }
+
+  .tp-home-booking-card dt {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .tp-home-booking-card dd {
+    margin: 0;
+    font-size: clamp(24px, 5.8vw, 30px);
+    line-height: 1.3;
   }
 
   #SITE_PAGES section,
@@ -997,6 +1617,111 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     font-size: clamp(18px, 5vw, 24px);
     line-height: 1.2;
   }
+
+  body.tp-home-mobile-template-page #SITE_FOOTER #comp-m221xy5q,
+  body.tp-home-mobile-template-page #SITE_FOOTER #comp-m4uf0dtt {
+    display: none !important;
+  }
+
+  body.tp-home-mobile-template-page .tp-home-booking {
+    padding-bottom: 15px;
+  }
+
+  body.tp-home-mobile-template-page .tp-home-booking-card:last-child {
+    margin-bottom: 17px;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__panel {
+    margin: 0 16px 20px;
+    padding: 0 20px 32px;
+    border: 1px solid rgba(25, 42, 136, 0.45);
+    border-radius: 4px;
+    background: linear-gradient(180deg, #d9e8fb 0%, #e8eefb 45%, #f2f0ff 100%);
+    box-sizing: border-box;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__logo {
+    display: block;
+    width: min(220px, 58vw);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__block:first-of-type {
+    margin-top: 0;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__block + .tp-mobile-footer__block {
+    margin-top: 28px;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__block h2 {
+    margin: 0 0 12px;
+    color: #192a88;
+    font: 700 20px/1.2 helvetica-w01-bold, helvetica-w02-bold, helvetica-lt-w10-bold, Arial, sans-serif;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__block p {
+    margin: 0;
+    color: #152251;
+    font: 400 16px/1.45 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__block p + p {
+    margin-top: 8px;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__block a {
+    color: #1d4f9d;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__areas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #152251;
+    font: 400 16px/1.45 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__areas li {
+    position: relative;
+    padding-left: 14px;
+  }
+
+  body.tp-home-mobile-template-page .tp-mobile-footer__areas li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #315f9d;
+  }
+
+  body.tp-home-mobile-template-page #SITE_FOOTER {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_FOOTER [data-mesh-id='SITE_FOOTERinlineContent'],
+  body.tp-home-mobile-template-page #SITE_FOOTER [data-mesh-id='SITE_FOOTERinlineContent-gridContainer'] {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1053,6 +1778,16 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     gap: 8px !important;
   }
 
+  #SITE_HEADER [data-mesh-id='SITE_HEADERinlineContent'] {
+    display: none !important;
+  }
+
+  .tp-mobile-header-row {
+    min-height: 0;
+    padding: 0 12px 0 0;
+    gap: 8px;
+  }
+
   #SITE_HEADER #comp-m4u3wh0r,
   #SITE_HEADER #img_comp-m4u3wh0r,
   #SITE_HEADER #img_comp-m4u3wh0r img {
@@ -1080,9 +1815,10 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   .tp-mobile-nav__toggle {
-    min-width: 44px;
+    min-width: 62px;
+    min-height: 58px;
     justify-content: center;
-    padding: 0 11px;
+    padding: 0 13px;
   }
 
   #SITE_PAGES [data-testid='columns'],
@@ -1099,5 +1835,36 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   #SITE_PAGES h2,
   #SITE_PAGES h2 .wixui-rich-text__text {
     font-size: clamp(24px, 8vw, 34px) !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-hero h1 {
+    font-size: clamp(24px, 6.4vw, 33px) !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-hero p {
+    font-size: clamp(18px, 4.4vw, 22px) !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-help h2,
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-services h2,
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-booking h2 {
+    font-size: clamp(28px, 6.48vw, 36px) !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-feature-card h3,
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-service-card h3,
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-booking-card h3 {
+    font-size: 22px !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-rapid h2 {
+    font-size: clamp(24px, 5.76vw, 31px) !important;
+  }
+
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-feature-card p,
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-service-card p,
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-booking-card p,
+  body.tp-home-mobile-template-page #SITE_PAGES .tp-home-rapid p {
+    font-size: 22px !important;
   }
 }

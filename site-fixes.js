@@ -451,21 +451,9 @@
       return;
     }
 
-    var links = [];
-    desktopNav.querySelectorAll("a[href]").forEach(function (link) {
-      var href = link.getAttribute("href");
-      var label = (link.textContent || "").replace(/\s+/g, " ").trim();
-      if (!href || !label || href === "#" || href.indexOf("javascript:") === 0) return;
-      if (links.some(function (item) { return item.href === href && item.label === label; })) return;
-      links.push({ href: href, label: label });
-    });
-
-    if (!links.length) {
-      window.setTimeout(initMobileNavigation, 250);
-      return;
-    }
-
     var isFrench = isFrenchPage();
+    var menu = isFrench ? getFrenchMobileMenu() : getEnglishMobileMenu();
+    var headerRow = initMobileHeaderRow(header, isFrench);
     var nav = document.createElement("nav");
     nav.className = "tp-mobile-nav";
     nav.setAttribute("aria-label", isFrench ? "Navigation mobile" : "Mobile navigation");
@@ -476,20 +464,28 @@
       (isFrench ? "Menu" : "Menu") +
       "</span>" +
       "</button>" +
-      '<div class="tp-mobile-nav__panel" hidden></div>';
+      '<div class="tp-mobile-nav__panel" hidden>' +
+      '<div class="tp-mobile-nav__login" aria-hidden="true"><span></span>Log In</div>' +
+      '<button type="button" class="tp-mobile-nav__close" aria-label="Close menu">&times;</button>' +
+      '<div class="tp-mobile-nav__items"></div>' +
+      '<div class="tp-mobile-nav__language"></div>' +
+      "</div>";
 
     var panel = nav.querySelector(".tp-mobile-nav__panel");
-    links.forEach(function (item) {
-      var menuLink = document.createElement("a");
-      menuLink.className = "tp-mobile-nav__link";
-      menuLink.href = item.href;
-      menuLink.textContent = item.label;
-      panel.appendChild(menuLink);
-    });
+    var itemsRoot = nav.querySelector(".tp-mobile-nav__items");
+    var languageRoot = nav.querySelector(".tp-mobile-nav__language");
 
-    header.appendChild(nav);
+    menu.forEach(function (item) {
+      itemsRoot.appendChild(buildMobileMenuItem(item));
+    });
+    languageRoot.appendChild(buildMobileLanguageSwitch(isFrench));
+
+    initMobileHeaderAppointment(headerRow, isFrench);
+    headerRow.appendChild(nav);
+    initMobileHeaderContactBar(header);
 
     var toggle = nav.querySelector(".tp-mobile-nav__toggle");
+    var close = nav.querySelector(".tp-mobile-nav__close");
 
     function closeMenu() {
       nav.classList.remove("is-open");
@@ -503,11 +499,23 @@
       panel.hidden = false;
     }
 
+    nav.querySelectorAll(".tp-mobile-nav__section-toggle").forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        event.stopPropagation();
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        var group = document.getElementById(button.getAttribute("aria-controls"));
+        button.setAttribute("aria-expanded", expanded ? "false" : "true");
+        if (group) group.hidden = expanded;
+      });
+    });
+
     toggle.addEventListener("click", function (event) {
       event.stopPropagation();
       if (panel.hidden) openMenu();
       else closeMenu();
     });
+
+    close.addEventListener("click", closeMenu);
 
     panel.addEventListener("click", function (event) {
       if (event.target.closest("a[href]")) closeMenu();
@@ -520,6 +528,388 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") closeMenu();
     });
+  }
+
+  function buildMobileMenuItem(item) {
+    var wrapper = document.createElement("div");
+    wrapper.className = "tp-mobile-nav__item";
+
+    if (!item.children || !item.children.length) {
+      var link = document.createElement("a");
+      link.className = "tp-mobile-nav__link";
+      link.href = item.href;
+      link.textContent = item.label;
+      wrapper.appendChild(link);
+      return wrapper;
+    }
+
+    var id = "tp-mobile-menu-" + item.label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    var row = document.createElement("div");
+    row.className = "tp-mobile-nav__section";
+
+    var main = document.createElement("a");
+    main.className = "tp-mobile-nav__link";
+    main.href = item.href;
+    main.textContent = item.label;
+    row.appendChild(main);
+
+    var toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "tp-mobile-nav__section-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", id);
+    toggle.setAttribute("aria-label", "Toggle " + item.label + " submenu");
+    toggle.textContent = "v";
+    row.appendChild(toggle);
+    wrapper.appendChild(row);
+
+    var group = document.createElement("div");
+    group.className = "tp-mobile-nav__subitems";
+    group.id = id;
+    group.hidden = true;
+    item.children.forEach(function (child) {
+      var childLink = document.createElement("a");
+      childLink.href = child.href;
+      childLink.textContent = child.label;
+      group.appendChild(childLink);
+    });
+    wrapper.appendChild(group);
+    return wrapper;
+  }
+
+  function buildMobileLanguageSwitch(isFrench) {
+    var urls = getLanguageUrls();
+    var link = document.createElement("a");
+    link.className = "tp-mobile-nav__lang-link";
+    link.href = isFrench ? urls.en : urls.fr;
+    link.innerHTML =
+      '<img class="tp-lang-flag" src="' +
+      CA_FLAG +
+      '" alt="" width="22" height="22" />' +
+      '<span>' +
+      (isFrench ? "FR" : "EN") +
+      "</span>" +
+      '<span aria-hidden="true">v</span>';
+    return link;
+  }
+
+  function initMobileHeaderContactBar(header) {
+    if (header.querySelector(".tp-mobile-contact-bar")) return;
+    var bar = document.createElement("div");
+    bar.className = "tp-mobile-contact-bar";
+    bar.innerHTML =
+      '<a href="mailto:services@therapypath.com" class="tp-mobile-contact-bar__email">' +
+      '<span aria-hidden="true">&#9993;</span> services@therapypath.com</a>' +
+      '<a href="tel:705-363-8871" class="tp-mobile-contact-bar__phone">' +
+      '<span aria-hidden="true">&#9742;</span> 705-363-8871</a>';
+    header.appendChild(bar);
+  }
+
+  function initMobileHeaderAppointment(header, isFrench) {
+    if (header.querySelector(".tp-mobile-appointment")) return;
+    var link = document.createElement("a");
+    link.className = "tp-mobile-appointment";
+    link.href = "https://theramatic.ca/request-appointment/the-therapy-path";
+    link.textContent = isFrench ? "Prendre rendez-vous" : "Book an Appointment";
+    header.appendChild(link);
+  }
+
+  function initMobileHeaderRow(header, isFrench) {
+    var existing = header.querySelector(".tp-mobile-header-row");
+    if (existing) return existing;
+
+    var row = document.createElement("div");
+    row.className = "tp-mobile-header-row";
+
+    var logoLink = document.createElement("a");
+    logoLink.className = "tp-mobile-header-logo";
+    logoLink.href = isFrench ? "/fr.html" : "/";
+
+    var logo = document.createElement("img");
+    logo.src = "/images/opt/therapy-path-header-logo-286w.webp";
+    logo.srcset =
+      "/images/opt/therapy-path-header-logo-143w.webp 1x, /images/opt/therapy-path-header-logo-286w.webp 2x";
+    logo.alt = "The Therapy Path";
+    logo.width = 104;
+    logo.height = 104;
+    logoLink.appendChild(logo);
+    row.appendChild(logoLink);
+
+    header.appendChild(row);
+    return row;
+  }
+
+  function getEnglishMobileMenu() {
+    return [
+      { label: "Home", href: "/" },
+      {
+        label: "Services",
+        href: "/services.html",
+        children: [
+          { label: "Assessments", href: "/services/assessments.html" },
+          { label: "Consultations/Workshops", href: "/services/consultations-workshops-reading-groups.html" },
+          { label: "Therapy", href: "/services/therapy.html" },
+          { label: "Speech", href: "/services/therapy.html#anchors-m4u9ygef6" },
+          { label: "Language", href: "/services/therapy.html#anchors-m4u9yger9" },
+          { label: "Assistive devices", href: "/services/therapy.html#anchors-m4u9ygfe4" },
+          { label: "Reading Groups", href: "/services/consultations-workshops-reading-groups.html" },
+        ],
+      },
+      {
+        label: "Products",
+        href: "/services/clinical-management-software.html",
+        children: [
+          { label: "Clinical Management Software", href: "/services/clinical-management-software.html" },
+          { label: "Click Reader", href: "/services/clinical-management-software.html" },
+        ],
+      },
+      {
+        label: "About Us",
+        href: "/about-us/our-team.html",
+        children: [
+          { label: "Geographical Coverage", href: "/about-us/geographical-coverage.html" },
+          { label: "Our Accomplishments", href: "/about-us/our-accomplishments.html" },
+          { label: "Our Team", href: "/about-us/our-team.html" },
+          { label: "Join Our Team", href: "/about-us/our-team.html#join-our-team" },
+          { label: "Our Specializations", href: "/about-us/our-specializations.html" },
+          { label: "Brain Injury", href: "/about-us/our-specializations.html#anchors-m4u9qh0c" },
+          { label: "Learning Disabilities", href: "/about-us/our-specializations.html#anchors-m4u9qh0m1" },
+          { label: "Stroke", href: "/about-us/our-specializations.html#anchors-m4u9qh0u6" },
+        ],
+      },
+      {
+        label: "Contact Us",
+        href: "/contact-us.html",
+        children: [
+          { label: "Contact Us", href: "/contact-us.html" },
+          { label: "Fees", href: "/contact-us.html#anchors-lvfbdtjs" },
+        ],
+      },
+      { label: "Book Online", href: "/book-online.html" },
+    ];
+  }
+
+  function getFrenchMobileMenu() {
+    return [
+      { label: "Accueil", href: "/fr.html" },
+      {
+        label: "Services",
+        href: "/fr/services.html",
+        children: [
+          { label: "Evaluations", href: "/fr/services/assessments.html" },
+          { label: "Consultations/Ateliers", href: "/fr/services/consultations-workshops-reading-groups.html" },
+          { label: "Therapie", href: "/fr/services/therapy.html" },
+          { label: "Parole", href: "/fr/services/therapy.html#anchors-m4u9ygef6" },
+          { label: "Langage", href: "/fr/services/therapy.html#anchors-m4u9yger9" },
+          { label: "Appareils fonctionnels", href: "/fr/services/therapy.html#anchors-m4u9ygfe4" },
+          { label: "Groupes de lecture", href: "/fr/services/consultations-workshops-reading-groups.html" },
+        ],
+      },
+      {
+        label: "Produits",
+        href: "/fr/services/clinical-management-software.html",
+        children: [
+          { label: "Logiciel de gestion clinique", href: "/fr/services/clinical-management-software.html" },
+          { label: "Click Reader", href: "/fr/services/clinical-management-software.html" },
+        ],
+      },
+      {
+        label: "A propos de nous",
+        href: "/fr/about-us/our-team.html",
+        children: [
+          { label: "Couverture geographique", href: "/fr/about-us/geographical-coverage.html" },
+          { label: "Nos realisations", href: "/fr/about-us/our-accomplishments.html" },
+          { label: "Notre equipe", href: "/fr/about-us/our-team.html" },
+          { label: "Rejoignez notre equipe", href: "/fr/about-us/our-team.html#join-our-team" },
+          { label: "Nos specialisations", href: "/fr/about-us/our-specializations.html" },
+          { label: "Lesion cerebrale", href: "/fr/about-us/our-specializations.html#anchors-m4u9qh0c" },
+          { label: "Troubles d'apprentissage", href: "/fr/about-us/our-specializations.html#anchors-m4u9qh0m1" },
+          { label: "Accident vasculaire cerebral", href: "/fr/about-us/our-specializations.html#anchors-m4u9qh0u6" },
+        ],
+      },
+      {
+        label: "Contactez nous",
+        href: "/fr/contact-us.html",
+        children: [
+          { label: "Contactez nous", href: "/fr/contact-us.html" },
+          { label: "Frais", href: "/fr/contact-us.html#anchors-lvfbdtjs" },
+        ],
+      },
+      { label: "Reservez en ligne", href: "/fr/book-online.html" },
+    ];
+  }
+
+  function initHomeMobileTemplate() {
+    var path = window.location.pathname.toLowerCase();
+    var isEnglishHome =
+      path === "/" || path === "/index.html" || path === "/index";
+    if (!isEnglishHome || isFrenchPage()) return;
+
+    var sitePages = document.getElementById("SITE_PAGES");
+    if (!sitePages || sitePages.querySelector(".tp-mobile-home")) return;
+
+    document.documentElement.classList.add("tp-home-mobile-template-page");
+    document.body.classList.add("tp-home-mobile-template-page");
+
+    var home = document.createElement("main");
+    home.className = "tp-mobile-home";
+    home.setAttribute("aria-label", "The Therapy Path home page");
+    home.innerHTML =
+      '<section class="tp-home-hero">' +
+      '<div class="tp-home-hero__copy">' +
+      '<h1>Your Journey to Improved Communication Starts Here</h1>' +
+      '<p>Covering most areas from North Bay to Hearst.</p>' +
+      "</div>" +
+      "</section>" +
+      '<section class="tp-home-intro">' +
+      '<p class="tp-home-intro__tagline">Together, we can pave the way for a brighter future filled with clear communication.</p>' +
+      '<p>Welcome to The Therapy Path. We proudly provide compassionate and effective speech-language therapy services tailored to each individual&apos;s unique needs across Northern Ontario.</p>' +
+      '<p>Our dedicated team of experienced Speech-Language Pathologists (SLPs) and Assistants are here to support you or your loved ones. Let us guide you on the journey to improved communication and literacy skills, fostering growth and connection in every community we serve.</p>' +
+      "</section>" +
+      '<section class="tp-home-help" aria-labelledby="tp-home-help-title">' +
+      '<h2 id="tp-home-help-title">How We Can Help You</h2>' +
+      '<div class="tp-home-feature-card">' +
+      '<img src="/images/opt/assessment-speech-service-864w.webp" alt="Speech-language assessment session" loading="lazy" />' +
+      '<div class="tp-home-feature-card__body">' +
+      '<h3>Comprehensive Speech and Language Assessments</h3>' +
+      '<p>Discover how our assessments identify strengths and guide our therapy targets.</p>' +
+      '<a href="/services/assessments.html" aria-label="Learn more about assessments">&rsaquo;</a>' +
+      "</div>" +
+      "</div>" +
+      '<div class="tp-home-feature-card">' +
+      '<img src="/images/opt/adobestock_363566581-864w.webp" alt="Therapy session with a child" loading="lazy" />' +
+      '<div class="tp-home-feature-card__body">' +
+      '<h3>Comprehensive Therapy Services</h3>' +
+      '<p>Discover how our tailored therapy enhances communication.</p>' +
+      '<a href="/services/therapy.html" aria-label="Learn more about therapy services">&rsaquo;</a>' +
+      "</div>" +
+      "</div>" +
+      "</section>" +
+      '<section class="tp-home-services" aria-labelledby="tp-home-services-title">' +
+      '<h2 id="tp-home-services-title">Our Services</h2>' +
+      '<p>We offer a variety of specialized services designed to address diverse communication needs:</p>' +
+      '<div class="tp-home-service-list">' +
+      buildHomeServiceCard("Speech Therapy", "Tailored interventions to improve articulation, fluency, and overall speech clarity.", "/services/therapy.html#anchors-m4u9ygef6") +
+      buildHomeServiceCard("Language Therapy", "Support for language comprehension and expression, helping individuals communicate effectively.", "/services/therapy.html#anchors-m4u9yger9") +
+      buildHomeServiceCard("Reading Therapy", "A research-supported approach focusing on teaching reading fundamentals to non-readers and at-risk children, fostering a love for literacy.", "/services/consultations-workshops-reading-groups.html") +
+      buildHomeServiceCard("Consultation Services", "Professional guidance for families and educators on best practices to support communication.", "/services/consultations-workshops-reading-groups.html") +
+      buildHomeServiceCard("Presentations", "Educational workshops for parents, teachers, and community members on speech and language development.", "/services/consultations-workshops-reading-groups.html") +
+      buildHomeServiceCard("Assistive Devices", "Recommendations and training on the use of assistive technology to enhance communication.", "/services/therapy.html#anchors-m4u9ygfe4") +
+      "</div>" +
+      "</section>" +
+      '<section class="tp-home-rapid">' +
+      '<img src="/images/opt/ba2cd3_ce429fe317704238b6b68ffe39659f77-1076w.webp" alt="Child reading a book" loading="lazy" />' +
+      '<div class="tp-home-rapid__card">' +
+      '<h2>Rapid Response</h2>' +
+      '<p>We understand that timely intervention is critical. That&apos;s why we strive to see new clients within two weeks of referral, ensuring that you receive the support you need without unnecessary delays.</p>' +
+      '<p>Whether you are seeking help for yourself or a loved one, we invite you to explore our services and discover how we can make a difference in your life.</p>' +
+      '<a class="tp-home-button" href="https://theramatic.ca/request-appointment/the-therapy-path">Schedule an Appointment</a>' +
+      "</div>" +
+      "</section>" +
+      '<section class="tp-home-booking" aria-labelledby="tp-home-booking-title">' +
+      '<h2 id="tp-home-booking-title">Book Online</h2>' +
+      '<div class="tp-home-booking-list">' +
+      buildHomeBookingCard("Speech & Language Assessment with report", "Select your preferred SLP to complete the assessment", "1 hr 30 min", "$990", "/booking-calendar/speech-language-assessment-with-report.html", "/images/opt/5353ca_b05e9a98bc264a0480d92a702e808975-864w.webp") +
+      buildHomeBookingCard("45 minute Virtual SLP Therapy", "Virtual speech-language therapy session.", "45 min", "$123.75", "/booking-calendar/45-minute-virtual-slp-therapy.html", "/images/opt/dda575_7d642f34c3524555a2dabdd59ecd1e3f-800w.webp") +
+      buildHomeBookingCard("1 hour Virtual SLP Therapy", "Virtual speech-language therapy session.", "1 hr", "$165", "/booking-calendar/1-hour-virtual-slp-therapy.html", "/images/opt/dda575_098fc47f424e46909702a5d5dd49f04f-1600w.webp") +
+      "</div>" +
+      "</section>";
+
+    sitePages.insertBefore(home, sitePages.firstChild);
+    initHomeMobileFooter();
+  }
+
+  function getHomeMobileFooterHtml() {
+    return (
+      '<div class="tp-mobile-footer__panel">' +
+      '<img class="tp-mobile-footer__logo" src="/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp" alt="The Therapy Path" width="220" height="222" loading="lazy" />' +
+      '<section class="tp-mobile-footer__block" aria-labelledby="tp-mobile-footer-contact">' +
+      '<h2 id="tp-mobile-footer-contact">Contact Info</h2>' +
+      "<p>117 Kay Crescent<br>Timmins, ON P4N 8A9</p>" +
+      '<p><a href="tel:705-363-8871">705-363-8871</a></p>' +
+      '<p><a href="mailto:jstark@therapypath.com">jstark@therapypath.com</a></p>' +
+      '<p><a href="mailto:services@therapypath.com">services@therapypath.com</a></p>' +
+      "</section>" +
+      '<section class="tp-mobile-footer__block" aria-labelledby="tp-mobile-footer-hours">' +
+      '<h2 id="tp-mobile-footer-hours">Hours</h2>' +
+      "<p>Monday &ndash; Friday: 8:30 AM &ndash; 4:30 PM</p>" +
+      "<p>Saturday: Closed</p>" +
+      "<p>Sunday: Closed</p>" +
+      "</section>" +
+      '<section class="tp-mobile-footer__block" aria-labelledby="tp-mobile-footer-areas">' +
+      '<h2 id="tp-mobile-footer-areas">Service Area</h2>' +
+      '<ul class="tp-mobile-footer__areas">' +
+      "<li>North Bay</li>" +
+      "<li>Iroquois Falls</li>" +
+      "<li>Timmins</li>" +
+      "<li>Kapuskasing</li>" +
+      "<li>New Liskeard</li>" +
+      "<li>Hearst</li>" +
+      "<li>Kirkland Lake</li>" +
+      "<li>James Bay Coast</li>" +
+      "<li>Cochrane</li>" +
+      "</ul>" +
+      "</section>" +
+      "</div>"
+    );
+  }
+
+  function initHomeMobileFooter() {
+    var footer = document.getElementById("SITE_FOOTER");
+    var grid = footer && footer.querySelector("[data-mesh-id='SITE_FOOTERinlineContent-gridContainer']");
+    if (!grid || grid.querySelector(".tp-mobile-footer")) return;
+
+    var mobileFooter = document.createElement("div");
+    mobileFooter.className = "tp-mobile-footer";
+    mobileFooter.setAttribute("aria-label", "Site footer");
+    mobileFooter.innerHTML = getHomeMobileFooterHtml();
+    grid.insertBefore(mobileFooter, grid.firstChild);
+  }
+
+  function buildHomeServiceCard(title, body, href) {
+    var slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    return (
+      '<article class="tp-home-service-card tp-home-service-card--' + slug + '">' +
+      '<div class="tp-home-service-card__icon" aria-hidden="true"></div>' +
+      "<h3>" +
+      title +
+      "</h3>" +
+      "<p>" +
+      body +
+      "</p>" +
+      '<a href="' +
+      href +
+      '" aria-label="Learn more about ' +
+      title +
+      '">&rsaquo;</a>' +
+      "</article>"
+    );
+  }
+
+  function buildHomeBookingCard(title, body, duration, price, href, image) {
+    return (
+      '<article class="tp-home-booking-card">' +
+      '<img src="' +
+      image +
+      '" alt="" loading="lazy" />' +
+      '<div class="tp-home-booking-card__body">' +
+      "<h3>" +
+      title +
+      "</h3>" +
+      "<p>" +
+      body +
+      "</p>" +
+      '<dl><div><dt>Duration</dt><dd>' +
+      duration +
+      '</dd></div><div><dt>Price</dt><dd>' +
+      price +
+      "</dd></div></dl>" +
+      '<a class="tp-home-button" href="' +
+      href +
+      '">Book Now</a>' +
+      "</div>" +
+      "</article>"
+    );
   }
 
   function loadStylesheet(href) {
@@ -867,6 +1257,7 @@
   initMobileNavigation();
   window.setTimeout(initMobileNavigation, 500);
   window.setTimeout(initMobileNavigation, 1500);
+  initHomeMobileTemplate();
   initTherapyMenuLinks();
   initHashScroll();
   initHelpCardButtons();
