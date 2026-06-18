@@ -558,6 +558,28 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   display: none;
 }
 
+/* Anti-FOUC: hide Wix shell on mobile until site-fixes.js finishes the mobile retrofit */
+@media (max-width: 980px) {
+  html.tp-mobile-booting:not(.tp-mobile-ready) #SITE_CONTAINER {
+    opacity: 0;
+  }
+
+  html.tp-mobile-booting:not(.tp-mobile-ready) body {
+    background: #fff;
+  }
+
+  html.tp-mobile-ready #SITE_CONTAINER {
+    opacity: 1;
+    transition: opacity 0.15s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.tp-mobile-ready #SITE_CONTAINER {
+      transition: none;
+    }
+  }
+}
+
 .tp-mobile-header-row,
 .tp-mobile-appointment,
 .tp-mobile-contact-bar {
@@ -728,6 +750,21 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   #comp-m4cysm7d,
   #comp-m6k5baee {
     display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -10000px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+  }
+
+  #comp-m4ufk180 *,
+  #SITE_HEADER nav.wixui-horizontal-menu,
+  #SITE_HEADER .StylableHorizontalMenu3372578893__menu,
+  #SITE_HEADER .submenu815198092__root {
+    pointer-events: none !important;
   }
 
   #comp-m677fr86 {
@@ -821,6 +858,16 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     border: 0;
     border-radius: 0;
     box-shadow: none;
+    z-index: 5030;
+  }
+
+  body.tp-mobile-nav-open #SITE_HEADER {
+    pointer-events: none;
+  }
+
+  body.tp-mobile-nav-open .tp-mobile-nav,
+  body.tp-mobile-nav-open .tp-mobile-nav__panel {
+    pointer-events: auto;
   }
 
   .tp-mobile-nav__panel[hidden] {
@@ -930,8 +977,11 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     display: none !important;
   }
 
-  .tp-mobile-nav__subitems a {
+  .tp-mobile-nav__subitems a,
+  .tp-mobile-nav__sublink {
     display: block;
+    position: relative;
+    z-index: 1;
     padding: 10px 0;
     color: #152251;
     font: 700 18px/1.25 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
@@ -969,14 +1019,29 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     color: #fff;
     order: 4;
     flex-basis: 100%;
+    position: relative;
+    z-index: 5025;
+    pointer-events: auto;
   }
 
-  .tp-mobile-contact-bar a {
+  .tp-mobile-contact-bar a,
+  .tp-mobile-contact-bar__email,
+  .tp-mobile-contact-bar__phone {
     color: #fff;
     font: 700 clamp(14px, 3.8vw, 20px)/1.15 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
     letter-spacing: 0.08em;
     text-decoration: none;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .tp-mobile-contact-bar a:hover,
+  .tp-mobile-contact-bar a:focus,
+  .tp-mobile-contact-bar a:active,
+  .tp-mobile-contact-bar a:visited {
+    color: #fff;
+    text-decoration: none;
   }
 
   .tp-mobile-contact-bar span {
@@ -993,7 +1058,9 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   html.tp-home-mobile-template-page,
-  body.tp-home-mobile-template-page {
+  body.tp-home-mobile-template-page,
+  html.tp-mobile-site,
+  body.tp-mobile-site {
     height: auto !important;
     min-height: 100% !important;
     overflow-x: hidden !important;
@@ -1004,7 +1071,12 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   body.tp-home-mobile-template-page #site-root,
   body.tp-home-mobile-template-page #masterPage,
   body.tp-home-mobile-template-page #PAGES_CONTAINER,
-  body.tp-home-mobile-template-page #SITE_PAGES {
+  body.tp-home-mobile-template-page #SITE_PAGES,
+  body.tp-mobile-site #SITE_CONTAINER,
+  body.tp-mobile-site #site-root,
+  body.tp-mobile-site #masterPage,
+  body.tp-mobile-site #PAGES_CONTAINER,
+  body.tp-mobile-site #SITE_PAGES {
     height: auto !important;
     min-height: 0 !important;
     overflow: visible !important;
@@ -1618,26 +1690,18 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     line-height: 1.2;
   }
 
-  body.tp-home-mobile-template-page #SITE_FOOTER #comp-m221xy5q,
-  body.tp-home-mobile-template-page #SITE_FOOTER #comp-m4uf0dtt {
+  body.tp-mobile-site #SITE_FOOTER #comp-m221xy5q,
+  body.tp-mobile-site #SITE_FOOTER #comp-m4uf0dtt {
     display: none !important;
   }
 
-  body.tp-home-mobile-template-page .tp-home-booking {
-    padding-bottom: 15px;
-  }
-
-  body.tp-home-mobile-template-page .tp-home-booking-card:last-child {
-    margin-bottom: 17px;
-  }
-
-  body.tp-home-mobile-template-page .tp-mobile-footer {
+  body.tp-mobile-site .tp-mobile-footer {
     display: block;
     width: 100%;
     box-sizing: border-box;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__panel {
+  body.tp-mobile-site .tp-mobile-footer__panel {
     margin: 0 16px 20px;
     padding: 0 20px 32px;
     border: 1px solid rgba(25, 42, 136, 0.45);
@@ -1646,44 +1710,44 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     box-sizing: border-box;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__logo {
+  body.tp-mobile-site .tp-mobile-footer__logo {
     display: block;
     width: min(220px, 58vw);
     height: auto;
     margin: 0 auto;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__block:first-of-type {
+  body.tp-mobile-site .tp-mobile-footer__block:first-of-type {
     margin-top: 0;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__block + .tp-mobile-footer__block {
+  body.tp-mobile-site .tp-mobile-footer__block + .tp-mobile-footer__block {
     margin-top: 28px;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__block h2 {
+  body.tp-mobile-site .tp-mobile-footer__block h2 {
     margin: 0 0 12px;
     color: #192a88;
     font: 700 20px/1.2 helvetica-w01-bold, helvetica-w02-bold, helvetica-lt-w10-bold, Arial, sans-serif;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__block p {
+  body.tp-mobile-site .tp-mobile-footer__block p {
     margin: 0;
     color: #152251;
     font: 400 16px/1.45 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__block p + p {
+  body.tp-mobile-site .tp-mobile-footer__block p + p {
     margin-top: 8px;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__block a {
+  body.tp-mobile-site .tp-mobile-footer__block a {
     color: #1d4f9d;
     font-weight: 700;
     text-decoration: none;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__areas {
+  body.tp-mobile-site .tp-mobile-footer__areas {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 6px 18px;
@@ -1694,12 +1758,12 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     font: 400 16px/1.45 helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, Arial, sans-serif;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__areas li {
+  body.tp-mobile-site .tp-mobile-footer__areas li {
     position: relative;
     padding-left: 14px;
   }
 
-  body.tp-home-mobile-template-page .tp-mobile-footer__areas li::before {
+  body.tp-mobile-site .tp-mobile-footer__areas li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -1710,17 +1774,221 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     background: #315f9d;
   }
 
-  body.tp-home-mobile-template-page #SITE_FOOTER {
+  body.tp-mobile-site #SITE_FOOTER {
     height: auto !important;
     min-height: 0 !important;
     overflow: visible !important;
   }
 
-  body.tp-home-mobile-template-page #SITE_FOOTER [data-mesh-id='SITE_FOOTERinlineContent'],
-  body.tp-home-mobile-template-page #SITE_FOOTER [data-mesh-id='SITE_FOOTERinlineContent-gridContainer'] {
+  body.tp-mobile-site #SITE_FOOTER [data-mesh-id='SITE_FOOTERinlineContent'],
+  body.tp-mobile-site #SITE_FOOTER [data-mesh-id='SITE_FOOTERinlineContent-gridContainer'] {
     position: relative !important;
     height: auto !important;
     min-height: 0 !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero {
+    min-height: 411px !important;
+    height: auto !important;
+    overflow: hidden;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-tp-mobile-hero-hidden='true'],
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero .wixui-vector-image {
+    display: none !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-testid='columns'],
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [class*='wixui-column-strip__column'],
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-mesh-id$='inlineContent'],
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-mesh-id$='gridContainer'] {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 411px !important;
+    height: auto !important;
+    margin-left: 0 !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero wow-image.bgImage,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero wow-image[class*='bgImage'],
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [id^='img_comp-'] {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 411px !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero wow-image img,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [id^='img_comp-'] img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy {
+    position: relative;
+    z-index: 2;
+    width: min(492px, calc(100vw - 44px));
+    margin: 20px 0 22px 17px;
+    padding: 14px 12px 32px;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
+    box-sizing: border-box;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy [data-testid='richTextElement'] {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    margin: 0 0 8px !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy h1,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy h1 .wixui-rich-text__text,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy .font_0,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy .font_6 {
+    font-size: clamp(24px, 6.4vw, 33px) !important;
+    line-height: 1.08 !important;
+    color: #192a88 !important;
+    font-family: 'Libre Baskerville', 'Times New Roman', serif !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    text-align: left !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy p,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy .font_8,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero__copy .font_8 .wixui-rich-text__text {
+    font-size: clamp(18px, 4.4vw, 22px) !important;
+    line-height: 1.12 !important;
+    color: #192a88 !important;
+    font-family: 'avenir-lt-w01_35-light1475496', 'avenir-lt-w05_35-light', avenir, sans-serif !important;
+    font-weight: 300 !important;
+    text-align: left !important;
+  }
+
+  body.tp-mobile-site #SITE_PAGES h2,
+  body.tp-mobile-site #SITE_PAGES h2 .wixui-rich-text__text,
+  body.tp-mobile-site #SITE_PAGES h3,
+  body.tp-mobile-site #SITE_PAGES h3 .wixui-rich-text__text {
+    color: #192a88;
+    font-family: 'Libre Baskerville', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  body.tp-mobile-site #SITE_PAGES [data-testid='richTextElement'] p,
+  body.tp-mobile-site #SITE_PAGES [data-testid='richTextElement'] li,
+  body.tp-mobile-site #SITE_PAGES [data-testid='richTextElement'] .wixui-rich-text__text {
+    font-size: 18px !important;
+    line-height: 1.48 !important;
+  }
+
+  /* Interior pages: stack Wix mesh text/image blocks in document order */
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES [id^='comp-'] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES [data-mesh-id$='inlineContent'] {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES [data-mesh-id$='gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    position: relative !important;
+    margin-left: 0 !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES [data-mesh-id$='gridContainer'] > *,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES [data-mesh-id$='gridContainer'] > interact-element,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES [data-mesh-id$='gridContainer'] > interact-element > * {
+    position: relative !important;
+    top: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 0 20px !important;
+    grid-area: auto !important;
+    justify-self: stretch !important;
+    align-self: stretch !important;
+    transform: none !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES [data-testid='richTextElement'] {
+    position: relative !important;
+    left: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-image,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES .ih2JY1 {
+    position: relative !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-image img,
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES .ih2JY1 img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: cover;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-vector-image {
+    display: none !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) #SITE_PAGES .wixui-horizontal-line {
+    width: 100% !important;
+    margin: 12px 0 !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-mesh-id$='gridContainer'] {
+    display: block !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  body.tp-mobile-site:not(.tp-home-mobile-template-page) .tp-mobile-page-hero [data-mesh-id$='gridContainer'] > * {
+    margin-bottom: 0 !important;
+  }
+
+  body.tp-home-mobile-template-page .tp-home-booking {
+    padding-bottom: 15px;
+  }
+
+  body.tp-home-mobile-template-page .tp-home-booking-card:last-child {
+    margin-bottom: 17px;
   }
 }
 
@@ -1842,6 +2110,21 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   body.tp-home-mobile-template-page #SITE_PAGES .tp-home-hero p {
+    font-size: clamp(18px, 4.4vw, 22px) !important;
+  }
+
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy h1,
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy h1 .wixui-rich-text__text,
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy .font_0,
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy .font_6,
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy .font_0 .wixui-rich-text__text,
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy .font_6 .wixui-rich-text__text {
+    font-size: clamp(24px, 6.4vw, 33px) !important;
+  }
+
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy p,
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy .font_8,
+  body.tp-mobile-site #SITE_PAGES .tp-mobile-page-hero__copy .font_8 .wixui-rich-text__text {
     font-size: clamp(18px, 4.4vw, 22px) !important;
   }
 

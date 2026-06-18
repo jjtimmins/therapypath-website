@@ -90,6 +90,108 @@
     return link.pathname;
   }
 
+  function normalizeNavHref(href) {
+    if (!href) return "";
+    if (/^(https?:|mailto:|tel:)/i.test(href)) return href;
+    var link = document.createElement("a");
+    link.href = href;
+    return link.pathname + link.search + link.hash;
+  }
+
+  function getDesktopNavLinkMap() {
+    var nav = document.getElementById("comp-m4ufk180");
+    var map = {};
+    if (!nav) return map;
+
+    function addLink(anchor) {
+      var href = anchor.getAttribute("href");
+      if (!href || href.indexOf("javascript:") === 0) return;
+      var anchorId = anchor.getAttribute("data-anchor");
+      if (anchorId && href.indexOf("#") < 0) {
+        href = href + "#" + anchorId;
+      }
+      var label = (anchor.textContent || "").replace(/\s+/g, " ").trim();
+      if (!label) return;
+      map[label] = normalizeNavHref(href);
+    }
+
+    nav.querySelectorAll("a.wixui-rich-text__text[href]").forEach(addLink);
+    nav.querySelectorAll("a.itemDepth12472627565__root[href]").forEach(addLink);
+    nav.querySelectorAll("a.itemDepth02233374943__root[href]").forEach(addLink);
+
+    return map;
+  }
+
+  function syncMobileMenuFromDesktop() {
+    var mobileNav = document.querySelector(".tp-mobile-nav");
+    if (!mobileNav) return;
+
+    var map = getDesktopNavLinkMap();
+    mobileNav.querySelectorAll(".tp-mobile-nav__sublink, .tp-mobile-nav__link").forEach(function (link) {
+      var label = (link.textContent || "").replace(/\s+/g, " ").trim();
+      if (map[label]) {
+        link.setAttribute("href", map[label]);
+      }
+    });
+  }
+
+  function closeMobileNavMenu(nav) {
+    if (!nav) return;
+    var panel = nav.querySelector(".tp-mobile-nav__panel");
+    var toggle = nav.querySelector(".tp-mobile-nav__toggle");
+    nav.classList.remove("is-open");
+    document.body.classList.remove("tp-mobile-nav-open");
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+    if (panel) {
+      panel.hidden = true;
+      if (panel.parentNode !== nav) {
+        nav.appendChild(panel);
+      }
+    }
+  }
+
+  function navigateFromMobileMenu(href) {
+    var nav = document.querySelector(".tp-mobile-nav");
+    if (nav) closeMobileNavMenu(nav);
+
+    if (/^(mailto:|tel:)/i.test(href)) {
+      window.top.location.href = href;
+      return;
+    }
+
+    var absolute =
+      href.indexOf("http") === 0
+        ? href
+        : window.location.origin + (href.charAt(0) === "/" ? href : "/" + href);
+    window.top.location.href = absolute;
+  }
+
+  function initMobileNavRouting() {
+    if (window.__tpMobileNavRoutingBound) return;
+    window.__tpMobileNavRoutingBound = true;
+
+    var lastNav = { href: "", time: 0 };
+
+    function handleMobileNavActivate(event) {
+      var link = event.target.closest(".tp-mobile-nav a[href]");
+      if (!link) return;
+
+      var href = link.getAttribute("href");
+      if (!href || href.charAt(0) === "#") return;
+
+      var now = Date.now();
+      if (lastNav.href === href && now - lastNav.time < 500) return;
+      lastNav = { href: href, time: now };
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      navigateFromMobileMenu(href);
+    }
+
+    document.addEventListener("click", handleMobileNavActivate, true);
+  }
+
   function isFrenchPage() {
     var path = window.location.pathname.toLowerCase();
     var lang = (document.documentElement.lang || "").toLowerCase();
@@ -284,6 +386,9 @@
       : "/about-us/our-specializations.html";
     var contactPath = isFrench ? "/fr/contact-us.html" : "/contact-us.html";
     var targetsByText = {
+      Therapy: therapyPath,
+      Therapie: therapyPath,
+      "Thérapie": therapyPath,
       "Speech": therapyPath + "#anchors-m4u9ygef6",
       "Parole": therapyPath + "#anchors-m4u9ygef6",
       "Language": therapyPath + "#anchors-m4u9yger9",
@@ -298,6 +403,16 @@
       "Troubles d'apprentissage": specializationsPath + "#anchors-m4u9qh0m1",
       "Stroke": specializationsPath + "#anchors-m4u9qh0u6",
       "Accident vasculaire cérébral": specializationsPath + "#anchors-m4u9qh0u6",
+      "Reading Groups":
+        (isFrench ? "/fr" : "") +
+        "/services/consultations-workshops-reading-groups.html#anchors-m4u7nvwq6",
+      "Groupes de lecture":
+        "/fr/services/consultations-workshops-reading-groups.html#anchors-m4u7nvwq6",
+      "Click Reader":
+        (isFrench ? "/fr" : "") +
+        "/services/clinical-management-software.html#comp-m4wzb8lj6",
+      "Fees": contactPath + "#comp-m4uec27w1",
+      "Frais": contactPath + "#comp-m4uec27w1",
     };
 
     document
@@ -314,10 +429,18 @@
       .querySelectorAll('#comp-m4ufk180 .itemDepth12472627565__root')
       .forEach(function (link) {
         var label = (link.textContent || "").replace(/\s+/g, " ").trim();
-        if (label !== "Contact Us" && label !== "Contactez nous") return;
-        link.setAttribute("href", contactPath + "#anchors-lvfbdtjs");
-        link.setAttribute("target", "_self");
+        if (label === "Contact Us" || label === "Contactez nous") {
+          link.setAttribute("href", contactPath + "#anchors-lvfbdtjs");
+          link.setAttribute("target", "_self");
+          return;
+        }
+        if (label === "Fees" || label === "Frais") {
+          link.setAttribute("href", contactPath + "#comp-m4uec27w1");
+          link.setAttribute("target", "_self");
+        }
       });
+
+    syncMobileMenuFromDesktop();
   }
 
   function initHelpCardButtons() {
@@ -484,19 +607,27 @@
     headerRow.appendChild(nav);
     initMobileHeaderContactBar(header);
 
+    desktopNav.setAttribute("aria-hidden", "true");
+    desktopNav.querySelectorAll("a[href]").forEach(function (anchor) {
+      anchor.setAttribute("tabindex", "-1");
+    });
+
     var toggle = nav.querySelector(".tp-mobile-nav__toggle");
     var close = nav.querySelector(".tp-mobile-nav__close");
 
     function closeMenu() {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      panel.hidden = true;
+      closeMobileNavMenu(nav);
     }
 
     function openMenu() {
       nav.classList.add("is-open");
+      document.body.classList.add("tp-mobile-nav-open");
       toggle.setAttribute("aria-expanded", "true");
       panel.hidden = false;
+      if (panel.parentNode !== document.body) {
+        document.body.appendChild(panel);
+      }
+      syncMobileMenuFromDesktop();
     }
 
     nav.querySelectorAll(".tp-mobile-nav__section-toggle").forEach(function (button) {
@@ -522,12 +653,16 @@
     });
 
     document.addEventListener("click", function (event) {
-      if (!nav.contains(event.target)) closeMenu();
+      if (!nav.classList.contains("is-open")) return;
+      if (nav.contains(event.target) || panel.contains(event.target)) return;
+      closeMenu();
     });
 
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") closeMenu();
     });
+
+    syncMobileMenuFromDesktop();
   }
 
   function buildMobileMenuItem(item) {
@@ -569,7 +704,8 @@
     group.hidden = true;
     item.children.forEach(function (child) {
       var childLink = document.createElement("a");
-      childLink.href = child.href;
+      childLink.className = "tp-mobile-nav__sublink";
+      childLink.setAttribute("href", child.href);
       childLink.textContent = child.label;
       group.appendChild(childLink);
     });
@@ -597,12 +733,35 @@
     if (header.querySelector(".tp-mobile-contact-bar")) return;
     var bar = document.createElement("div");
     bar.className = "tp-mobile-contact-bar";
-    bar.innerHTML =
-      '<a href="mailto:services@therapypath.com" class="tp-mobile-contact-bar__email">' +
-      '<span aria-hidden="true">&#9993;</span> services@therapypath.com</a>' +
-      '<a href="tel:705-363-8871" class="tp-mobile-contact-bar__phone">' +
-      '<span aria-hidden="true">&#9742;</span> 705-363-8871</a>';
+
+    var emailLink = document.createElement("a");
+    emailLink.className = "tp-mobile-contact-bar__email";
+    emailLink.href = "mailto:services@therapypath.com";
+    emailLink.innerHTML =
+      '<span aria-hidden="true">&#9993;</span> services@therapypath.com';
+
+    var phoneLink = document.createElement("a");
+    phoneLink.className = "tp-mobile-contact-bar__phone";
+    phoneLink.href = "tel:+17053638871";
+    phoneLink.innerHTML = '<span aria-hidden="true">&#9742;</span> 705-363-8871';
+
+    bar.appendChild(emailLink);
+    bar.appendChild(phoneLink);
     header.appendChild(bar);
+
+    bar.querySelectorAll("a[href]").forEach(function (link) {
+      link.addEventListener(
+        "click",
+        function (event) {
+          var href = link.getAttribute("href");
+          if (!href) return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          window.location.href = href;
+        },
+        true
+      );
+    });
   }
 
   function initMobileHeaderAppointment(header, isFrench) {
@@ -652,7 +811,7 @@
           { label: "Speech", href: "/services/therapy.html#anchors-m4u9ygef6" },
           { label: "Language", href: "/services/therapy.html#anchors-m4u9yger9" },
           { label: "Assistive devices", href: "/services/therapy.html#anchors-m4u9ygfe4" },
-          { label: "Reading Groups", href: "/services/consultations-workshops-reading-groups.html" },
+          { label: "Reading Groups", href: "/services/consultations-workshops-reading-groups.html#anchors-m4u7nvwq6" },
         ],
       },
       {
@@ -660,7 +819,7 @@
         href: "/services/clinical-management-software.html",
         children: [
           { label: "Clinical Management Software", href: "/services/clinical-management-software.html" },
-          { label: "Click Reader", href: "/services/clinical-management-software.html" },
+          { label: "Click Reader", href: "/services/clinical-management-software.html#comp-m4wzb8lj6" },
         ],
       },
       {
@@ -670,7 +829,7 @@
           { label: "Geographical Coverage", href: "/about-us/geographical-coverage.html" },
           { label: "Our Accomplishments", href: "/about-us/our-accomplishments.html" },
           { label: "Our Team", href: "/about-us/our-team.html" },
-          { label: "Join Our Team", href: "/about-us/our-team.html#join-our-team" },
+          { label: "Join Our Team", href: "/about-us/our-team.html#anchors-m4uaf2y410" },
           { label: "Our Specializations", href: "/about-us/our-specializations.html" },
           { label: "Brain Injury", href: "/about-us/our-specializations.html#anchors-m4u9qh0c" },
           { label: "Learning Disabilities", href: "/about-us/our-specializations.html#anchors-m4u9qh0m1" },
@@ -682,7 +841,7 @@
         href: "/contact-us.html",
         children: [
           { label: "Contact Us", href: "/contact-us.html" },
-          { label: "Fees", href: "/contact-us.html#anchors-lvfbdtjs" },
+          { label: "Fees", href: "/contact-us.html#comp-m4uec27w1" },
         ],
       },
       { label: "Book Online", href: "/book-online.html" },
@@ -702,7 +861,7 @@
           { label: "Parole", href: "/fr/services/therapy.html#anchors-m4u9ygef6" },
           { label: "Langage", href: "/fr/services/therapy.html#anchors-m4u9yger9" },
           { label: "Appareils fonctionnels", href: "/fr/services/therapy.html#anchors-m4u9ygfe4" },
-          { label: "Groupes de lecture", href: "/fr/services/consultations-workshops-reading-groups.html" },
+          { label: "Groupes de lecture", href: "/fr/services/consultations-workshops-reading-groups.html#anchors-m4u7nvwq6" },
         ],
       },
       {
@@ -710,7 +869,7 @@
         href: "/fr/services/clinical-management-software.html",
         children: [
           { label: "Logiciel de gestion clinique", href: "/fr/services/clinical-management-software.html" },
-          { label: "Click Reader", href: "/fr/services/clinical-management-software.html" },
+          { label: "Click Reader", href: "/fr/services/clinical-management-software.html#comp-m4wzb8lj6" },
         ],
       },
       {
@@ -720,7 +879,7 @@
           { label: "Couverture geographique", href: "/fr/about-us/geographical-coverage.html" },
           { label: "Nos realisations", href: "/fr/about-us/our-accomplishments.html" },
           { label: "Notre equipe", href: "/fr/about-us/our-team.html" },
-          { label: "Rejoignez notre equipe", href: "/fr/about-us/our-team.html#join-our-team" },
+          { label: "Rejoignez notre equipe", href: "/fr/about-us/our-team.html#anchors-m4uaf2y410" },
           { label: "Nos specialisations", href: "/fr/about-us/our-specializations.html" },
           { label: "Lesion cerebrale", href: "/fr/about-us/our-specializations.html#anchors-m4u9qh0c" },
           { label: "Troubles d'apprentissage", href: "/fr/about-us/our-specializations.html#anchors-m4u9qh0m1" },
@@ -732,7 +891,7 @@
         href: "/fr/contact-us.html",
         children: [
           { label: "Contactez nous", href: "/fr/contact-us.html" },
-          { label: "Frais", href: "/fr/contact-us.html#anchors-lvfbdtjs" },
+          { label: "Frais", href: "/fr/contact-us.html#comp-m4uec27w1" },
         ],
       },
       { label: "Reservez en ligne", href: "/fr/book-online.html" },
@@ -816,10 +975,47 @@
       "</section>";
 
     sitePages.insertBefore(home, sitePages.firstChild);
-    initHomeMobileFooter();
   }
 
-  function getHomeMobileFooterHtml() {
+  function getMobileFooterHtml(isFrench) {
+    var areas =
+      "<li>North Bay</li>" +
+      "<li>Iroquois Falls</li>" +
+      "<li>Timmins</li>" +
+      "<li>Kapuskasing</li>" +
+      "<li>New Liskeard</li>" +
+      "<li>Hearst</li>" +
+      "<li>Kirkland Lake</li>" +
+      "<li>James Bay Coast</li>" +
+      "<li>Cochrane</li>";
+
+    if (isFrench) {
+      return (
+        '<div class="tp-mobile-footer__panel">' +
+        '<img class="tp-mobile-footer__logo" src="/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp" alt="The Therapy Path" width="220" height="222" loading="lazy" />' +
+        '<section class="tp-mobile-footer__block" aria-labelledby="tp-mobile-footer-contact">' +
+        '<h2 id="tp-mobile-footer-contact">Coordonn&eacute;es</h2>' +
+        "<p>117, rue Kay Crescent<br>Timmins (Ontario) P4N 8A9</p>" +
+        '<p><a href="tel:705-363-8871">705-363-8871</a></p>' +
+        '<p><a href="mailto:jstark@therapypath.com">jstark@therapypath.com</a></p>' +
+        '<p><a href="mailto:services@therapypath.com">services@therapypath.com</a></p>' +
+        "</section>" +
+        '<section class="tp-mobile-footer__block" aria-labelledby="tp-mobile-footer-hours">' +
+        '<h2 id="tp-mobile-footer-hours">Heures</h2>' +
+        "<p>Lundi &ndash; vendredi : 8 h 30 &ndash; 16 h 30</p>" +
+        "<p>Samedi : Ferm&eacute;</p>" +
+        "<p>Dimanche : Ferm&eacute;</p>" +
+        "</section>" +
+        '<section class="tp-mobile-footer__block" aria-labelledby="tp-mobile-footer-areas">' +
+        '<h2 id="tp-mobile-footer-areas">Zone de service</h2>' +
+        '<ul class="tp-mobile-footer__areas">' +
+        areas +
+        "</ul>" +
+        "</section>" +
+        "</div>"
+      );
+    }
+
     return (
       '<div class="tp-mobile-footer__panel">' +
       '<img class="tp-mobile-footer__logo" src="/images/opt/ba2cd3_501a358c30d1498d855bbdeacb20d2ae-620w.webp" alt="The Therapy Path" width="220" height="222" loading="lazy" />' +
@@ -839,31 +1035,125 @@
       '<section class="tp-mobile-footer__block" aria-labelledby="tp-mobile-footer-areas">' +
       '<h2 id="tp-mobile-footer-areas">Service Area</h2>' +
       '<ul class="tp-mobile-footer__areas">' +
-      "<li>North Bay</li>" +
-      "<li>Iroquois Falls</li>" +
-      "<li>Timmins</li>" +
-      "<li>Kapuskasing</li>" +
-      "<li>New Liskeard</li>" +
-      "<li>Hearst</li>" +
-      "<li>Kirkland Lake</li>" +
-      "<li>James Bay Coast</li>" +
-      "<li>Cochrane</li>" +
+      areas +
       "</ul>" +
       "</section>" +
       "</div>"
     );
   }
 
-  function initHomeMobileFooter() {
+  function initMobileFooter() {
     var footer = document.getElementById("SITE_FOOTER");
     var grid = footer && footer.querySelector("[data-mesh-id='SITE_FOOTERinlineContent-gridContainer']");
     if (!grid || grid.querySelector(".tp-mobile-footer")) return;
 
+    var isFrench = isFrenchPage();
     var mobileFooter = document.createElement("div");
     mobileFooter.className = "tp-mobile-footer";
-    mobileFooter.setAttribute("aria-label", "Site footer");
-    mobileFooter.innerHTML = getHomeMobileFooterHtml();
+    mobileFooter.setAttribute("aria-label", isFrench ? "Pied de page" : "Site footer");
+    mobileFooter.innerHTML = getMobileFooterHtml(isFrench);
     grid.insertBefore(mobileFooter, grid.firstChild);
+
+    var wixFooter = document.getElementById("comp-m221xy5q");
+    if (wixFooter) wixFooter.setAttribute("aria-hidden", "true");
+  }
+
+  function getActiveSitePage() {
+    var pages = document.getElementById("SITE_PAGES");
+    if (!pages) return null;
+
+    var children = pages.children;
+    for (var i = 0; i < children.length; i++) {
+      var child = children[i];
+      if (child.classList && child.classList.contains("tp-mobile-home")) continue;
+      var style = window.getComputedStyle(child);
+      if (style.display !== "none" && style.visibility !== "hidden") return child;
+    }
+
+    return pages.firstElementChild;
+  }
+
+  function initMobilePageHero() {
+    if (document.body.classList.contains("tp-home-mobile-template-page")) return;
+
+    var page = getActiveSitePage();
+    if (!page || page.querySelector(".tp-mobile-page-hero")) return;
+
+    var heroImages = page.querySelectorAll("wow-image.bgImage, wow-image[class*='bgImage']");
+    var heroImage = null;
+    for (var i = 0; i < heroImages.length; i++) {
+      var candidate = heroImages[i];
+      if (candidate.id && candidate.id.indexOf("pageBackground") !== -1) continue;
+      if (candidate.closest("#comp-m6aya1jg")) continue;
+      heroImage = candidate;
+      break;
+    }
+    if (!heroImage) return;
+
+    var section = heroImage.closest("section");
+    if (!section) return;
+
+    section.classList.add("tp-mobile-page-hero");
+
+    section.querySelectorAll("[data-testid='colorUnderlay']").forEach(function (underlay) {
+      underlay.setAttribute("data-tp-mobile-hero-hidden", "true");
+    });
+
+    section.querySelectorAll(".wixui-vector-image").forEach(function (graphic) {
+      if (!graphic.closest(".tp-mobile-page-hero__copy")) {
+        graphic.setAttribute("data-tp-mobile-hero-hidden", "true");
+      }
+    });
+
+    if (section.querySelector(".tp-mobile-page-hero__copy")) return;
+
+    var mesh = section.querySelector("[data-mesh-id$='gridContainer']");
+    if (!mesh) return;
+
+    var texts = [];
+    mesh.querySelectorAll('[data-testid="richTextElement"]').forEach(function (el) {
+      if (el.closest(".tp-mobile-page-hero__copy")) return;
+      if (el.querySelector("h1, h2, p")) texts.push(el);
+    });
+
+    if (!texts.length) return;
+
+    var copy = document.createElement("div");
+    copy.className = "tp-mobile-page-hero__copy";
+    mesh.insertBefore(copy, texts[0]);
+    texts.forEach(function (el) {
+      copy.appendChild(el);
+    });
+  }
+
+  function initMobileSite() {
+    var master = document.getElementById("masterPage");
+    if (master && master.classList.contains("landingPage")) return;
+
+    document.documentElement.classList.add("tp-mobile-site");
+    document.body.classList.add("tp-mobile-site");
+
+    initMobileFooter();
+    initMobilePageHero();
+  }
+
+  function markMobileSiteReady() {
+    if (!window.matchMedia("(max-width: 980px)").matches) return;
+
+    function reveal() {
+      if (typeof window.__tpMarkMobileReady === "function") {
+        window.__tpMarkMobileReady();
+        return;
+      }
+      document.documentElement.classList.remove("tp-mobile-booting");
+      document.documentElement.classList.add("tp-mobile-ready");
+      document.body.classList.remove("tp-mobile-booting");
+      document.body.classList.add("tp-mobile-ready");
+    }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(reveal);
+    });
   }
 
   function buildHomeServiceCard(title, body, href) {
@@ -1254,11 +1544,17 @@
   showSentBanner();
   initContactForm();
   initLanguageSwitcher();
+  initMobileNavRouting();
   initMobileNavigation();
   window.setTimeout(initMobileNavigation, 500);
   window.setTimeout(initMobileNavigation, 1500);
   initHomeMobileTemplate();
+  initMobileSite();
+  window.setTimeout(initMobileSite, 500);
   initTherapyMenuLinks();
+  syncMobileMenuFromDesktop();
+  window.setTimeout(syncMobileMenuFromDesktop, 500);
+  window.setTimeout(syncMobileMenuFromDesktop, 1500);
   initHashScroll();
   initHelpCardButtons();
   initConsultationCardButtons();
@@ -1268,4 +1564,7 @@
   pinLocalImages();
   initAppointmentCardImages();
   initGeographicCoverageMap();
+  markMobileSiteReady();
+  window.setTimeout(markMobileSiteReady, 600);
+  window.setTimeout(markMobileSiteReady, 1600);
 })();
