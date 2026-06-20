@@ -1,3 +1,67 @@
+/* Hero titles: block font swap so Azure does not flash light fallback text first. */
+@font-face {
+  font-family: 'libre baskerville';
+  font-style: italic;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/parastorage/fonts-cache/googlefont/woff2/s/librebaskerville/v14/kmKhZrc3Hgbbcjq75U4uslyuy4kn0qNcWxEQDO-Wyrs.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'libre baskerville';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('/fonts/parastorage/fonts-cache/googlefont/woff2/s/librebaskerville/v14/kmKiZrc3Hgbbcjq75U4uslyuy4kn0qviTgY3KcC-wLOj.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: wfont_c04bd5_9f2797b0468342778e780108993b3788;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/ufonts/c04bd5_9f2797b0468342778e780108993b3788.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: avenir-lt-w01_85-heavy1475544;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/parastorage/v2/74290729-59ae-4129-87d0-2eec3974dce1/v1/avenir-lt-w01_85-heavy1475544.woff2') format('woff2');
+  unicode-range: U+0000, U+000D, U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+0160-0161, U+0178, U+017D-017E, U+0192, U+0237, U+02C6-02C7, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122;
+}
+
+@media (min-width: 981px) {
+  /* Wix motion enter animations are paused without the removed runtime; show hero text immediately. */
+  #SITE_PAGES .wixui-rich-text:not([data-motion-enter='done']) {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Pin hero title typography before webfonts swap in (matches final Libre Baskerville italic look). */
+  #SITE_PAGES .font_0.wixui-rich-text__text,
+  #SITE_PAGES .font_6.wixui-rich-text__text,
+  #SITE_PAGES .font_0 .wixui-rich-text__text,
+  #SITE_PAGES .font_6 .wixui-rich-text__text {
+    font-family: 'libre baskerville', Georgia, 'Times New Roman', serif !important;
+    font-style: italic !important;
+  }
+
+  #SITE_PAGES .font_0.wixui-rich-text__text,
+  #SITE_PAGES .font_0 .wixui-rich-text__text {
+    font-weight: 700 !important;
+  }
+
+  #SITE_PAGES .font_6.wixui-rich-text__text,
+  #SITE_PAGES .font_6 .wixui-rich-text__text {
+    font-weight: 400 !important;
+  }
+}
+
 /* Therapy Path static mirror adjustments */
 #comp-m4vmexby,
 #comp-m4vmf0th,

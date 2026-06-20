@@ -1,4 +1,21 @@
 (function () {
+  var HERO_FONTS = [
+    "/fonts/parastorage/fonts-cache/googlefont/woff2/s/librebaskerville/v14/kmKhZrc3Hgbbcjq75U4uslyuy4kn0qNcWxEQDO-Wyrs.woff2",
+    "/fonts/parastorage/fonts-cache/googlefont/woff2/s/librebaskerville/v14/kmKiZrc3Hgbbcjq75U4uslyuy4kn0qviTgY3KcC-wLOj.woff2",
+    "/fonts/ufonts/c04bd5_9f2797b0468342778e780108993b3788.woff2",
+    "/fonts/parastorage/v2/74290729-59ae-4129-87d0-2eec3974dce1/v1/avenir-lt-w01_85-heavy1475544.woff2",
+  ];
+
+  HERO_FONTS.forEach(function (href) {
+    var link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "font";
+    link.type = "font/woff2";
+    link.crossOrigin = "anonymous";
+    link.href = href;
+    document.head.appendChild(link);
+  });
+
   var MOBILE_QUERY = "(max-width: 980px)";
   var DESKTOP_VIEWPORT_WIDTH = 1024;
   var SYNC_CLASSES = ["tp-mobile-site", "tp-home-mobile-template-page", "tp-mobile-booting", "tp-mobile-ready"];

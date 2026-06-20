@@ -2026,6 +2026,17 @@
     resetWixMotionEnter(root);
   }
 
+  function initDesktopHeroMotionReset() {
+    if (isMobileViewport()) return;
+
+    var sitePages = document.getElementById("SITE_PAGES");
+    if (!sitePages) return;
+
+    sitePages.querySelectorAll('.wixui-rich-text[data-testid="richTextElement"]').forEach(function (el) {
+      resetWixMotionEnter(el);
+    });
+  }
+
   function shouldSkipMobileMotionReveal(el) {
     if (!el) return true;
     if (el.closest("#SITE_HEADER, #SITE_FOOTER")) return true;
@@ -2692,6 +2703,7 @@
   }
   initTherapyMenuLinks();
   initDesktopServicesMegaMenu();
+  initDesktopHeroMotionReset();
   syncMobileMenuFromDesktop();
   window.setTimeout(syncMobileMenuFromDesktop, 500);
   window.setTimeout(syncMobileMenuFromDesktop, 1500);
