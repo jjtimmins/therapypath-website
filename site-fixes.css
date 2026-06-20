@@ -42,23 +42,22 @@
     transform: none !important;
   }
 
-  /* Pin hero title typography before webfonts swap in (matches final Libre Baskerville italic look). */
-  #SITE_PAGES .font_0.wixui-rich-text__text,
-  #SITE_PAGES .font_6.wixui-rich-text__text,
-  #SITE_PAGES .font_0 .wixui-rich-text__text,
-  #SITE_PAGES .font_6 .wixui-rich-text__text {
+  /* Pin desktop hero titles to Assessments reference (34px Libre Baskerville italic, #192A88). */
+  #comp-m4uabng9 .wixui-rich-text__text,
+  #comp-m4u9qh014 .wixui-rich-text__text,
+  #comp-m4u9ebxu10 .wixui-rich-text__text,
+  #comp-m4u7nvwh5 .wixui-rich-text__text,
+  #comp-m4uaf2xx9 .wixui-rich-text__text,
+  #comp-m4u9yge69 .wixui-rich-text__text,
+  #comp-m4n0yvju .wixui-rich-text__text,
+  #comp-m4d26eo2 .wixui-rich-text__text {
     font-family: 'libre baskerville', Georgia, 'Times New Roman', serif !important;
     font-style: italic !important;
-  }
-
-  #SITE_PAGES .font_0.wixui-rich-text__text,
-  #SITE_PAGES .font_0 .wixui-rich-text__text {
-    font-weight: 700 !important;
-  }
-
-  #SITE_PAGES .font_6.wixui-rich-text__text,
-  #SITE_PAGES .font_6 .wixui-rich-text__text {
     font-weight: 400 !important;
+    font-size: 34px !important;
+    line-height: 1.4 !important;
+    color: #192a88 !important;
+    letter-spacing: normal !important;
   }
 }
 
