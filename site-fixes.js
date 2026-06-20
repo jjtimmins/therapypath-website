@@ -706,6 +706,417 @@
     });
   }
 
+  function initConsultationPresentationCards() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("yb9d1");
+    if (!page) return;
+
+    var repeater = document.getElementById("comp-m6awikew");
+    if (!repeater) return;
+
+    page.querySelectorAll(".comp-m6awikfp.wixui-repeater__item").forEach(function (card) {
+      var mesh = card.querySelector("[data-mesh-id$='inlineContent-gridContainer']");
+      if (!mesh) return;
+
+      var icon = mesh.querySelector("[id^='comp-m6awikft5__']");
+      var title = mesh.querySelector("[id^='comp-m6awikfy__']");
+      var link = mesh.querySelector("[id^='comp-m6awikg0__']");
+      var description = mesh.querySelector("[id^='comp-m6awikg31__']");
+      if (!icon || !title) return;
+
+      card.classList.add("tp-presentation-card");
+
+      var header = mesh.querySelector(".tp-presentation-card__header");
+      if (!header) {
+        header = document.createElement("div");
+        header.className = "tp-presentation-card__header";
+        mesh.insertBefore(header, mesh.firstChild);
+      }
+
+      icon.classList.add("tp-presentation-card__icon");
+      title.classList.add("tp-presentation-card__title");
+      if (link) link.classList.add("tp-presentation-card__link");
+      if (description) description.classList.add("tp-presentation-card__body");
+
+      icon.style.setProperty("display", "block", "important");
+      if (link) link.style.setProperty("display", "block", "important");
+
+      if (!header.contains(icon)) header.appendChild(icon);
+      if (!header.contains(title)) header.appendChild(title);
+      if (link && !header.contains(link)) header.appendChild(link);
+
+      resetWixMotionEnter(card);
+      resetWixMotionEnter(header);
+    });
+
+    repeater.classList.add("tp-presentation-cards");
+    page.dataset.tpPresentationCardsPatched = "true";
+  }
+
+  function restoreConsultationPresentationCards() {
+    var page = document.getElementById("yb9d1");
+    if (!page || page.dataset.tpPresentationCardsPatched !== "true") return;
+
+    page.querySelectorAll(".comp-m6awikfp.wixui-repeater__item").forEach(function (card) {
+      var mesh = card.querySelector("[data-mesh-id$='inlineContent-gridContainer']");
+      if (!mesh) return;
+
+      var icon = mesh.querySelector("[id^='comp-m6awikft5__']");
+      var title = mesh.querySelector("[id^='comp-m6awikfy__']");
+      var link = mesh.querySelector("[id^='comp-m6awikg0__']");
+      var description = mesh.querySelector("[id^='comp-m6awikg31__']");
+      var header = mesh.querySelector(".tp-presentation-card__header");
+
+      [icon, title, link, description].forEach(function (node) {
+        if (!node) return;
+        node.classList.remove(
+          "tp-presentation-card__icon",
+          "tp-presentation-card__title",
+          "tp-presentation-card__link",
+          "tp-presentation-card__body"
+        );
+        node.style.removeProperty("display");
+        mesh.appendChild(node);
+      });
+
+      if (header) header.remove();
+      card.classList.remove("tp-presentation-card");
+    });
+
+    var repeater = document.getElementById("comp-m6awikew");
+    if (repeater) repeater.classList.remove("tp-presentation-cards");
+
+    delete page.dataset.tpPresentationCardsPatched;
+  }
+
+  function initConsultationProgramsTitle() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("yb9d1");
+    if (!page) return;
+
+    var title = document.getElementById("comp-m4u7nvwo2");
+    var card = document.getElementById("comp-m6782her");
+    var mesh = document.querySelector(
+      "[data-mesh-id='comp-m4u7nvwm2inlineContent-gridContainer']"
+    );
+    if (!title || !card || !mesh) return;
+
+    title.classList.add("tp-consultation-programs-title");
+    if (title.nextElementSibling === card) {
+      page.dataset.tpConsultationProgramsTitlePatched = "true";
+      return;
+    }
+
+    mesh.insertBefore(title, card);
+    resetWixMotionEnter(title);
+    page.dataset.tpConsultationProgramsTitlePatched = "true";
+  }
+
+  function restoreConsultationProgramsTitle() {
+    var page = document.getElementById("yb9d1");
+    if (!page || page.dataset.tpConsultationProgramsTitlePatched !== "true") return;
+
+    var title = document.getElementById("comp-m4u7nvwo2");
+    var card = document.getElementById("comp-m6782her");
+    var mesh = document.querySelector(
+      "[data-mesh-id='comp-m4u7nvwm2inlineContent-gridContainer']"
+    );
+    if (!title || !mesh) return;
+
+    title.classList.remove("tp-consultation-programs-title");
+    if (card && card.parentElement === mesh) {
+      mesh.insertBefore(title, card.nextSibling);
+    } else {
+      mesh.appendChild(title);
+    }
+
+    delete page.dataset.tpConsultationProgramsTitlePatched;
+  }
+
+  function initConsultationHeroTuning() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("yb9d1");
+    if (!page) return;
+
+    var subtitle = document.getElementById("comp-m4u7nvwj1");
+    var heroCopy = page.querySelector(".tp-mobile-page-hero__copy");
+    if (!subtitle && !heroCopy) return;
+
+    if (subtitle) {
+      subtitle.classList.add("tp-consultation-hero-subtitle");
+      subtitle.style.setProperty("display", "none", "important");
+    }
+
+    if (heroCopy) {
+      heroCopy.classList.add("tp-consultation-hero-copy");
+      heroCopy.style.setProperty("padding", "14px 12px 12px", "important");
+      heroCopy.style.setProperty("margin-bottom", "0", "important");
+    }
+
+    page.dataset.tpConsultationHeroTuned = "true";
+  }
+
+  function restoreConsultationHeroTuning() {
+    var page = document.getElementById("yb9d1");
+    if (!page || page.dataset.tpConsultationHeroTuned !== "true") return;
+
+    var subtitle = document.getElementById("comp-m4u7nvwj1");
+    var heroCopy = page.querySelector(".tp-consultation-hero-copy");
+    if (subtitle) {
+      subtitle.classList.remove("tp-consultation-hero-subtitle");
+      subtitle.style.removeProperty("display");
+    }
+    if (heroCopy) {
+      heroCopy.classList.remove("tp-consultation-hero-copy");
+      heroCopy.style.removeProperty("padding");
+      heroCopy.style.removeProperty("margin-bottom");
+    }
+
+    delete page.dataset.tpConsultationHeroTuned;
+  }
+
+  function storeConsultationReadingRestorePoint(element) {
+    if (!element || element.dataset.tpRestoreMesh) return;
+
+    var parent = element.parentElement;
+    element.dataset.tpRestoreMesh = parent
+      ? parent.getAttribute("data-mesh-id") || ""
+      : "";
+    element.dataset.tpRestoreNext = element.nextElementSibling
+      ? element.nextElementSibling.id || ""
+      : "";
+  }
+
+  function restoreConsultationReadingElement(element) {
+    if (!element || !element.dataset.tpRestoreMesh) return;
+
+    var mesh = document.querySelector(
+      "[data-mesh-id='" + element.dataset.tpRestoreMesh + "']"
+    );
+    if (!mesh) return;
+
+    var next = document.getElementById(element.dataset.tpRestoreNext || "");
+    if (next && next.parentElement === mesh) {
+      mesh.insertBefore(element, next);
+    } else {
+      mesh.appendChild(element);
+    }
+
+    element.classList.remove("tp-consultation-reading-image");
+    delete element.dataset.tpRestoreMesh;
+    delete element.dataset.tpRestoreNext;
+  }
+
+  function initConsultationReadingProgramLayout() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("yb9d1");
+    if (!page || page.dataset.tpConsultationReadingLayoutPatched === "true") return;
+
+    var boyImage = document.getElementById("comp-m4u7nvwt10");
+    var boyLine = document.getElementById("comp-m4u7nvwv1");
+    var boyMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u7nvwr8inlineContent-gridContainer']"
+    );
+    if (boyImage && boyLine && boyMesh && boyImage.nextElementSibling !== boyLine) {
+      storeConsultationReadingRestorePoint(boyImage);
+      boyMesh.insertBefore(boyImage, boyLine);
+      boyImage.classList.add("tp-consultation-reading-image");
+      resetWixMotionEnter(boyImage);
+    }
+    if (boyLine) boyLine.classList.add("tp-consultation-reading-line");
+
+    var girlImage = document.getElementById("comp-m4u7unhi");
+    var girlLine = document.getElementById("comp-m4u7unhj1");
+    var girlMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u7unhf7inlineContent-gridContainer']"
+    );
+    if (girlImage && girlLine && girlMesh && girlImage.nextElementSibling !== girlLine) {
+      storeConsultationReadingRestorePoint(girlImage);
+      girlMesh.insertBefore(girlImage, girlLine);
+      girlImage.classList.add("tp-consultation-reading-image");
+      resetWixMotionEnter(girlImage);
+    }
+    if (girlLine) girlLine.classList.add("tp-consultation-reading-line");
+
+    var teachingImage = document.getElementById("comp-m4u7wneb6");
+    var teachingLine = document.getElementById("comp-m4u7wnec15");
+    var teachingMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u7wne92inlineContent-gridContainer']"
+    );
+    if (
+      teachingImage &&
+      teachingLine &&
+      teachingMesh &&
+      teachingImage.nextElementSibling !== teachingLine
+    ) {
+      storeConsultationReadingRestorePoint(teachingImage);
+      teachingMesh.insertBefore(teachingImage, teachingLine);
+      teachingImage.classList.add("tp-consultation-reading-image");
+      resetWixMotionEnter(teachingImage);
+    }
+    if (teachingLine) teachingLine.classList.add("tp-consultation-reading-line");
+
+    var parentalImage = document.getElementById("comp-m4u7x79g1");
+    var parentalLine = document.getElementById("comp-m4u7x79h4");
+    var parentalMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u7x79d8inlineContent-gridContainer']"
+    );
+    if (
+      parentalImage &&
+      parentalLine &&
+      parentalMesh &&
+      parentalImage.nextElementSibling !== parentalLine
+    ) {
+      storeConsultationReadingRestorePoint(parentalImage);
+      parentalMesh.insertBefore(parentalImage, parentalLine);
+      parentalImage.classList.add("tp-consultation-reading-image");
+      resetWixMotionEnter(parentalImage);
+    }
+    if (parentalLine) parentalLine.classList.add("tp-consultation-reading-line");
+
+    var eligibilityImage = document.getElementById("comp-m4u7xt0v2");
+    var eligibilityLine = document.getElementById("comp-m4u7xt0w9");
+    var eligibilityMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u7xt0s8inlineContent-gridContainer']"
+    );
+    if (
+      eligibilityImage &&
+      eligibilityLine &&
+      eligibilityMesh &&
+      eligibilityImage.nextElementSibling !== eligibilityLine
+    ) {
+      storeConsultationReadingRestorePoint(eligibilityImage);
+      eligibilityMesh.insertBefore(eligibilityImage, eligibilityLine);
+      eligibilityImage.classList.add("tp-consultation-reading-image");
+      resetWixMotionEnter(eligibilityImage);
+    }
+    if (eligibilityLine) eligibilityLine.classList.add("tp-consultation-reading-line");
+
+    page.dataset.tpConsultationReadingLayoutPatched = "true";
+  }
+
+  function restoreConsultationReadingProgramLayout() {
+    var page = document.getElementById("yb9d1");
+    if (!page || page.dataset.tpConsultationReadingLayoutPatched !== "true") return;
+
+    restoreConsultationReadingElement(document.getElementById("comp-m4u7nvwt10"));
+    restoreConsultationReadingElement(document.getElementById("comp-m4u7unhi"));
+    restoreConsultationReadingElement(document.getElementById("comp-m4u7wneb6"));
+    restoreConsultationReadingElement(document.getElementById("comp-m4u7x79g1"));
+    restoreConsultationReadingElement(document.getElementById("comp-m4u7xt0v2"));
+
+    var boyLine = document.getElementById("comp-m4u7nvwv1");
+    var girlLine = document.getElementById("comp-m4u7unhj1");
+    var teachingLine = document.getElementById("comp-m4u7wnec15");
+    var parentalLine = document.getElementById("comp-m4u7x79h4");
+    var eligibilityLine = document.getElementById("comp-m4u7xt0w9");
+    if (boyLine) boyLine.classList.remove("tp-consultation-reading-line");
+    if (girlLine) girlLine.classList.remove("tp-consultation-reading-line");
+    if (teachingLine) teachingLine.classList.remove("tp-consultation-reading-line");
+    if (parentalLine) parentalLine.classList.remove("tp-consultation-reading-line");
+    if (eligibilityLine) eligibilityLine.classList.remove("tp-consultation-reading-line");
+
+    delete page.dataset.tpConsultationReadingLayoutPatched;
+  }
+
+  function initOurTeamJoinBenefitsLayout() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("n1sxe");
+    if (!page || page.dataset.tpOurTeamJoinBenefitsPatched === "true") return;
+
+    var line = document.getElementById("comp-m6i5pxgq");
+    var jobList = document.getElementById("comp-m4uaf2y911");
+    var mesh = document.querySelector(
+      "[data-mesh-id='comp-m4uaf2y59inlineContent-gridContainer']"
+    );
+
+    if (line && jobList && mesh && line.previousElementSibling !== jobList) {
+      storeConsultationReadingRestorePoint(line);
+      var anchor = jobList.nextElementSibling;
+      if (anchor && anchor.parentElement === mesh) {
+        mesh.insertBefore(line, anchor);
+      } else {
+        mesh.insertBefore(line, jobList.nextSibling);
+      }
+    }
+
+    if (line) line.classList.add("tp-our-team-join-line");
+
+    page.dataset.tpOurTeamJoinBenefitsPatched = "true";
+  }
+
+  function restoreOurTeamJoinBenefitsLayout() {
+    var page = document.getElementById("n1sxe");
+    if (!page || page.dataset.tpOurTeamJoinBenefitsPatched !== "true") return;
+
+    var line = document.getElementById("comp-m6i5pxgq");
+    restoreConsultationReadingElement(line);
+    if (line) line.classList.remove("tp-our-team-join-line");
+
+    delete page.dataset.tpOurTeamJoinBenefitsPatched;
+  }
+
+  function initConsultationSnakeInline() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("yb9d1");
+    if (!page || page.dataset.tpSnakeInlinePatched === "true") return;
+
+    var textBlock = document.getElementById("comp-m4u7wneb");
+    var snake = document.getElementById("comp-m4ugyjbc");
+    if (!textBlock || !snake) return;
+
+    var targetP = null;
+    textBlock.querySelectorAll("p").forEach(function (para) {
+      if (/resembles|ressemble/i.test(para.textContent) && /nake/i.test(para.textContent)) {
+        targetP = para;
+      }
+    });
+    if (!targetP || targetP.querySelector(".tp-snake-inline-anchor")) return;
+
+    targetP.dataset.tpSnakeOriginalHtml = targetP.innerHTML;
+    targetP.innerHTML = targetP.innerHTML.replace(
+      /(resembles|ressemble)((?:\s|&nbsp;|\u00a0|\u202f)+)(?=nake)/i,
+      '$1 <span class="tp-snake-inline-anchor"></span>'
+    );
+
+    var anchor = targetP.querySelector(".tp-snake-inline-anchor");
+    if (!anchor) {
+      delete targetP.dataset.tpSnakeOriginalHtml;
+      return;
+    }
+
+    storeConsultationReadingRestorePoint(snake);
+    snake.classList.add("tp-snake-inline-image");
+    anchor.appendChild(snake);
+    resetWixMotionEnter(snake);
+    page.dataset.tpSnakeInlinePatched = "true";
+  }
+
+  function restoreConsultationSnakeInline() {
+    var page = document.getElementById("yb9d1");
+    if (!page || page.dataset.tpSnakeInlinePatched !== "true") return;
+
+    restoreConsultationReadingElement(document.getElementById("comp-m4ugyjbc"));
+
+    var textBlock = document.getElementById("comp-m4u7wneb");
+    if (textBlock) {
+      textBlock.querySelectorAll("p").forEach(function (para) {
+        if (para.dataset.tpSnakeOriginalHtml) {
+          para.innerHTML = para.dataset.tpSnakeOriginalHtml;
+          delete para.dataset.tpSnakeOriginalHtml;
+        }
+      });
+    }
+
+    delete page.dataset.tpSnakeInlinePatched;
+  }
+
   function initConsultationCardButtons() {
     document
       .querySelectorAll('[id^="comp-m6awikg0__"] a[href*="therapy.html"]')
@@ -1277,7 +1688,13 @@
     }
 
     var page = getActiveSitePage();
-    if (!page || page.querySelector(".tp-mobile-page-hero")) return;
+    if (!page) return;
+
+    var currentHero = page.querySelector(".tp-mobile-page-hero");
+    if (currentHero) {
+      tuneScopedMobileHero(page, currentHero);
+      return;
+    }
 
     var heroImages = page.querySelectorAll("wow-image.bgImage, wow-image[class*='bgImage']");
     var heroImage = null;
@@ -1294,6 +1711,7 @@
     if (!section) return;
 
     section.classList.add("tp-mobile-page-hero");
+    tuneScopedMobileHero(page, section);
 
     section.querySelectorAll("[data-testid='colorUnderlay']").forEach(function (underlay) {
       underlay.setAttribute("data-tp-mobile-hero-hidden", "true");
@@ -1305,7 +1723,11 @@
       }
     });
 
-    if (section.querySelector(".tp-mobile-page-hero__copy")) return;
+    var existingCopy = section.querySelector(".tp-mobile-page-hero__copy");
+    if (existingCopy) {
+      tuneScopedMobileHero(page, section, existingCopy);
+      return;
+    }
 
     var mesh = section.querySelector("[data-mesh-id$='gridContainer']");
     if (!mesh) return;
@@ -1332,6 +1754,31 @@
       copy.appendChild(el);
       resetHeroTextMotion(el);
     });
+    tuneScopedMobileHero(page, section, copy);
+  }
+
+  function tuneScopedMobileHero(page, section, copy) {
+    if (!page || !section) return;
+    var scopedPage = section.closest("#zbyrt, #qpnc0, #hwr7r, #yb9d1") || page;
+    if (!/^(zbyrt|qpnc0|hwr7r|yb9d1)$/.test(scopedPage.id || "")) return;
+
+    section.style.setProperty("width", "100vw", "important");
+    section.style.setProperty("max-width", "100vw", "important");
+    section.style.setProperty("margin-left", "calc(50% - 50vw)", "important");
+    section.style.setProperty("margin-right", "calc(50% - 50vw)", "important");
+
+    section
+      .querySelectorAll("[data-testid='columns'], [data-mesh-id$='gridContainer']")
+      .forEach(function (node) {
+        node.style.setProperty("padding-left", "0", "important");
+        node.style.setProperty("padding-right", "0", "important");
+      });
+
+    var heroCopy = copy || section.querySelector(".tp-mobile-page-hero__copy");
+    if (heroCopy) {
+      heroCopy.style.setProperty("top", "22px", "important");
+      heroCopy.style.setProperty("margin-top", "30px", "important");
+    }
   }
 
   function resetWixMotionEnter(root) {
@@ -1371,6 +1818,123 @@
     });
   }
 
+  function initAssessmentIntroCard() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("zbyrt");
+    if (!page) return;
+
+    var title = document.getElementById("comp-m4uabnge8");
+    var cardMesh = document.querySelector(
+      "[data-mesh-id='comp-m677p2ds1__item1inlineContent-gridContainer']"
+    );
+    if (!title || !cardMesh) return;
+
+    page.dataset.tpAssessmentIntroPatched = "true";
+
+    if (cardMesh.contains(title)) return;
+
+    title.classList.add("tp-assessment-intro__title");
+    cardMesh.insertBefore(title, cardMesh.firstChild);
+    resetWixMotionEnter(title);
+  }
+
+  function initAssessmentAppointmentImage() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("zbyrt");
+    if (!page || page.querySelector(".tp-assessment-appointment-image")) return;
+
+    var appointmentButton =
+      document.getElementById("comp-m6gkmrbp") ||
+      Array.prototype.slice.call(page.querySelectorAll("a[href*='theramatic.ca/request-appointment']")).pop();
+    if (!appointmentButton) return;
+
+    var image = document.createElement("img");
+    image.className = "tp-assessment-appointment-image";
+    image.src = "/images/opt/assessment-computer-session.png";
+    image.alt = "Clinician using a laptop during an assessment session";
+    image.loading = "eager";
+    image.decoding = "async";
+    image.style.setProperty("width", "min(379px, calc(100vw - 48px))", "important");
+    image.style.setProperty("max-width", "none", "important");
+    image.style.setProperty("height", "auto", "important");
+    image.style.setProperty("position", "relative", "important");
+    image.style.setProperty("left", "calc(33.333% - 33.333vw)", "important");
+    image.style.setProperty("transform", "none", "important");
+    image.style.setProperty("margin", "18px 0 8px", "important");
+    image.style.setProperty("border-radius", "12px", "important");
+
+    appointmentButton.insertAdjacentElement("afterend", image);
+    resetWixMotionEnter(image);
+  }
+
+  function restoreAssessmentAppointmentImage() {
+    document.querySelectorAll(".tp-assessment-appointment-image").forEach(function (image) {
+      image.remove();
+    });
+  }
+
+  function initTherapyAssistiveImageMove() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("qpnc0");
+    if (!page) return;
+
+    var image = document.getElementById("comp-m4u9ygeu8");
+    var targetTitle = document.getElementById("comp-m4u9ygew");
+    if (!image || !targetTitle || image.classList.contains("tp-therapy-assistive-image")) return;
+
+    var originalParent = image.parentElement;
+    if (originalParent && originalParent.id) {
+      image.dataset.tpOriginalParent = originalParent.id;
+    }
+    image.dataset.tpOriginalNext = image.nextElementSibling ? image.nextElementSibling.id || "" : "";
+    image.classList.add("tp-therapy-assistive-image");
+    targetTitle.parentElement.insertBefore(image, targetTitle);
+    resetWixMotionEnter(image);
+  }
+
+  function restoreTherapyAssistiveImageMove() {
+    var image = document.getElementById("comp-m4u9ygeu8");
+    if (!image || !image.classList.contains("tp-therapy-assistive-image")) return;
+
+    var originalParent = document.getElementById(image.dataset.tpOriginalParent || "");
+    var originalNext = document.getElementById(image.dataset.tpOriginalNext || "");
+    if (originalParent) {
+      if (originalNext && originalNext.parentElement === originalParent) {
+        originalParent.insertBefore(image, originalNext);
+      } else {
+        originalParent.appendChild(image);
+      }
+    }
+
+    image.classList.remove("tp-therapy-assistive-image");
+    delete image.dataset.tpOriginalParent;
+    delete image.dataset.tpOriginalNext;
+  }
+
+  function restoreAssessmentIntroCard() {
+    var page = document.getElementById("zbyrt");
+    if (!page || page.dataset.tpAssessmentIntroPatched !== "true") return;
+
+    var title = document.getElementById("comp-m4uabnge8");
+    var sectionMesh = document.querySelector(
+      "[data-mesh-id='comp-m4uabngc13inlineContent-gridContainer']"
+    );
+    var strip = document.getElementById("comp-m4uabngd6");
+    if (!title || !sectionMesh) return;
+
+    title.classList.remove("tp-assessment-intro__title");
+    if (strip && strip.parentElement === sectionMesh) {
+      sectionMesh.insertBefore(title, strip.nextSibling);
+    } else {
+      sectionMesh.appendChild(title);
+    }
+
+    delete page.dataset.tpAssessmentIntroPatched;
+  }
+
   function restoreMobilePageHeroes() {
     document.querySelectorAll(".tp-mobile-page-hero").forEach(function (section) {
       var mesh = section.querySelector("[data-mesh-id$='gridContainer']");
@@ -1399,6 +1963,15 @@
   }
 
   function teardownMobileRetrofit() {
+    restoreConsultationHeroTuning();
+    restoreConsultationProgramsTitle();
+    restoreConsultationPresentationCards();
+    restoreConsultationSnakeInline();
+    restoreConsultationReadingProgramLayout();
+    restoreOurTeamJoinBenefitsLayout();
+    restoreTherapyAssistiveImageMove();
+    restoreAssessmentAppointmentImage();
+    restoreAssessmentIntroCard();
     restoreMobilePageHeroes();
     clearTpMotionInlineStyles();
     removeMobileChrome();
@@ -1427,6 +2000,15 @@
     initHomeMobileTemplate();
     initMobileFooter();
     initMobilePageHero();
+    initConsultationHeroTuning();
+    initAssessmentIntroCard();
+    initAssessmentAppointmentImage();
+    initTherapyAssistiveImageMove();
+    initConsultationProgramsTitle();
+    initConsultationPresentationCards();
+    initConsultationReadingProgramLayout();
+    initOurTeamJoinBenefitsLayout();
+    initConsultationSnakeInline();
     revealMobileMotionContent();
     notifyMobileSiteShellReady();
   }
