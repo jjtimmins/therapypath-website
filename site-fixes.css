@@ -648,14 +648,13 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   font-size: 10px;
 }
 
-/* Home hero tagline — Avenir Light blocked on HTTPS when @font-face used http:// URLs */
+/* Home hero tagline: local Avenir Light copy avoids third-party font requests. */
 @font-face {
   font-family: 'avenir-lt-w01_35-light1475496';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('https://static.parastorage.com/fonts/v2/af36905f-3c92-4ef9-b0c1-f91432f16ac1/v1/avenir-lt-w01_35-light1475496.woff2')
-    format('woff2');
+  src: url('/fonts/avenir-lt-w01-35-light.woff2') format('woff2');
 }
 
 #comp-m4rlxan7,
