@@ -2472,6 +2472,7 @@
   function initGeographicCoverageMap() {
     var mount = document.getElementById("comp-m4uh76kx");
     if (!mount) return;
+    var COVERAGE_MAP_ZOOM = 5;
 
     function invalidateCoverageMap(map) {
       if (!map) return;
@@ -2500,11 +2501,10 @@
         window.setTimeout(function () {
           if (!map || !map.getContainer()) return;
 
-          var zoom = map.getZoom();
           map.invalidateSize();
-          map.setZoom(zoom - 1, { animate: false });
+          map.setZoom(COVERAGE_MAP_ZOOM - 1, { animate: false });
           window.setTimeout(function () {
-            map.setZoom(zoom, { animate: false });
+            map.setZoom(COVERAGE_MAP_ZOOM, { animate: false });
             map.invalidateSize();
           }, 80);
         }, delay);
@@ -2538,14 +2538,24 @@
         var map = L.map(mapEl, {
           scrollWheelZoom: false,
           zoomControl: true,
-        }).setView([48.95, -81.25], 6);
+        }).setView([48.95, -81.25], COVERAGE_MAP_ZOOM + 1);
 
         mount._tpLeafletMap = map;
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        var tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           attribution: "&copy; OpenStreetMap contributors",
           maxZoom: 18,
         }).addTo(map);
+
+        function applyCoverageMapFinalZoom() {
+          map.setZoom(COVERAGE_MAP_ZOOM, { animate: false });
+          map.invalidateSize();
+        }
+
+        map.whenReady(function () {
+          window.setTimeout(applyCoverageMapFinalZoom, 100);
+        });
+        tileLayer.on("load", applyCoverageMapFinalZoom);
 
         [
           ["North Bay", 46.3091, -79.4608],
