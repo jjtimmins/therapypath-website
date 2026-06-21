@@ -735,10 +735,17 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   font-family: helvetica-w01-roman, helvetica-w02-roman, helvetica-lt-w10-roman, sans-serif;
 }
 
-#comp-m4uh76kx .leaflet-container {
-  width: 100%;
-  height: 100%;
-}
+  #comp-m4uh76kx .leaflet-container {
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  #comp-m4uh76kx .leaflet-tile-pane {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
 
 #comp-m4uh76kx .leaflet-control-attribution {
   font-size: 10px;
@@ -4139,7 +4146,7 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     margin-top: 16px !important;
   }
 
-  /* Contact Us: tighten gap between contact emails and logo image. */
+  /* Contact Us: collapse contact block height; two lines between email and Hours. */
   :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd,
   :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd [data-mesh-id$='inlineContent'],
   :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd [data-mesh-id$='gridContainer'] {
@@ -4147,12 +4154,40 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     min-height: 0 !important;
   }
 
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd {
+    margin-bottom: 0 !important;
+  }
+
   :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m2217w84 {
     margin-bottom: 0 !important;
   }
 
+  /* Contact Us: hide logo between services email and Hours. */
   :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m6gmoxnh {
-    margin-top: -12px !important;
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4uaospd {
+    margin-top: 32px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4puygib {
+    margin-top: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4puygib p,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4puygib .wixui-rich-text__text {
+    font-size: 28px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4uaoizh p,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4uaoizh .wixui-rich-text__text {
+    font-size: 18px !important;
   }
 
   /* Contact Us: collapse empty map placeholder and tighten Fees spacing. */

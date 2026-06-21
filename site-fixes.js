@@ -2474,39 +2474,71 @@
     if (!mount) return;
     var COVERAGE_MAP_ZOOM = 5;
 
-    function invalidateCoverageMap(map) {
-      if (!map) return;
-      map.invalidateSize();
+    function refreshCoverageMap(map, tileLayer) {
+      if (!map || !map.getContainer()) return;
+      var rect = map.getContainer().getBoundingClientRect();
+      if (rect.width < 20 || rect.height < 20) return;
+
+      map.invalidateSize({ animate: false, pan: false });
+      var center = map.getCenter();
+      var zoom = map.getZoom();
+      map.setView(center, zoom, { animate: false });
+      if (tileLayer && typeof tileLayer.redraw === "function") {
+        tileLayer.redraw();
+      }
     }
 
-    function scheduleCoverageMapInvalidate(map) {
+    function nudgeCoverageMapZoom(map, tileLayer) {
+      if (!map) return;
+      var zoom = map.getZoom();
+      map.setZoom(zoom - 1, { animate: false });
+      map.invalidateSize({ animate: false, pan: false });
+      window.setTimeout(function () {
+        map.setZoom(zoom, { animate: false });
+        refreshCoverageMap(map, tileLayer);
+      }, 50);
+    }
+
+    function invalidateCoverageMap(map) {
+      refreshCoverageMap(map, mount._tpLeafletTileLayer);
+    }
+
+    function scheduleCoverageMapInvalidate(map, tileLayer) {
       var delays = isMobileViewport()
-        ? [0, 100, 250, 500]
+        ? [0, 100, 250, 500, 750, 1000, 1500, 2500]
         : [0, 100, 250, 500, 1000, 2000];
 
       delays.forEach(function (delay) {
         window.setTimeout(function () {
-          invalidateCoverageMap(map);
+          refreshCoverageMap(map, tileLayer);
         }, delay);
       });
+
+      if (mount._tpCoverageMapResizeListener) return;
+      mount._tpCoverageMapResizeListener = true;
       window.addEventListener("resize", function () {
-        invalidateCoverageMap(map);
+        refreshCoverageMap(map, tileLayer);
       });
+      window.addEventListener("pageshow", function () {
+        refreshCoverageMap(map, tileLayer);
+      });
+
+      if (window.ResizeObserver) {
+        var observer = new ResizeObserver(function () {
+          refreshCoverageMap(map, tileLayer);
+        });
+        observer.observe(mount);
+        mount._tpCoverageMapResizeObserver = observer;
+      }
     }
 
-    function scheduleMobileCoverageMapTileKick(map) {
+    function scheduleMobileCoverageMapTileKick(map, tileLayer) {
       if (!isMobileViewport()) return;
 
-      [1200].forEach(function (delay) {
+      [400, 1200, 2400].forEach(function (delay) {
         window.setTimeout(function () {
           if (!map || !map.getContainer()) return;
-
-          map.invalidateSize();
-          map.setZoom(COVERAGE_MAP_ZOOM - 1, { animate: false });
-          window.setTimeout(function () {
-            map.setZoom(COVERAGE_MAP_ZOOM, { animate: false });
-            map.invalidateSize();
-          }, 80);
+          nudgeCoverageMapZoom(map, tileLayer);
         }, delay);
       });
     }
@@ -2518,7 +2550,7 @@
 
     function buildCoverageMap() {
       if (mount.dataset.tpMapReady === "true") {
-        if (mount._tpLeafletMap) invalidateCoverageMap(mount._tpLeafletMap);
+        invalidateCoverageMap(mount._tpLeafletMap);
         return;
       }
       if (!mountHasSize()) {
@@ -2538,7 +2570,7 @@
         var map = L.map(mapEl, {
           scrollWheelZoom: false,
           zoomControl: true,
-        }).setView([48.95, -81.25], COVERAGE_MAP_ZOOM + 1);
+        }).setView([48.95, -81.25], COVERAGE_MAP_ZOOM);
 
         mount._tpLeafletMap = map;
 
@@ -2547,15 +2579,14 @@
           maxZoom: 18,
         }).addTo(map);
 
-        function applyCoverageMapFinalZoom() {
-          map.setZoom(COVERAGE_MAP_ZOOM, { animate: false });
-          map.invalidateSize();
+        mount._tpLeafletTileLayer = tileLayer;
+
+        function stabilizeCoverageMap() {
+          refreshCoverageMap(map, tileLayer);
         }
 
-        map.whenReady(function () {
-          window.setTimeout(applyCoverageMapFinalZoom, 100);
-        });
-        tileLayer.on("load", applyCoverageMapFinalZoom);
+        map.whenReady(stabilizeCoverageMap);
+        tileLayer.on("load", stabilizeCoverageMap);
 
         [
           ["North Bay", 46.3091, -79.4608],
@@ -2571,34 +2602,37 @@
           L.marker([place[1], place[2]]).addTo(map).bindPopup(place[0]);
         });
 
-        scheduleCoverageMapInvalidate(map);
-        scheduleMobileCoverageMapTileKick(map);
+        scheduleCoverageMapInvalidate(map, tileLayer);
+        scheduleMobileCoverageMapTileKick(map, tileLayer);
       });
     }
 
     function whenCoverageMapCanRender(callback) {
-      if (
-        !isMobileViewport() ||
-        document.documentElement.classList.contains("tp-mobile-ready")
-      ) {
+      if (!isMobileViewport()) {
         callback();
         return;
       }
 
       var done = false;
-      function run() {
+      function run(afterMs) {
         if (done) return;
         done = true;
-        callback();
+        window.setTimeout(callback, afterMs || 0);
       }
 
-      window.addEventListener("load", run, { once: true });
-      window.setTimeout(run, 4500);
+      if (document.documentElement.classList.contains("tp-mobile-ready")) {
+        run(250);
+        return;
+      }
+
+      window.setTimeout(function () {
+        run(0);
+      }, 5000);
 
       var observer = new MutationObserver(function () {
         if (document.documentElement.classList.contains("tp-mobile-ready")) {
           observer.disconnect();
-          run();
+          run(250);
         }
       });
       observer.observe(document.documentElement, {
@@ -2606,6 +2640,12 @@
         attributeFilter: ["class"],
       });
     }
+
+    if (mount.dataset.tpMapInitScheduled === "true") {
+      if (mount._tpLeafletMap) invalidateCoverageMap(mount._tpLeafletMap);
+      return;
+    }
+    mount.dataset.tpMapInitScheduled = "true";
 
     whenCoverageMapCanRender(function () {
       window.requestAnimationFrame(function () {
