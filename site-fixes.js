@@ -7,6 +7,14 @@
     "tp-mobile-ready",
     "tp-mobile-nav-open",
   ];
+  var MOBILE_NAV_TAP_MOVE_THRESHOLD = 12;
+  var mobileNavTouchState = {
+    active: false,
+    moved: false,
+    startX: 0,
+    startY: 0,
+  };
+  var mobileNavSuppressClickUntil = 0;
 
   function isMobileViewport() {
     if (typeof window.__tpShouldUseMobileSite === "function") {
@@ -188,6 +196,71 @@
     };
   }
 
+  function suppressMobileNavClick(ms) {
+    mobileNavSuppressClickUntil = Date.now() + (ms || 650);
+  }
+
+  function shouldSuppressMobileNavClick() {
+    return Date.now() < mobileNavSuppressClickUntil;
+  }
+
+  function resetMobileNavTouchState() {
+    mobileNavTouchState.active = false;
+    mobileNavTouchState.moved = false;
+  }
+
+  function initMobileNavTouchGuard(root) {
+    if (!root || root.dataset.tpTouchGuardBound === "true") return;
+    root.dataset.tpTouchGuardBound = "true";
+
+    root.addEventListener(
+      "touchstart",
+      function (event) {
+        if (!event.touches || !event.touches.length) return;
+        var touch = event.touches[0];
+        mobileNavTouchState.active = true;
+        mobileNavTouchState.moved = false;
+        mobileNavTouchState.startX = touch.clientX;
+        mobileNavTouchState.startY = touch.clientY;
+      },
+      true
+    );
+
+    root.addEventListener(
+      "touchmove",
+      function (event) {
+        if (!mobileNavTouchState.active || !event.touches || !event.touches.length) return;
+        var touch = event.touches[0];
+        var dx = touch.clientX - mobileNavTouchState.startX;
+        var dy = touch.clientY - mobileNavTouchState.startY;
+        if (dx * dx + dy * dy > MOBILE_NAV_TAP_MOVE_THRESHOLD * MOBILE_NAV_TAP_MOVE_THRESHOLD) {
+          mobileNavTouchState.moved = true;
+        }
+      },
+      true
+    );
+
+    root.addEventListener(
+      "touchend",
+      function () {
+        if (mobileNavTouchState.moved) {
+          suppressMobileNavClick();
+        }
+        resetMobileNavTouchState();
+      },
+      true
+    );
+
+    root.addEventListener(
+      "touchcancel",
+      function () {
+        suppressMobileNavClick();
+        resetMobileNavTouchState();
+      },
+      true
+    );
+  }
+
   function findMobileNavLink(target) {
     if (!target || !target.closest) return null;
     return target.closest(
@@ -215,6 +288,12 @@
       "touchend",
       function (event) {
         touchedAt = Date.now();
+        if (mobileNavTouchState.moved || shouldSuppressMobileNavClick()) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return;
+        }
         activateFromLink(event);
       },
       { capture: true, passive: false }
@@ -223,8 +302,10 @@
     link.addEventListener(
       "click",
       function (event) {
-        if (Date.now() - touchedAt < 500) {
+        if (shouldSuppressMobileNavClick() || Date.now() - touchedAt < 500) {
           event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
           return;
         }
         activateFromLink(event);
@@ -300,6 +381,13 @@
     var lastNav = { href: "", time: 0 };
 
     function handleMobileNavActivate(event) {
+      if (shouldSuppressMobileNavClick()) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        return;
+      }
+
       var link = findMobileNavLink(event.target);
       if (!link) return;
 
@@ -1277,8 +1365,15 @@
       syncMobileMenuFromDesktop();
     }
 
+    initMobileNavTouchGuard(panel);
+
     nav.querySelectorAll(".tp-mobile-nav__section-toggle").forEach(function (button) {
       button.addEventListener("click", function (event) {
+        if (shouldSuppressMobileNavClick()) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
         event.stopPropagation();
         var expanded = button.getAttribute("aria-expanded") === "true";
         var group = document.getElementById(button.getAttribute("aria-controls"));
@@ -1296,6 +1391,10 @@
     close.addEventListener("click", closeMenu);
 
     panel.addEventListener("click", function (event) {
+      if (shouldSuppressMobileNavClick()) {
+        event.preventDefault();
+        return;
+      }
       if (event.target.closest("a[href]")) closeMenu();
     });
 
