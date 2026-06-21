@@ -202,21 +202,29 @@
   background-position: center top !important;
 }
 
-/* Consultations hero: extend caption box over headline + subtitle */
-#comp-m6gkuugi {
-  height: 140px !important;
-  grid-area: 1 / 1 / 3 / 2 !important;
-  z-index: 0 !important;
-}
+@media (min-width: 981px) {
+  /* Consultations hero: raise caption panel and trim bottom edge. */
+  #yb9d1 #comp-m6gkuugi {
+    margin-top: 21px !important;
+    height: 136px !important;
+    grid-area: 1 / 1 / 3 / 2 !important;
+    z-index: 0 !important;
+  }
 
-#comp-m6gkuugi svg {
-  height: 100% !important;
-}
+  #yb9d1 #comp-m6gkuugi svg {
+    height: 100% !important;
+  }
 
-#comp-m4u7nvwh5,
-#comp-m4u7nvwj1 {
-  position: relative !important;
-  z-index: 1 !important;
+  #yb9d1 #comp-m4u7nvwh5 {
+    margin-top: 21px !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  #yb9d1 #comp-m4u7nvwj1 {
+    position: relative !important;
+    z-index: 1 !important;
+  }
 }
 
 /* Our accomplishments hero: raise caption box and headline. */
@@ -1253,10 +1261,10 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     width: 100%;
     box-sizing: border-box;
-    padding: 9px 10px 10px;
+    padding: 2px 10px 8px;
     background: #3d86e4;
     color: #fff;
     order: 4;
@@ -1955,13 +1963,13 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xn2 {
-    grid-row: 1;
+    grid-row: 2 !important;
     grid-column: 1;
     z-index: 1;
-    align-self: stretch;
+    align-self: start !important;
     width: 100% !important;
-    margin: 0 !important;
-    pointer-events: none;
+    margin: 0 0 -24px !important;
+    pointer-events: auto !important;
     background: transparent !important;
   }
 
@@ -1972,12 +1980,77 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xp {
     background: rgba(var(--color_42), 0.82) !important;
-    min-height: 100% !important;
+    min-height: 0 !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #comp-m4u927xx11 {
-    grid-row: 2;
+    grid-row: 3 !important;
     grid-column: 1;
+    margin-top: 0 !important;
+    margin-bottom: -88px !important;
+    padding-top: 0 !important;
+    position: relative !important;
+    top: -88px !important;
+  }
+
+  /* Geographical coverage: blue banner sits directly above services title on mobile. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d #comp-m4u927xo2 [data-testid='columns'] {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d #comp-m4u927xp,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d [data-mesh-id='comp-m4u927xpinlineContent-gridContainer'] > #comp-m4u927xq {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d #comp-m4u927xq {
+    margin-top: 6px !important;
+    margin-bottom: 0 !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    text-align: center !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d #comp-m4u927xq p {
+    display: inline !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d #comp-m4u927xq :is(p, span) {
+    font-size: 22px !important;
+    line-height: normal !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d [data-mesh-id='comp-m4u927xx11inlineContent-gridContainer'] {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d #comp-m4u927xy8 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d [data-mesh-id='comp-m4u927xz8inlineContent-gridContainer'] {
+    min-height: 0 !important;
+    height: auto !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d [data-mesh-id='comp-m4u927xz8inlineContent-gridContainer'] > #comp-m4u927y08 {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #mm74d #comp-m4u927y08 h2 {
+    margin: 0 !important;
+    line-height: 1.12 !important;
   }
 
   .tp-mobile-nav__subitems a,
@@ -2532,8 +2605,8 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero__copy {
-    margin: 16px 0 12px 17px !important;
-    padding-bottom: 18px !important;
+    margin: 15px 0 12px 17px !important;
+    padding: 10px 12px 10px !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 #comp-m4u9ygee7,
@@ -2645,13 +2718,13 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero__copy {
-    margin: 16px 0 12px 17px !important;
-    padding: 14px 12px 12px !important;
+    margin: 15px 0 12px 17px !important;
+    padding: 14px 12px 8px !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-consultation-hero-copy,
   :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero__copy.tp-consultation-hero-copy {
-    padding: 14px 12px 12px !important;
+    padding: 14px 12px 8px !important;
     margin-bottom: 0 !important;
   }
 
@@ -3148,13 +3221,30 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m7971kb4 {
     margin-top: 0 !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r [data-mesh-id='comp-m5vmk2rc2inlineContent-gridContainer'] > #comp-m7971kb4 {
+    margin-bottom: 4px !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m5vmk2rf6 {
     min-height: 0 !important;
     height: auto !important;
     --min-height: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m5vmk2rf6 > p:last-child {
+    margin: 0 !important;
+    line-height: 0 !important;
+    font-size: 0 !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m5vmk2rf6 > p:nth-last-child(2) {
+    margin-bottom: 0 !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m7971f62 {
@@ -3630,15 +3720,15 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
     font-size: 22px !important;
   }
 
-  :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1) .tp-mobile-page-hero {
+  :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1, #n1sxe, #rdv5s, #vwdio) .tp-mobile-page-hero {
     width: 100vw !important;
     max-width: 100vw !important;
     margin-left: calc(50% - 50vw) !important;
     margin-right: calc(50% - 50vw) !important;
   }
 
-  :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1) .tp-mobile-page-hero [data-testid='columns'],
-  :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1) .tp-mobile-page-hero [data-mesh-id$='gridContainer'] {
+  :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1, #n1sxe, #rdv5s, #vwdio) .tp-mobile-page-hero [data-testid='columns'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1, #n1sxe, #rdv5s, #vwdio) .tp-mobile-page-hero [data-mesh-id$='gridContainer'] {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
@@ -3655,6 +3745,415 @@ a[href*='theramatic.ca/request-appointment'] .StylableButton2545352419__label {
   :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1) .tp-mobile-page-hero__copy .font_0 .wixui-rich-text__text,
   :is(html.tp-mobile-site, body.tp-mobile-site) :is(#zbyrt, #qpnc0, #hwr7r, #yb9d1) .tp-mobile-page-hero__copy .font_6 .wixui-rich-text__text {
     font-size: clamp(20px, 6.4vw, 29px) !important;
+  }
+
+  /* Consultations mobile hero: raise caption panel and trim bottom edge. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero__copy,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #yb9d1 .tp-mobile-page-hero__copy.tp-consultation-hero-copy {
+    top: 11px !important;
+    margin-top: 15px !important;
+    padding: 14px 12px 8px !important;
+  }
+
+  /* Therapy mobile hero: raise caption panel and trim top/bottom edges. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #qpnc0 .tp-mobile-page-hero__copy {
+    top: 11px !important;
+    margin-top: 15px !important;
+    padding: 10px 12px 10px !important;
+  }
+
+  /* Our Accomplishments: crop mobile hero image from the bottom. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero {
+    min-height: 340px !important;
+    height: 340px !important;
+    max-height: 340px !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [data-motion-part*='BG_MEDIA'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [data-motion-part*='BG_LAYER'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [data-motion-part*='BG_IMG'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [data-testid='columns'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [class*='wixui-column-strip__column'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [data-mesh-id$='inlineContent'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [data-mesh-id$='gridContainer'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero wow-image.bgImage,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero wow-image[class*='bgImage'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero [id^='img_comp-'] {
+    min-height: 340px !important;
+    height: 340px !important;
+    max-height: 340px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m4u9ebxp,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m4u9ebxq,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m4u9ebxq6 {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    min-height: 340px !important;
+    height: 340px !important;
+    max-height: 340px !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m4u9ebxp {
+    margin-bottom: 28px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r [data-mesh-id='comp-m4u9ebxq6inlineContent-gridContainer'] {
+    min-height: 340px !important;
+    height: 340px !important;
+    max-height: 340px !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #img_comp-m4u9ebxq6 {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: 340px !important;
+    height: 340px !important;
+    max-height: 340px !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero #img_comp-m4u9ebxq6 img {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m5vmk2qt {
+    margin-top: 0 !important;
+    padding-top: 28px !important;
+    position: relative !important;
+    z-index: 2 !important;
+    background: #fff !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r #comp-m6bfxk4m {
+    margin-top: 0 !important;
+  }
+
+  /* Our Accomplishments mobile hero: raise caption panel and trim top/bottom edges. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero__copy {
+    top: 11px !important;
+    margin-top: 15px !important;
+    padding: 8px 12px 10px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #hwr7r .tp-mobile-page-hero__copy [data-testid='richTextElement'] {
+    margin: 0 !important;
+  }
+
+  /* Our Team: crop top 25% of mobile hero image and make full width. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero {
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [data-motion-part*='BG_MEDIA'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [data-motion-part*='BG_LAYER'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [data-motion-part*='BG_IMG'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [data-testid='columns'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [class*='wixui-column-strip__column'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [data-mesh-id$='inlineContent'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [data-mesh-id$='gridContainer'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero wow-image.bgImage,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero wow-image[class*='bgImage'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero [id^='img_comp-'] {
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe #comp-m4uaf2xs,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe #comp-m4uaf2xt,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe #comp-m4uaf2xt6 {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe [data-mesh-id='comp-m4uaf2xt6inlineContent-gridContainer'] {
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe #img_comp-m4uaf2xt6 {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: 308px !important;
+    height: 308px !important;
+    max-height: 308px !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    background-size: cover !important;
+    background-position: center 25% !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero #img_comp-m4uaf2xt6 img {
+    object-fit: cover !important;
+    object-position: center 25% !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe .tp-mobile-page-hero__copy {
+    padding-bottom: 16px !important;
+  }
+
+  /* Our Team: reduce mobile gap between hero image and Our Team title (~half). */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe #comp-m5fqnke0 {
+    margin-top: -43px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe #comp-m5fqnx1c {
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #n1sxe #comp-m5fqnx1c h2 {
+    margin: 0 !important;
+  }
+
+  /* Our Specializations: crop bottom 24px of mobile hero image and make full width. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero {
+    min-height: 387px !important;
+    height: 387px !important;
+    max-height: 387px !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [data-motion-part*='BG_MEDIA'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [data-motion-part*='BG_LAYER'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [data-motion-part*='BG_IMG'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [data-testid='columns'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [class*='wixui-column-strip__column'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [data-mesh-id$='inlineContent'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [data-mesh-id$='gridContainer'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero wow-image.bgImage,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero wow-image[class*='bgImage'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero [id^='img_comp-'] {
+    min-height: 387px !important;
+    height: 387px !important;
+    max-height: 387px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qgzv,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qgzw1,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qgzx {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    min-height: 387px !important;
+    height: 387px !important;
+    max-height: 387px !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s [data-mesh-id='comp-m4u9qgzxinlineContent-gridContainer'] {
+    min-height: 387px !important;
+    height: 387px !important;
+    max-height: 387px !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #img_comp-m4u9qgzx {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: 387px !important;
+    height: 387px !important;
+    max-height: 387px !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero #img_comp-m4u9qgzx img {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  /* Our Specializations mobile hero: trim caption panel top/bottom edges. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero__copy {
+    padding: 0 12px 18px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero__copy #comp-m4u9qh014,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s .tp-mobile-page-hero__copy [data-testid='richTextElement']:first-child {
+    margin-top: 28px !important;
+  }
+
+  /* Our Specializations: reduce mobile gap between page title and Brain Injury Rehabilitation (~half). */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0811 {
+    margin-top: -40px !important;
+  }
+
+  /* Our Specializations: place Brain Injury image above the blue divider line. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s [data-mesh-id='comp-m4u9qh0d7inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0j1 {
+    order: 3 !important;
+    margin: 12px 0 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0f8 {
+    order: 4 !important;
+    margin: 8px 0 12px !important;
+  }
+
+  /* Our Specializations: place Learning Disabilities image after intro paragraph. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s [data-mesh-id='comp-m4u9qh0n4inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0q1 {
+    order: 1 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0r {
+    order: 2 !important;
+    margin-bottom: 4px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0p1 {
+    order: 3 !important;
+    margin: 6px 0 28px !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0w5 {
+    margin-top: 10px !important;
+  }
+
+  /* Our Specializations: place Stroke Rehabilitation image above the blue divider line. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s [data-mesh-id='comp-m4u9qh0v7inlineContent-gridContainer'] {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0y16 {
+    order: 6 !important;
+    margin: 12px 0 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #rdv5s #comp-m4u9qh0x8 {
+    order: 7 !important;
+    margin: 8px 0 12px !important;
+  }
+
+  /* Contact Us: make mobile hero full width and trim caption panel bottom edge. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m21zub41,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m21zub4c,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m21zub4c6 {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #img_comp-m21zub4c6 {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio .tp-mobile-page-hero #img_comp-m21zub4c6 img {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio .tp-mobile-page-hero__copy {
+    top: 22px !important;
+    margin-top: 6px !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* Contact Us: one line of space between intro copy and Timmins address. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd {
+    margin-top: 16px !important;
+  }
+
+  /* Contact Us: tighten gap between contact emails and logo image. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd [data-mesh-id$='inlineContent'],
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m221ykbd [data-mesh-id$='gridContainer'] {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m2217w84 {
+    margin-bottom: 0 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m6gmoxnh {
+    margin-top: -12px !important;
+  }
+
+  /* Contact Us: collapse empty map placeholder and tighten Fees spacing. */
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4pv2vh7 {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4uec27w1 {
+    margin-bottom: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4uec27w1 h2,
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4uec27w1 .wixui-rich-text__text {
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  :is(html.tp-mobile-site, body.tp-mobile-site) #vwdio #comp-m4uece9l {
+    margin-top: 4px !important;
   }
 
   :is(html.tp-mobile-site, body.tp-mobile-site) #zbyrt #comp-m4uabngg4 {

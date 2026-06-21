@@ -246,19 +246,25 @@
 
     var desktopMap = getDesktopNavLinkMap();
     var anchorMap = getMobileMenuAnchorTargets();
-    mobileNav.querySelectorAll(".tp-mobile-nav__sublink, .tp-mobile-nav__link").forEach(function (link) {
+    var linksRoot = getMobileNavPanel(mobileNav) || mobileNav;
+    linksRoot.querySelectorAll(".tp-mobile-nav__sublink, .tp-mobile-nav__link").forEach(function (link) {
       var label = (link.textContent || "").replace(/\s+/g, " ").trim();
       var href = anchorMap[label] || desktopMap[label];
       if (href) {
         link.setAttribute("href", href);
       }
     });
-    bindAllMobileNavLinks(mobileNav);
+    bindAllMobileNavLinks(linksRoot);
+  }
+
+  function getMobileNavPanel(nav) {
+    if (!nav) return null;
+    return nav.querySelector(".tp-mobile-nav__panel") || document.body.querySelector(".tp-mobile-nav__panel");
   }
 
   function closeMobileNavMenu(nav) {
     if (!nav) return;
-    var panel = nav.querySelector(".tp-mobile-nav__panel");
+    var panel = getMobileNavPanel(nav);
     var toggle = nav.querySelector(".tp-mobile-nav__toggle");
     nav.classList.remove("is-open");
     document.body.classList.remove("tp-mobile-nav-open");
@@ -852,7 +858,7 @@
 
     if (heroCopy) {
       heroCopy.classList.add("tp-consultation-hero-copy");
-      heroCopy.style.setProperty("padding", "14px 12px 12px", "important");
+      heroCopy.style.setProperty("padding", "14px 12px 8px", "important");
       heroCopy.style.setProperty("margin-bottom", "0", "important");
     }
 
@@ -1021,6 +1027,68 @@
     if (eligibilityLine) eligibilityLine.classList.remove("tp-consultation-reading-line");
 
     delete page.dataset.tpConsultationReadingLayoutPatched;
+  }
+
+  function initSpecializationsSectionLayouts() {
+    if (!isMobileViewport()) return;
+
+    var page = document.getElementById("rdv5s");
+    if (!page || page.dataset.tpSpecializationsSectionLayoutsPatched === "true") return;
+
+    var brainImage = document.getElementById("comp-m4u9qh0j1");
+    var brainLine = document.getElementById("comp-m4u9qh0f8");
+    var brainMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u9qh0d7inlineContent-gridContainer']"
+    );
+    if (brainImage && brainLine && brainMesh && brainImage.nextElementSibling !== brainLine) {
+      storeConsultationReadingRestorePoint(brainImage);
+      brainMesh.insertBefore(brainImage, brainLine);
+      resetWixMotionEnter(brainImage);
+    }
+
+    var learningImage = document.getElementById("comp-m4u9qh0p1");
+    var learningParagraph = document.getElementById("comp-m4u9qh0r");
+    var learningMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u9qh0n4inlineContent-gridContainer']"
+    );
+    if (
+      learningImage &&
+      learningParagraph &&
+      learningMesh &&
+      learningImage.previousElementSibling !== learningParagraph
+    ) {
+      storeConsultationReadingRestorePoint(learningImage);
+      var learningAnchor = learningParagraph.nextElementSibling;
+      if (learningAnchor && learningAnchor.parentElement === learningMesh) {
+        learningMesh.insertBefore(learningImage, learningAnchor);
+      } else {
+        learningMesh.appendChild(learningImage);
+      }
+      resetWixMotionEnter(learningImage);
+    }
+
+    var strokeImage = document.getElementById("comp-m4u9qh0y16");
+    var strokeLine = document.getElementById("comp-m4u9qh0x8");
+    var strokeMesh = document.querySelector(
+      "[data-mesh-id='comp-m4u9qh0v7inlineContent-gridContainer']"
+    );
+    if (strokeImage && strokeLine && strokeMesh && strokeImage.nextElementSibling !== strokeLine) {
+      storeConsultationReadingRestorePoint(strokeImage);
+      strokeMesh.insertBefore(strokeImage, strokeLine);
+      resetWixMotionEnter(strokeImage);
+    }
+
+    page.dataset.tpSpecializationsSectionLayoutsPatched = "true";
+  }
+
+  function restoreSpecializationsSectionLayouts() {
+    var page = document.getElementById("rdv5s");
+    if (!page || page.dataset.tpSpecializationsSectionLayoutsPatched !== "true") return;
+
+    restoreConsultationReadingElement(document.getElementById("comp-m4u9qh0j1"));
+    restoreConsultationReadingElement(document.getElementById("comp-m4u9qh0p1"));
+    restoreConsultationReadingElement(document.getElementById("comp-m4u9qh0y16"));
+    delete page.dataset.tpSpecializationsSectionLayoutsPatched;
   }
 
   function initOurTeamJoinBenefitsLayout() {
@@ -1398,7 +1466,7 @@
       { label: "Home", href: "/" },
       {
         label: "Services",
-        href: "/services.html",
+        href: "/services/assessments.html",
         children: [
           { label: "Assessments", href: "/services/assessments.html" },
           { label: "Consultations/Workshops", href: "/services/consultations-workshops-reading-groups.html" },
@@ -1448,7 +1516,7 @@
       { label: "Accueil", href: "/fr.html" },
       {
         label: "Services",
-        href: "/fr/services.html",
+        href: "/fr/services/assessments.html",
         children: [
           { label: "Evaluations", href: "/fr/services/assessments.html" },
           { label: "Consultations/Ateliers", href: "/fr/services/consultations-workshops-reading-groups.html" },
@@ -1759,8 +1827,8 @@
 
   function tuneScopedMobileHero(page, section, copy) {
     if (!page || !section) return;
-    var scopedPage = section.closest("#zbyrt, #qpnc0, #hwr7r, #yb9d1") || page;
-    if (!/^(zbyrt|qpnc0|hwr7r|yb9d1)$/.test(scopedPage.id || "")) return;
+    var scopedPage = section.closest("#zbyrt, #qpnc0, #hwr7r, #yb9d1, #n1sxe, #rdv5s, #vwdio") || page;
+    if (!/^(zbyrt|qpnc0|hwr7r|yb9d1|n1sxe|rdv5s|vwdio)$/.test(scopedPage.id || "")) return;
 
     section.style.setProperty("width", "100vw", "important");
     section.style.setProperty("max-width", "100vw", "important");
@@ -1776,8 +1844,33 @@
 
     var heroCopy = copy || section.querySelector(".tp-mobile-page-hero__copy");
     if (heroCopy) {
-      heroCopy.style.setProperty("top", "22px", "important");
-      heroCopy.style.setProperty("margin-top", "30px", "important");
+      if (scopedPage.id === "yb9d1") {
+        heroCopy.style.setProperty("top", "11px", "important");
+        heroCopy.style.setProperty("margin-top", "15px", "important");
+      } else if (scopedPage.id === "qpnc0") {
+        heroCopy.style.setProperty("top", "11px", "important");
+        heroCopy.style.setProperty("margin-top", "15px", "important");
+        heroCopy.style.setProperty("padding", "10px 12px 10px", "important");
+      } else if (scopedPage.id === "hwr7r") {
+        heroCopy.style.setProperty("top", "11px", "important");
+        heroCopy.style.setProperty("margin-top", "15px", "important");
+        heroCopy.style.setProperty("padding", "8px 12px 10px", "important");
+      } else if (scopedPage.id === "n1sxe") {
+        heroCopy.style.setProperty("top", "22px", "important");
+        heroCopy.style.setProperty("margin-top", "30px", "important");
+        heroCopy.style.setProperty("padding", "14px 12px 16px", "important");
+      } else if (scopedPage.id === "rdv5s") {
+        heroCopy.style.setProperty("top", "22px", "important");
+        heroCopy.style.setProperty("margin-top", "30px", "important");
+        heroCopy.style.setProperty("padding", "0 12px 18px", "important");
+      } else if (scopedPage.id === "vwdio") {
+        heroCopy.style.setProperty("top", "22px", "important");
+        heroCopy.style.setProperty("margin-top", "6px", "important");
+        heroCopy.style.setProperty("padding", "14px 12px 8px", "important");
+      } else {
+        heroCopy.style.setProperty("top", "22px", "important");
+        heroCopy.style.setProperty("margin-top", "30px", "important");
+      }
     }
   }
 
@@ -1968,6 +2061,7 @@
     restoreConsultationPresentationCards();
     restoreConsultationSnakeInline();
     restoreConsultationReadingProgramLayout();
+    restoreSpecializationsSectionLayouts();
     restoreOurTeamJoinBenefitsLayout();
     restoreTherapyAssistiveImageMove();
     restoreAssessmentAppointmentImage();
@@ -2007,6 +2101,7 @@
     initConsultationProgramsTitle();
     initConsultationPresentationCards();
     initConsultationReadingProgramLayout();
+    initSpecializationsSectionLayouts();
     initOurTeamJoinBenefitsLayout();
     initConsultationSnakeInline();
     revealMobileMotionContent();
