@@ -2229,6 +2229,18 @@
     sitePages.querySelectorAll('.wixui-rich-text[data-testid="richTextElement"]').forEach(function (el) {
       resetWixMotionEnter(el);
     });
+    revealBodyImages(sitePages);
+  }
+
+  function scheduleDesktopMotionRetries() {
+    function run() {
+      if (isMobileViewport()) return;
+      initDesktopHeroMotionReset();
+    }
+
+    window.setTimeout(run, 0);
+    window.setTimeout(run, 500);
+    window.setTimeout(run, 1500);
   }
 
   function shouldSkipMobileMotionReveal(el) {
@@ -2240,12 +2252,54 @@
     return false;
   }
 
+  var PINNED_HERO_IMAGE_IDS = {
+    "img_comp-m4n0yl36": true,
+    "img_comp-m4uaf2xt6": true,
+    "img_comp-m4u9ebxq6": true,
+    "img_comp-m4u9qgzx": true,
+    "img_comp-m21zub4c6": true,
+    "img_comp-m4uabng46": true,
+    "img_comp-m4u7nvwc5": true,
+    "img_comp-m4u9yge25": true,
+    "img_comp-m6aya26d": true,
+  };
+
   function isPinnedHeroBackgroundImage(img) {
     if (!img) return false;
-    if (img.id && img.id.indexOf("img_comp-") === 0) return true;
+    if (img.id && PINNED_HERO_IMAGE_IDS[img.id]) return true;
     if (img.closest("wow-image.bgImage, wow-image[class*='bgImage']")) return true;
     if (img.closest("#comp-m6aya1jg")) return true;
     return false;
+  }
+
+  function revealBodyImages(scope) {
+    if (!scope) return;
+
+    scope.querySelectorAll(".wixui-image, .ih2JY1, .W4V2qg").forEach(function (wrapper) {
+      if (shouldSkipMobileMotionReveal(wrapper)) return;
+
+      resetWixMotionEnter(wrapper);
+      wrapper.querySelectorAll("img").forEach(function (img) {
+        if (!img || isPinnedHeroBackgroundImage(img)) return;
+        img.setAttribute("data-motion-enter", "done");
+        img.setAttribute("data-load-done", "true");
+        img.setAttribute("data-tp-motion-reset", "true");
+        img.style.opacity = "1";
+        img.style.visibility = "visible";
+        img.style.animation = "none";
+        img.style.transform = "none";
+        img.style.webkitTransform = "none";
+        img.style.webkitMaskImage = "none";
+        img.style.maskImage = "none";
+        img.style.filter = "none";
+        if (img.loading === "lazy") {
+          img.loading = "eager";
+        }
+        if (img.dataset && img.dataset.src && !img.getAttribute("src")) {
+          img.setAttribute("src", img.dataset.src);
+        }
+      });
+    });
   }
 
   function revealMobileMotionContent() {
@@ -2265,28 +2319,7 @@
       resetWixMotionEnter(comp);
     });
 
-    sitePages.querySelectorAll(".wixui-image, .ih2JY1, .W4V2qg").forEach(function (wrapper) {
-      if (shouldSkipMobileMotionReveal(wrapper)) return;
-
-      resetWixMotionEnter(wrapper);
-      wrapper.querySelectorAll("img").forEach(function (img) {
-        if (!img || isPinnedHeroBackgroundImage(img)) return;
-        img.setAttribute("data-motion-enter", "done");
-        img.setAttribute("data-tp-motion-reset", "true");
-        img.style.opacity = "1";
-        img.style.animation = "none";
-        img.style.transform = "none";
-        img.style.webkitTransform = "none";
-        img.style.webkitMaskImage = "none";
-        img.style.maskImage = "none";
-        if (img.loading === "lazy") {
-          img.loading = "eager";
-        }
-        if (img.dataset && img.dataset.src && !img.getAttribute("src")) {
-          img.setAttribute("src", img.dataset.src);
-        }
-      });
-    });
+    revealBodyImages(sitePages);
   }
 
   function scheduleMobileMotionRetries() {
@@ -2955,6 +2988,7 @@
   initTherapyMenuLinks();
   initDesktopServicesMegaMenu();
   initDesktopHeroMotionReset();
+  scheduleDesktopMotionRetries();
   syncMobileMenuFromDesktop();
   window.setTimeout(syncMobileMenuFromDesktop, 500);
   window.setTimeout(syncMobileMenuFromDesktop, 1500);

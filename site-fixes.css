@@ -42,6 +42,47 @@
     transform: none !important;
   }
 
+  /* Body/content images rely on <img> tags; without the Wix runtime they can stay hidden on desktop. */
+  #SITE_PAGES .wixui-image,
+  #SITE_PAGES .ih2JY1,
+  #SITE_PAGES .W4V2qg {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  #SITE_PAGES .wixui-image img,
+  #SITE_PAGES .ih2JY1 img,
+  #SITE_PAGES .W4V2qg img {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    filter: none !important;
+  }
+
+  #SITE_PAGES wow-image[data-animate-blur] img {
+    filter: none !important;
+  }
+
+  /* Keep pinned hero backgrounds visible via CSS; underlying <img> stays hidden. */
+  #SITE_PAGES wow-image.bgImage img,
+  #SITE_PAGES wow-image[class*='bgImage'] img,
+  #SITE_PAGES #img_comp-m4n0yl36 img,
+  #SITE_PAGES #img_comp-m4uaf2xt6 img,
+  #SITE_PAGES #img_comp-m4u9ebxq6 img,
+  #SITE_PAGES #img_comp-m4u9qgzx img,
+  #SITE_PAGES #img_comp-m21zub4c6 img,
+  #SITE_PAGES #img_comp-m4uabng46 img,
+  #SITE_PAGES #img_comp-m6aya26d img,
+  #SITE_PAGES #img_comp-m4u7nvwc5 img,
+  #SITE_PAGES #img_comp-m4u9yge25 img {
+    opacity: 0 !important;
+  }
+
   /* Pin desktop hero titles to Assessments reference (34px Libre Baskerville italic, #192A88). */
   #comp-m4uabng9 .wixui-rich-text__text,
   #comp-m4u9qh014 .wixui-rich-text__text,
