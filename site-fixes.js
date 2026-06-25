@@ -2915,6 +2915,13 @@
       img.srcset = helpCardImages[id].srcset;
     });
 
+    var yellowPagesLogo = document.getElementById("img_comp-m4da0lhl1");
+    if (yellowPagesLogo) {
+      yellowPagesLogo.src = "/images/opt/yellow-pages-for-business-153w.webp";
+      yellowPagesLogo.srcset =
+        "/images/opt/yellow-pages-for-business-153w.webp 1x, /images/opt/yellow-pages-for-business-306w.webp 2x";
+    }
+
     document.querySelectorAll('img[src*="wixstatic.com"]').forEach(function (img) {
       if (img.closest("#img_pageBackground_c1dmp")) return;
       var localSrc = img.getAttribute("data-tp-local-src");
