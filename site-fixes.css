@@ -35,11 +35,28 @@
 }
 
 @media (min-width: 981px) {
-  /* Wix motion enter animations are paused without the removed runtime; show hero text immediately. */
+  /* Wix motion enter animations are paused without the removed runtime; show page content immediately. */
+  #SITE_PAGES [id^='comp-']:not([data-tp-mobile-hero-hidden='true']):not(.wixui-vector-image),
+  #SITE_PAGES .mu5PoX {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
   #SITE_PAGES .wixui-rich-text:not([data-motion-enter='done']) {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Header appointment button uses paused Wix motion animations on the static mirror. */
+  #SITE_HEADER #comp-m4uhhrlo,
+  #SITE_HEADER #comp-m4uhhrlo * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
   }
 
   /* Body/content images rely on <img> tags; without the Wix runtime they can stay hidden on desktop. */

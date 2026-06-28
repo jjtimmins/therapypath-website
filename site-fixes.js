@@ -2220,16 +2220,35 @@
     resetWixMotionEnter(root);
   }
 
-  function initDesktopHeroMotionReset() {
+  function shouldSkipDesktopMotionReveal(el) {
+    if (!el) return true;
+    if (el.getAttribute("data-tp-mobile-hero-hidden") === "true") return true;
+    if (el.classList && el.classList.contains("wixui-vector-image")) return true;
+    if (el.closest("#comp-m6aya1jg")) return true;
+    return false;
+  }
+
+  function revealDesktopMotionContent() {
     if (isMobileViewport()) return;
+
+    var headerAppt = document.getElementById("comp-m4uhhrlo");
+    if (headerAppt) {
+      resetWixMotionEnter(headerAppt);
+    }
 
     var sitePages = document.getElementById("SITE_PAGES");
     if (!sitePages) return;
 
-    sitePages.querySelectorAll('.wixui-rich-text[data-testid="richTextElement"]').forEach(function (el) {
+    sitePages.querySelectorAll("[id^='comp-'], .mu5PoX").forEach(function (el) {
+      if (shouldSkipDesktopMotionReveal(el)) return;
       resetWixMotionEnter(el);
     });
+
     revealBodyImages(sitePages);
+  }
+
+  function initDesktopHeroMotionReset() {
+    revealDesktopMotionContent();
   }
 
   function scheduleDesktopMotionRetries() {
